@@ -1,0 +1,4 @@
+for i in $*; do
+   echo Detabbing $i ...
+   ow $i expand $i
+done
