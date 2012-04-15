@@ -26,6 +26,9 @@ formats like .png, .jpg, as well as for vector formats such as .eps
 
 * detab - remove tabs from files
 
+* scisearch - speacialized search for working with the Scilab sourcecode tree,
+based on locate. Can be easily adapted to other software
+
 * my_unix_cents.txt - a collection of unix tips and tricks
 
 == See Also ==
@@ -33,4 +36,5 @@ formats like .png, .jpg, as well as for vector formats such as .eps
 funcoeszz.net - a large and very useful collection of shell utilities
 
 == Authors ==
+
 Ricardo Fabbri and the rest of the Lab Macambira team
