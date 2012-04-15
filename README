@@ -15,8 +15,16 @@ team, started by Ricardo Fabbri.
 * 2eps - convert images to EPS using the best available tool
         2eps *.png
 
+* cx - basically just a shortcut to chmod a+x
+
+
+* lsc - search like 'find .' but using a list of source code extensions, in
+order to skip unwanted files
+
 * mytrim - cut excess homogeneous borders of a figure. works for both raster
 formats like .png, .jpg, as well as for vector formats such as .eps
+
+* detab - remove tabs from files
 
 == See Also ==
 
