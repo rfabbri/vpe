@@ -1,0 +1,10 @@
+#!/bin/sh
+case $# in
+    0) echo 'Usage: subst files' 1>&2; exit 2
+esac
+
+for i in $*
+do
+echo doing $i
+ow $i sed -f $HOME/bin/subst.sed $i
+done

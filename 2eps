@@ -1,0 +1,9 @@
+#!/bin/sh
+for i in $*
+do
+   noext=`echo $i|sed 's/\....$//g'`
+   ext=`echo $i| grep -o \....$`
+#      pdftops -eps $noext$ext
+   convert $noext$ext $noext.eps
+   echo "$noext$ext 	==> $noext.eps (convert)"
+done

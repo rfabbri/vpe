@@ -1,0 +1,27 @@
+#!/bin/sh
+#ow: overwrite file with output of command
+#note: must use redirection of input from file in command if required
+
+opath=$PATH
+PATH=/bin:/usr/bin:/usr/local/bin
+
+case $# in
+    0|1) echo 'Usage: ow file cmd [args]' 1>&2; exit 2
+esac
+
+file=$1; shift
+new=/tmp/overwr1.$$; old=/tmp/overwr2.$$
+trap 'rm -f $new $old; exit 1' 1 2 15
+
+export PATH=$opath; 
+if "$@" > $new
+then
+    cp $file $old
+    trap '' 1 2 15
+    cp $new $file
+else
+    echo "ow: $1 failed, $file unchanged" 1>&2
+    rm -f $new $old
+    exit 1
+fi
+rm -f $new $old

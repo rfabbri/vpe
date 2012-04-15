@@ -1,0 +1,23 @@
+= UTILS MACAMBIRA =
+
+This is a collection of unix and other misc. utilities by the Lab Macambira
+team, started by Ricardo Fabbri.
+
+== Description of the Tools ==
+
+* ow - overwrite files in a pipe (adapted from Kernighan & Pike)
+
+* subst - use this to do massive in-place substitution on sets of files 
+       find . |xargs subst
+
+* subst.sed - file that contains the search-and-replace SED commands
+
+* 2eps - convert images to EPS using the best available tool
+        2eps *.png
+
+* mytrim - cut excess homogeneous borders of a figure. works for both raster
+formats like .png, .jpg, as well as for vector formats such as .eps
+
+== See Also ==
+
+funcoeszz.net - a large and very useful collection of shell utilities
