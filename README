@@ -1,7 +1,7 @@
 = UTILS MACAMBIRA =
 
 This is a collection of unix and other misc. utilities by the Lab Macambira
-team, started by Ricardo Fabbri.
+team
 
 == Description of the Tools ==
 
@@ -26,6 +26,11 @@ formats like .png, .jpg, as well as for vector formats such as .eps
 
 * detab - remove tabs from files
 
+* my_unix_cents.txt - a collection of unix tips and tricks
+
 == See Also ==
 
 funcoeszz.net - a large and very useful collection of shell utilities
+
+== Authors ==
+Ricardo Fabbri and the rest of the Lab Macambira team
