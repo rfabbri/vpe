@@ -5,6 +5,10 @@ team
 
 == Description of the Tools ==
 
+* configure-ubuntu-for-programming - run a series of configurations, among
+  apt-get's and other things, for setting up a full-fledged programming
+  environment from a raw ubuntu installation. 
+
 * ow - overwrite files in a pipe (adapted from Kernighan & Pike)
 
 * subst - use this to do massive in-place substitution on sets of files 
