@@ -1,8 +1,8 @@
 #! /bin/sh
 case $# in
 #       0)  ls *.c *.h *.cpp *.cxx *.txx *.m *.sci *.sce *.sh 2>/tmp/my---null;;
-       0)  ls *.c *.h *.hxx *.cpp *.cxx *.txx *.sh 2>/tmp/my---null;;
-       1)  find . |egrep '\.(c|h|hxx|cxx|cpp|txx|m|sci|sce|sh)$' ;;
+       0)  ls *.c *.h *.hxx *.cpp *.cxx *.txx *.sh *.java 2>/tmp/my---null;;
+       1)  find . |egrep '\.(c|h|hxx|cxx|cpp|txx|m|sci|sce|sh|java)$' ;;
        *)      echo "Usage: $0 [-r|--recursive]" 1>&2
                exit 1
                ;;

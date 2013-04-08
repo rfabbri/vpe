@@ -16,6 +16,10 @@ case $1 in
       mv pdftrimwhite.pdf $i
     done
   ;;
+  -h|--help)
+    echo 'Usage:  mytrim [-pdf|-eps] FILE'
+    echo 'or, for raster trimming:  mytrim FILE'
+  ;;
   *)
     echo 'doing raster trimming';
     mogrify -trim +repage $*

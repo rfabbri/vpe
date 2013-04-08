@@ -6,6 +6,9 @@
 # Ricardo Fabbri and IPRJ / Lab Macambira Team
 #
 
+# How do you call your scilab base dir
+SCILABBASEDIR=scilab
+
 case $# in
     0) echo 'Usage1: scisearch -name string' 1>&2; 
        echo 'Usage2: scisearch string' 1>&2; 
@@ -26,5 +29,5 @@ ext="sci sce java h cpp c tcl xml"
 
 for i in $ext; do
   echo =================== $i ======================
-  locate -r "$USER.*scilab.*\.$i$" | $myxargs grep --color $*
+  locate -r "$USER.*$SCILABBASEDIR/scilab.*\.$i$" | $myxargs grep --color $*
 done
