@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Takes a playlist file (simple mplayer .pls text file with each file in a
+# line), and keeps playing it, with the property that you can edit the file
+# and the script will fire mplayer with the edited playlist. Basically it makes
+# mplayer playlists dynamically modifyable.
+#
+# AUTHOR: Ricardo Fabbri
+
+echo "opening playlist $1"
+
+n=0;
+while [ `cat $1|wc -l` != 0 ]; do
+  echo full playlist still
+  sleep 1
+  nl=`cat $1|wc -l`;
+  n=`echo "scale=0; $n%$nl + 1"|bc` #cyclic
+  echo getting line $n
+  fn=`sed -n ${n}p $1`
+
+  echo playinf file $fn
+  # pick file from playlist that is either at line
+  #  -->  n+1 mod current playlist size  OR if --shuffle, pick at random
+  #  if such line is empty
+  #     if number of lines == 0, 
+  #       quit or sleep.
+  #     else 
+  #       n=0;
+  #  else
+  #     n = line number
+
+  # to avoid flicker, could start mplayer with ampersand, and sleep for the
+  # ammount of time of the movie minus an overlap time, say 1s, then start the
+  # next one and so on
+done
