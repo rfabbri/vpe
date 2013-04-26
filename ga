@@ -1,0 +1,5 @@
+#!/bin/sh
+# accepts all parameters into a single string to git commit message
+set -x
+git commit -am "$*"
+aa shout "$*"
