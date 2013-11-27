@@ -1,6 +1,6 @@
 == INTRO ==
 
-This is a collection of random unix tips and tricks.
+This is a collection of random unix tips and tricks by Ricardo Fabbri.
 Separate each unix tip by a line of '------'s
 
 
@@ -198,3 +198,6 @@ dvips -q -f -E -D 600 -y 5000 -o eq.ps eq.dvi
 pstoedit -f plot-svg -dt -ssp eq.ps eq.svg
 
 
+----------------------------------------------------------------------
+PDF -> SVG
+pdf2svg filename.pdf output-page%03d.svg all

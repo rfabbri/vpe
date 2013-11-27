@@ -2,4 +2,8 @@
 # accepts all parameters into a single string to git commit message
 set -x
 git commit -am "$*"
-aa shout "git commit in $PWD: $*"
+#aa shout "git commit in $PWD: $*" &
+aa post "git commit in $PWD: $*" &
+#git push &
+wait
+echo "===== success ====="

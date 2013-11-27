@@ -25,9 +25,21 @@ case $1 in
   ;;
 esac
 
+if test -x "`which glocate`"; then
+  mylocate=glocate
+elif test -x "`which locate`"; then
+  if [[ "`uname`" == 'Darwin' ]]; then
+    echo "ERROR: GNU Locate needed in OSX not found"
+  fi
+  mylocate=locate
+else
+  echo "ERROR: no locate application found!"
+  exit
+fi
+
 ext="sci sce java h cpp c tcl xml"
 
 for i in $ext; do
   echo =================== $i ======================
-  locate -r "$USER.*$SCILABBASEDIR/scilab.*\.$i$" | $myxargs grep --color $*
+  $mylocate -r "$USER.*$SCILABBASEDIR/scilab.*\.$i$" | $myxargs grep --color "$*"
 done

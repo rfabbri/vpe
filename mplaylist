@@ -20,7 +20,7 @@ while [ `cat $1|wc -l` != 0 ]; do
   fn=`sed -n ${n}p $1`
 
   echo playinf file $fn
-  mplayer $fn
+  mplayer --xineramascreen=1 -fs $fn
   # pick file from playlist that is either at line
   #  -->  n+1 mod current playlist size  OR if --shuffle, pick at random
   #  if such line is empty
