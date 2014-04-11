@@ -12,8 +12,10 @@ case $1 in
     shift
     echo 'doing PDF trimming';
     for i in $*; do
-      pdftrimwhite $i
-      mv pdftrimwhite.pdf $i
+      pdfcrop $i crop-$i
+      mv crop-$i $i
+#      pdftrimwhite $i
+#      mv pdftrimwhite.pdf $i
     done
   ;;
   -h|--help)

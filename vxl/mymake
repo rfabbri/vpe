@@ -1,0 +1,20 @@
+#!/bin/sh
+# This is just to make from a source directory 'path/foosrc', when the binary tree is in
+# another directory 'path/foo-bin'.
+
+#set -x
+MYMAKEOPTS="-j9"
+#MYMAKEOPTS=""
+if test `pwd|grep '/lemsvxlsrc[^\/]*/'`; then
+  echo $0: Inside lemsvxlsrc.
+  bindir=`pwd | sed 's/lemsvxlsrc[^\/]*\//lemsvxl-bin\//g'`
+  make $MYMAKEOPTS -C $bindir $*
+else if test `pwd|grep /vxl/`; then
+  echo $0: In vxl-source area.
+  bindir=`pwd | sed 's/\/vxl\//\/vxl-bin\//g'`
+  make $MYMAKEOPTS -C $bindir $*
+else
+  echo $0: Running make in current directory.
+  make $MYMAKEOPTS $*
+fi
+fi
