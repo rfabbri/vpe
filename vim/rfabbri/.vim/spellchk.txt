@@ -1,0 +1,63 @@
+Spell Checking
+
+The English spelling checker (under Scripts in the Links) uses Vim's
+highlighting ability to make misspelled (English) words show up as "Error"
+(usually white on a red background). The Vim-based English spell checker
+also supports entering words that the cursor is on into a temporary or
+permanent dictionary and allows one to skip to the previous or subsequent
+spelling error (if any). It co-exists quite well with TeX, LaTeX, and
+other such variants, too!
+
+Getting Started: To enable english spell checking, put the following
+line in your <.vimrc>:
+
+map <F3> :so $CVIMSYN/engspchk.vim
+
+where CVIMSYN is an environment variable pointing to wherever you have
+<engspchk.vim> installed. Note that hitting the function key F3 will
+then invoke the English spelling checker by sourcing it in! Feel free to
+change that function key name to whatever you find appropriate. For PCs,
+note that to set up the CVIMSYN environment variable you'll be putting
+"set CVIMSYN=..path.." into your <autoexec.bat>. For NT or Win2000
+systems, environment variables are entered under the <Advanced> tab of
+<System Properties>, which in turn you can get to by right clicking on
+<My Computer> and choosing <Properties>.
+
+Moving: For Vim versions 5.04 and later, the <engspchk.vim> file also
+provides two maps (\en and \ep) to move to the next and preceding
+spelling error, if any. I suggest you upgrade if you haven't already,
+because Vim's functions are powerful!
+
+Custom Dictionary: Engspchk allows the user to temporarily (\et) or to
+permanently (\es) save their own words. A temporary save only affects
+the current vim editing session; a permanent save writes the word to a
+custom user dictionary.
+
+Alternatives: For Vim version 6.0 and later, <engspchk.vim> provides the
+(\ea) map which brings up a one-line alternatives window for the word
+under the cursor. Move left and right with the full power of Vim, and when
+the cursor lies on the desired substitute word, a simple carriage return
+will cause replacement. You'll also need to have the agrep program to do
+this (there's a pre-compiled for Windows version available using this
+link). The first use of (\ea) takes longer than subsequent use because
+the script that gets invoked constructs a plain list of words from the
+engspchk file.
+
+No Flashing: With Vim version 6.0y and later and version 2.04 of
+engspchk no longer will Error highlighting flash on and off while you're
+typing. Thanks go to Chase Tingley (with emendations by Bram Moolenaar)
+who wrote the changes to Vim to make this possible.
+
+More Words: If you download "More Words" from the Links section you will
+get a file of additional words based on Webster's 1913 dictionary. Only
+those words not already in engspchk itself appear in that file. If the
+file wb1913_engspchk.vim is present in the same directory as the regular
+<engspchk.vim>, it will be automatically detected and loaded.
+
+Other Languages: There are now variants of <engspchk.vim> for German,
+Hungarian, and Yiddish. If your native language isn't supported, feel
+free to make your own variant! I'd appreciate it if you could let me know
+where on the Web to find it so I can make a link on this page to it.
+Thomas Köhler has made his create script which uses the Bourne shell
+available; it merges a dictionary with engspchk.vim to create a spelling
+checker for another language.

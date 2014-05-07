@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/rfabbri/mvg/doc/fluid-emc-2013/arxiv-new'
+let g:netrw_dirhist_2='/Users/rfabbri/mvg/doc/fluid-emc-2013'
+let g:netrw_dirhist_3='/Users/rfabbri/doc/reviews/spl2014-stereo2'
+let g:netrw_dirhist_4='/Users/rfabbri/labmacambira/paaper/scripts'
+let g:netrw_dirhist_5='/Users/rfabbri/labmacambira/paaper'
+let g:netrw_dirhist_6='/Users/rfabbri'
+let g:netrw_dirhist_7='/Users/rfabbri/a'

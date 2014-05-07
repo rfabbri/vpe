@@ -1,0 +1,11 @@
+// This is |FILENAME|
+#ifndef foo_h
+#define foo_h
+//:
+//\file
+//\brief |CURSOR|
+//\author |AUTHOR| (|AUTHORREF|), |COMPANY|  (|EMAIL|)
+//\date |DATE|
+//
+
+#endif // foo_h
