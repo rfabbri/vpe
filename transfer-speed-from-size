@@ -12,9 +12,9 @@
 #
 
 ns=10
-kbs_1=`du -skc $* | cut -f 1 | sed -n '$p'`
+kbs_1=`du -skc "$*" | cut -f 1 | sed -n '$p'`
 sleep $ns; 
-kbs_2=`du -skc $* | cut -f 1 | sed -n '$p'`
+kbs_2=`du -skc "$*" | cut -f 1 | sed -n '$p'`
 
 rate=`echo "($kbs_2 - $kbs_1) / $ns" | bc`
 echo $rate 'KB/s'
