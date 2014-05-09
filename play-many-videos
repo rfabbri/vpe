@@ -1,7 +1,15 @@
 #!/bin/sh
 
+#set -x
+
 case $# in
-    0|1) echo 'Usage: play-many-videos file1 file2' 1>&2; exit 2
+    0|1) echo 'Usage: play-many-videos file1 file2 [mplayer_args]' 1>&2; exit 2
 esac
 
-(mplayer -geometry 50:40 -loop 0 $1 &); mplayer $2 -loop 0 -geometry 950:40
+file1=$1
+file2=$2
+shift
+shift
+mplayer_args=$*
+
+(mplayer -geometry 50:40 -loop 0 $file1 $mplayer_args &); mplayer $file2 -loop 0 -geometry 950:40
