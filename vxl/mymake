@@ -5,9 +5,9 @@
 #set -x
 #MYMAKEOPTS="-j9"
 MYMAKEOPTS=""
-if test `pwd|grep '/lemsvxlsrc[^\/]*/'`; then
-  echo $0: Inside lemsvxlsrc.
-  bindir=`pwd | sed 's/lemsvxlsrc[^\/]*\//lemsvxl-bin\//g'`
+if test `pwd|grep '/lemsvxl/'`; then
+  echo $0: Inside lemsvxl.
+  bindir=`pwd |  sed 's/\/lemsvxl\//\/lemsvxl-bin\//g'`
   make $MYMAKEOPTS -C $bindir $*
 else if test `pwd|grep /vxl/`; then
   echo $0: In vxl-source area.
