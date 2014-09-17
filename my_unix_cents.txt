@@ -201,3 +201,28 @@ pstoedit -f plot-svg -dt -ssp eq.ps eq.svg
 ----------------------------------------------------------------------
 PDF -> SVG
 pdf2svg filename.pdf output-page%03d.svg all
+
+----------------------------------------------------------------------
+Scanning (my script in OSX, should be same in linux)
+
+myscan file.ppm
+convert file.ppm file.pdf
+
+
+----------------------------------------------------------------------
+Reducing PDF Size
+
+reduce-pdf-size file.pdf
+
+For smaller file:
+
+convert file.ppm file.pdf
+
+pdf2ps file.pdf
+ps2pdf file.ps
+
+# Better quality, still smaller than convert's pdf:
+
+ps2pdf -dPDFSETTINGS=/prepress c.ps 
+
+

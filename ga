@@ -3,7 +3,8 @@
 set -x
 git commit -am "$*"
 #aa shout "git commit in $PWD: $*" &
-aa post "git commit in $PWD: $*" &
+#aa post "git commit in $PWD: $*" &
+aa "git commit in $PWD: $*" &
 #git push &
 wait
 echo "===== success ====="
