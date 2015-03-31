@@ -26,8 +26,13 @@ else if test `echo $mypwd|grep /vxl/`; then
   echo $0: In vxl-source area.
   bindir=`echo $mypwd | sed 's/\/vxl\//\/vxl-bin\//g'`
   make $MYMAKEOPTS -C $bindir $*
+else if test `echo $mypwd|grep /pet/`; then
+  echo $0: In pet project area.
+  # TODO cd root
+  mvn test $*
 else
   echo $0: Running make in current directory.
   make $MYMAKEOPTS $*
+fi
 fi
 fi
