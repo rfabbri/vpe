@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#set -x
+
+
+VXLDIR=/home/rfabbri/cprg/vxlprg
+
+case $# in
+    0) echo currently in `ls -l $VXLDIR/vxl-bin|egrep -o '(dbg|rel)'`; exit 0
+esac
+
+case $1 in
+    -h | --help | -? ) 
+      echo 'Usage: switchbuild (dbg|rel)' 1>&2; exit 2 
+    ;;
+    dbg | rel)
+      rm -f $VXLDIR/lemsvxl-bin
+      ln -s $VXLDIR/lemsvxl-bin-$1 $VXLDIR/lemsvxl-bin
+
+      rm -f $VXLDIR/vxl-bin
+      ln -s $VXLDIR/vxl-bin-$1 $VXLDIR/vxl-bin
+    ;;
+    *)
+      echo 'Usage: switchbuild [-h] [(dbg|rel)]' 1>&2; exit 2 
+    ;;
+esac
