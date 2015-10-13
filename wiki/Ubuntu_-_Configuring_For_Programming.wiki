@@ -14,7 +14,7 @@ File system: choose ext4, it performs very well on most circumstances.
 
 In the case of a laptop with a small internal SSD and a large slow HD, I've successfully used the following sheme
 * <tt>/</tt>: goes into the SSD, minus /var
-* <tt>/var</tt>: goes into the slow HD. 20GB should be more than enough here.
+* <tt>/var</tt>: goes into the slow HD. 10GB should be more than enough here.
 
 In the case of most modern UEFI firmware (replacing BIOS), you need to make sure there's an EFI partition.
 
