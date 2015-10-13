@@ -7,13 +7,16 @@ These instructions were tested on Ubuntu 15.04 but are almost the same for 12.04
 For programming, I use the following partition guidelines
 * <tt>/</tt> : from 20 to 100GB (usually a full-fledged Ubuntu install for multimedia development will consume 16GB, from my experience)
 * <tt>/linux2</tt> : I place another Linux partition here, so that I can have 2 linux distros. The size is the same guidelines as I mentioned above for '/'.
-* <tt>/home</tt> : your files - put 
+* <tt>/home</tt> : your files that are visible to all linux distros and remain untouched between reinstalls.
 * Swap: if you do heavy simulations, double your RAM is a good rule of thumb here; otherwise, you'll do fine with just a couple GB here.
 
 File system: choose ext4, it performs very well on most circumstances.
 
-In the case of internal SSD
+In the case of a laptop with a small internal SSD and a large slow HD, I've successfully used the following sheme
+* <tt>/</tt>: goes into the SSD, minus /var
+* <tt>/var</tt>: goes into the slow HD. 20GB should be more than enough here.
 
+In the case of most modern UEFI firmware (replacing BIOS), you need to make sure there's an EFI partition.
 
 
 == Installing Packages ==
