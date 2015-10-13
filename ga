@@ -6,5 +6,5 @@ git commit -am "$*"
 #aa post "git commit in $PWD: $*" &
 aa "git commit in $PWD: $*" &
 #git push &
-wait
+#wait
 echo "===== success ====="

@@ -69,6 +69,9 @@ mplayer video.m2t -vo png -frames 5
 ----------------------------------------------------------------------
 Make a video from a series of images:
 
+
+fmpeg -pattern_type glob -i '*.jpg' movie.mp4
+
 mencoder mf://snakepit*edgepara*A.png -mf fps=2 -o output.avi -ovc copy
 
 Better:
@@ -100,6 +103,14 @@ convert -density 140 -flip -flop input.pdf out.pdf
 Extract pages from a pdf (or alternatively, slice/remove pages):
 
 pdftk old.pdf cat 1-9 26-end output new.pdf
+
+----------------------------------------------------------------------
+Convert PDF to TIFF
+
+
+gs -dNOPAUSE -q -r200x200 -sDEVICE=tiffg4 -dBATCH -sOutputFile=output_file_name.tif ALINEAR1de2.pdf
+
+That uses 200dpi. Change the -r flag to the desired DPI, eg -r300x300 etc
 
 ----------------------------------------------------------------------
 Convert FLV to MPEG
@@ -225,4 +236,18 @@ ps2pdf file.ps
 
 ps2pdf -dPDFSETTINGS=/prepress c.ps 
 
+----------------------------------------------------------------------
+Chrooting from live cd to fix problems in main install
 
+
+# Mount root partition:
+sudo mount /dev/sdXY /mnt # /dev/sdXY is your root partition, e.g. /dev/sda1
+
+# If you have a separate boot partition you'll need to mount it also:
+sudo mount /dev/sdYY /mnt/boot
+
+# Mount your virtual filesystems:
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+
+# Chroot
+sudo chroot /mnt
