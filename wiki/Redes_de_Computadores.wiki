@@ -5,7 +5,7 @@ Esta é a página oficial do curso de Introdução a Redes de Computadores (grad
 == Informacoes gerais ==
 * Instrutor: prof. [http://www.lems.brown.edu/~rfabbri Ricardo Fabbri], Ph.D.
 * Periodo: 2o. Semestre de 2015, voltado ao 6o. periodo de Engenharia da Computacao
-* Tercas 16:10-17:50h e Quintas 14:20-16:00, sala 211 e Lab Inf #??
+* Tercas 16:10-17:50h e Quintas 14:20-16:00, sala 211 e Lab Inf 309
 
 === Pre-requisitos ===
 Introducao à Programacao e Algoritmos e Estrutura de Dados.
