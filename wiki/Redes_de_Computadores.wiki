@@ -98,6 +98,10 @@ Execute os exemplos Python do livro Violent Python, cap 5.
 * Cada aluno que apresentar um video curto sobre tecnologias de rede no inicio de cada aula teorica ira conquistar ate +1 ponto na media final
 * O Bonus sera maior quanto maior o numero de videos apresentados bem como a qualidade avaliada pelo professor.
 
+=== Trabalho 4: Exercicios dos Slides ===
+* Entregar cada exercicio listado nos slides.
+* Alguns destes sao projetos, ver em especial os slides em 04-mais-programacao.
+
 == Recursos principais ==
 * Grupo de discussao: [http://uerj.tk uerj.tk]
 
