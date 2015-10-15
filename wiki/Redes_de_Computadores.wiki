@@ -1,0 +1,191 @@
+Esta é a página oficial do curso de Introdução a Redes de Computadores (graduação) do [http://en.wikipedia.org/wiki/IPRJ IPRJ], contendo material potencialmente útil ao publico geral.
+[[Imagem:Datacenter-cables.jpg|right|250px]]
+[[Imagem:Google_Datacenter.jpeg|right|250px]]
+[[Imagem:Google-fiber-switches.jpg|right|250px]]
+== Informacoes gerais ==
+* Instrutor: prof. [http://www.lems.brown.edu/~rfabbri Ricardo Fabbri], Ph.D.
+* Periodo: 2o. Semestre de 2015, voltado ao 6o. periodo de Engenharia da Computacao
+* Tercas 16:10-17:50h e Quintas 14:20-16:00, sala 211 e Lab Inf #??
+
+=== Pre-requisitos ===
+Introducao à Programacao e Algoritmos e Estrutura de Dados.
+
+== Software ==
+* Linux (sera revisado) 
+** Tutorial [[Learning the Unix Programming Environment]] para treinar os alunos em Linux
+** Ler [[Literatura recomendada pela equipe|Recommended Reading]]
+* C (sera revisado) - ler [[Literatura recomendada pela equipe|Recommended Reading]]
+** [[Configuring Ubuntu for Programming]]
+* [[Python]] - ler [[Literatura recomendada pela equipe|Recommended Reading]], "Scientific Python for Matlab Users" (Boa parte dos alunos do IPRJ assistindo esta disciplina ja sabe Matlab/Scilab, fica facil aprender python por esses excelentes slides)
+
+== Tarefas ==
+As tarefas devem ser formatadas com notacao matematica adequada, preferencialmente em [[Latex]].
+
+'''Somente serao aceitos arquivos eletronicos no formato PDF ou outro formato aberto como .odt'''
+
+Quando a tarefa involver qualquer programacao, o aluno devera enviar o codigo fonte. O codigo junto com a documentacao devera estar dentro de um
+unico diretorio comprimido com .zip ou tar, com o nome do aluno, disciplina e data.
+
+=== Trabalho 0: Leitura do Livro Tubos ===
+[[Imagem:Livro-tubos.jpg|right|150px]]
+* Um livro util para saber mais de aspectos concretos da internet.
+* Entregar um resumo *coom opiniao pessoal*:
+** 1 pagina no dia da P1 relativa à primeira metade do livro (aprox. metade do numero de paginas)
+** 3 páginas no dia da P2 relativas à segunda metade do livro (restante do livro + analise pessoal)
+* Video do Autor: https://www.youtube.com/watch?v=XE_FPEFpHt4
+* Valor de nota: porcentagem de trabalho final proporcional à dificuldade relativa aos outros projetos
+
+=== Trabalho 1: Apresentacao Inicial de Tecnologias ===
+* Apresentar uma visao geral sobre alguma tecnolgia de redes e o basico de como funciona.
+* Apresentacao de ate 20min.
+* Grupos de ate 3 pessoas
+* Data de entrega: Quinta, 3/Set/2015
+* A apresentacao sera colocada on-line, exceto se solicitado o contrario.
+* '''Escrever os grupos e respectivos topicos aqui:'''
+* Sugestoes de topicos:
+** [http://www.rederio.br/site/pagina/topologia Rede Rio] - Rede de computadores à qual queremos conectar o [[IPRJ]] para aumentar nossa velocidade de conexao
+** Peer-to-Peer (P2P) - '''Guilherme Gonçalves, Rennan Cockles'''
+*** [https://en.wikipedia.org/wiki/Bitcoin Bit torrent] - ''' Roberto Mario'''
+*** [https://en.wikipedia.org/wiki/Bitcoin e-Mule]: "As of July 2014, it is the second most frequently downloaded project on SourceForge, with over 673.5 million downloads, only behind VLC media player"
+*** [https://en.wikipedia.org/wiki/Bitcoin Bitcoin] - '''João Parise, Rafael Firmino, Vitor Marchena'''
+*** [https://en.wikipedia.org/wiki/Gnutella Gnutella]
+*** [https://en.wikipedia.org/wiki/Soulseek Soulseek] 
+*** Web p2p: ideia é que todos que acessassem foo.com/bar pela primeira vez, seria feito um fork e estariam servindo /bar, em suas próprias instâncias.
+** [https://en.wikipedia.org/wiki/Swarm_robotics Swarm robotics / Robótica de Enxame]
+** Game servers - programacao de servidores de jogos multiplayer e seu funcionamento '''Luccas Beck Reis'''
+** Redes de alto desempenho
+*** Funcionamento de redes para clusters de computadores/nuvem/cloud/supercomputadores, e como programar, tanto baixo nivel como alto nivel (apps, etc). '''Luan dos Santos, Lucas Savioli, Navar Nunes'''
+**** [https://en.wikipedia.org/wiki/Infiniband Infiniband] - Rede de alto desempenho usada em supercomputadores
+*** Topologias de interconnects: [https://en.wikipedia.org/wiki/Torus_interconnect toroidais], etc.
+** Técnicas Cracker, seguranca - '''Geovane Pacheco, Susana Bouchardet'''
+** Wi-Fi: antenas, comunidades
+** programacao para a web / tecnologias mais alto nivel
+*** Web Sockets - "a standardized way for the server to send content to the browser without being solicited by the client, and allowing for messages to be passed back and forth while keeping the connection open. In this way a two-way (bi-directional) ongoing conversation can take place between a browser and the server."
+*** [http://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js Node.js]
+*** Tambem liga com p2p (ver acima)
+** [[Literatura_recomendada_pela_equipe#VOIP|VoIP]] - '''Jhonatan Gomes, Leonardo Simões'''
+
+=== Trabalho 2, Lab: DDoS Botnet ===
+# escreva um programa (em shell, python ou C) para controlar diversas maquinas via SSH
+## comece com um programa que simplesmente conecta numa maquina via ssh
+# envie um comando de DDoS para todas as maquinas simultaneamente (como um flood ping todos direcionados a uma mesma maquina vitima)
+# teste na rede local (do lab, por exemplo) e constate na maquina "vitima" os graficos de uso de CPU.
+# quantos bots voce precisa para que a maquina vitima fique inutilizavel?
+
+* Um exemplo para o item 1 esta no livro "Violent Python" listado na bibliografia.
+* O trabalho é ''individual'', valendo com o projeto principal do curso.
+
+Entrega ('''MUDOU''') 
+* '''Screencast''' Para nao precisar escrever um relatorio maçante, a entrega do trabalho será um no formato de um vídeo a ser editado pelo aluno contendo:
+** Uma explicação de como foi feita a da solução final
+** Explicação conceitual do código/scripts/comandos utilizados
+** Demo de execução
+** duração de 10min max
+
+
+=== Trabalho 3, Lab: Segurança Wifi ===
+Execute os exemplos Python do livro Violent Python, cap 5.
+'''codigo:'''
+* https://github.com/rfabbri/Violent-Python-Examples
+
+'''entregar:'''
+* copia do bash history conforme os labs em aula
+* saídas de cada comando em cada caso
+* observações rápidas sobre cada saída, em suas palavras. Funcionou conforme esperado? a saída é útil pra você?
+* informacoes interessantes obtidas (ofuscadas se necessario)
+
+=== Bonus de Video ===
+* Cada aluno que apresentar um video curto sobre tecnologias de rede no inicio de cada aula teorica ira conquistar ate +1 ponto na media final
+* O Bonus sera maior quanto maior o numero de videos apresentados bem como a qualidade avaliada pelo professor.
+
+== Recursos principais ==
+* Grupo de discussao: [http://uerj.tk uerj.tk]
+
+=== Bibliografia Comentada ===
+* Principais Livros-texto
+** [http://www.amazon.com/gp/product/0131411551 Unix Network Programming, W. Richard Stevens] - teoria e programacao de redes. Edicao atualizada recentemente.
+** [http://www.amazon.com/Linux-Network-Administrators-Guide-Bautts/dp/0596005482 Linux Network Administrator Guide] - utilitarios de redes em linux durante nossos laboratorios, e alguma teoria focada.
+** [http://www.amazon.com/gp/product/1593271441 HACKING - The Art of Exploitation], Jon Erickson, 2008. Um livro muito interessante com bom conteudo de programacao de redes em C e teoria associada. Ja inicia com revisao de C e Assembly e pode-se ate mesmo aprender a programar com este livro (ou revisar). Utilizaremos como complemento ao UNP de Stevens em um contexto de interesse geral dos alunos.
+** [http://www.amazon.com/gp/product/1597499579 Violent Python], TJ O'Connor. Livro com aplicacoes basicas de hacking utilizando Python. Enfatiza a construcao e apoderamento de sementes programaticas para ferramentas proprias, em vez da utilizacao ou estudo de codigo bem-acabado. Aborda assuntos mais alto nivel que o livro HACKING, mas mesmo assim contem fragmentos de programacao potencialmente muito uteis para redes no geral. Utilizaremos para gerar botnets e outras atividades de laboratorio.
+* Outros Livros-texto recomendados e eventualmente utilizados esporadicamente ao longo do curso
+** [http://www.amazon.com/gp/product/0321336313 TCP/IP Illustrated], W. Richard Stevens, vols 1-3. A serie de livros de referencia sobre protocolos TCP/IP, fortemente recomendada por diversos hackers de altissimo nivel.
+*** TCP/IP Illustrated, Volume 1: The Protocols, 2a. edicao atualizada, 2011. Utilizaremos este para complementar a teoria das aulas.
+*** TCP/IP Illustrated: The Implementation, Vol. 2. Descreve a implementacao de referencia do TCP/IP - o codigo fonte distribuido pelo FreeBSD, dentre outros. Um pouco antigo o livro, mas serve como referencia para compreender o funcionamento detalhado ou para reimplementacoes customizadas.
+*** TCP/IP Illustrated, Vol. 3: TCP for Transactions, HTTP, NNTP, and the UNIX Domain Protocols. Tambem um pouco antiga esta edicao.
+** [http://www.amazon.com/gp/product/0132126958 Computer Networks - Andrew Tanembaum], 5e. Tratamento enciclopedico muito útil como referência, de forma linear e ''bottom-up'' que, no entanto, carece da parte pratica e de programacao que enfatizaremos aqui.
+** [https://www.cs.purdue.edu/homes/comer/netbooks.html Comer Books]:
+*** Computer Networks And Internets - livro muito interessante pois fornece uma visao mais atual que o Tanembaum em alguns aspectos de interesse maior, como mesh networks.
+*** Internetworking With TCP/IP Volume I: Principles Protocols, and Architecture. Utilizaremos este para complementar os livros do Steven na explicacao de conceitos de internet
+*** Internetworking With TCP/IP Volume II: Design, Implementation, and Internals
+*** Internetworking With TCP/IP Volume III: Client-Server Programming and Applications, Linux/POSIX Socket Version - livro muito bom tambem para programacao em redes, porem nao utilizaremos desta vez pois provavelmente ha uma nova edicao sendo elaborada.
+*** '''Guia de programacao para os labs:''' [https://www.cs.purdue.edu/homes/comer/hon.cont.html Hands-On Networking With Internet Technologies]
+** [http://www.hardware.com.br/livros/redes/ Redes, Guia Pratico] (livro com versao on-line gratis) e [http://www.hardware.com.br/livros/servidores-linux/ Servidores Linux, Guia Pratico]
+* Outros recursos
+** [http://www.cl.cam.ac.uk/~rja14/book.html Security Engineering - The Book] (online)
+** [http://saladeaula.nic.br/moodle/course/view.php?id=9 Excelente material do NIC sobre IPv6] : recomendado por diversas fontes!
+
+=== Aulas ===
+* Teoria: Introdução, motivação, e formato do curso. Trabalhos 0 e 1 foram passados. (16/set/2014)
+* Lab: Visao geral de Linux para redes, instalação e comandos de rede. Rotina basica de laboratorio. Coleta dos temas de trabalho. Videos motivacionais. (previsao: 18/set/2014)
+* Apresentacoes de trabalho 1 (25/set/2014)
+* Apresentacoes de trabalho 1, parte 2. Conceitos e referencias uteis para realizacao dos proximos trabalhos e laboratorios (sem aprofundamento por enquanto). Videos motivacionais. [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2014/01-conceitos-uteis.pdf Slide de aula: 01-conceitos-uteis] (30/set/2014)
+* Lab: Fazer tutorial de linux [[LUPE]] ate final da secao Scripting e entregar o historico de comandos realizados. (2/out/2014)
+* Lab: Fazer tutorial de linux [[LUPE]] ate final da secao SSH e entregar o historico de comandos realizados. (9/out/2014)
+* Teoria: Intro prática ao TCP/IP até subredes [[Arquivo:02-ip-pratico.pdf|Slides de aula 02-ip-pratico.pdf]] (21/out/2014)
+* Teoria no lab: Intro prática ao TCP/IP até básico de IPv6 (23/out/2014)
+** Slides IPv6 do NIC.br [http://saladeaula.nic.br/moodle/mod/resource/view.php?id=654 Intro], [http://saladeaula.nic.br/moodle/mod/resource/view.php?id=667 Endereçamento]
+* P1 (4/nov/2014)
+* Lab: Introducao a Sockets
+** Baixar, compilar e rodar codigo do livro Unix Network Programming em http://www.unpbook.com/src.html
+** Compreensao dos conceitos e arquitetura.
+** Modifique os programas de forma a não precisar de senha de root ou sudo.
+* Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2015/03-ip-aprofundamento-2015.pdf Aprofundamento de TCP/IP] (até 18/nov/2014)
+* Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2015/04-mais-programacao-2015.pdf Aprofundamento de programação em redes] (até 27/nov/2014)
+* Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2014/05-wireless.pdf Programando Wireless] (2/dez/2014)
+
+=== Regras para Aulas de Laboratorio ===
+* Aulas de laboratorio terao nota individual, mas pode assistir com apoio do colega.
+
+==== Envio do historico de comandos ====
+* Cada aluno ira acompanhar a aula de laboratorio testando os procedimentos demonstrados
+* Utilizar sempre o mesmo terminal para os comandos da aula
+* Ao final, o aluno devera enviar o arquivo ~/.bash_history por email, com as seguintes especificacoes:
+** Subject: deve conter a string "[log-redes]"
+** O historico deve ser enviado como um arquivo anexado
+** Um email de confirmacao automatica ira ser enviado caso o email for formatado corretamente de acordo com as regras acima.
+** Somente emails com confirmacao serao considerados para nota. 
+** Arquivos identicos serao descartados com nota 0.
+
+=== Provas ===
+
+== Criterio de Avaliacao ==
+<small>
+      M_p = (P1 + P2)/2         
+      M = 0.6*M_p + 0.4*T , onde T é a nota dos trabalhos
+      Se M >= 5, passa --> M
+      Sub: (apenas se alguem faltou alguma prova ou quiser melhorar nota - mas quem entregar ira substituir)
+      M_sub = media com sub
+      Se M_sub >= 5, passou --> M_sub
+      Quem for usar a prova como Sub ira substituir a nota independentemente do resultado.
+      M_sub = M_f pois sera considerada a mesma prova e a prova final
+</small>
+
+== Links ==
+Links diversos interessantes, alguns meus e outros indicados por colegas '''(ainda nao filtrados)''':
+* [http://fabianamitsue.wordpress.com/2011/05/02/coletivos-em-rede-novas-formas-de-organizacao/fabiana-mitsue-najima_coletivos-em-rede_-pgeha_usp-final/ Coletivos em rede]
+* [http://en.wikipedia.org/wiki/As_We_May_Think As we may think] - an essay on www-like concepts.
+=== Ferramentas ===
+==== Segurança/Hacking ====
+''Na segunda parte do curso aprendemos a tecnologia para programar muitos utilitários de segurança, de forma mais poderosa que meras ferramentas listadas abaixo, e estudamos o código fonte para compreender as limitações dos protocolos de rede. O conhecimento profundo acarreta uma série de responsabilidades para com o bem comum. Este é um apelo para que se tome uma atitude elevada e ética com estas ferramentas.''
+* [http://www.metasploit.com Metasploit] framework para intrusao contendo um conjunto de exploits e automacao de invasoes.  Use com nmap para descobrir info do sistema e suas vulerabilidades, e aplicar exploits adequados a uma maquina especifica e testar sua seguranca. Basicamente automatiza uma intrusao completa.
+* [http://www.kali.org Kali linux] (anteriormente Backtrack Linux) - uma distribuição Linux baseada em Debian, voltada a security hacking. Já vem convenientemente com diversas ferramentas específicas voltadas a esse ramo.
+* [http://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf Netcat, socat, ncat,...]
+* nemesis
+* dsniff
+* [[Aircrack]]
+
+==== Connection load-balancing ====
+* [https://github.com/Morhaus/dispatch-proxy dispatch-proxy] - a proxy that balances traffic between multiple internet connections to increase your download speed (eg, wifi/ethernet/3G/4G).
+* Other solutions exist using iptables or kernel modules [https://news.ycombinator.com/item?id=6823269] and SCTP
+
+[[Category:IPRJ]] [[Category:Lab Macambira]] [[Category:Redes]]
