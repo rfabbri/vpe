@@ -100,7 +100,7 @@ Execute os exemplos Python do livro Violent Python, cap 5.
 
 === Trabalho 4: Exercicios dos Slides ===
 * Entregar cada exercicio listado nos slides.
-* Alguns destes sao projetos, ver em especial os slides em 04-mais-programacao.
+* Alguns destes sao projetos, ver em especial os slides ([http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2015/04-mais-programacao-2015v3.pdf Aprofundamento de programação em redes])
 
 == Recursos principais ==
 * Grupo de discussao: [http://uerj.tk uerj.tk]
@@ -144,7 +144,7 @@ Execute os exemplos Python do livro Violent Python, cap 5.
 ** Compreensao dos conceitos e arquitetura.
 ** Modifique os programas de forma a não precisar de senha de root ou sudo.
 * Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2015/03-ip-aprofundamento-2015.pdf Aprofundamento de TCP/IP] (até 18/nov/2014)
-* Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2015/04-mais-programacao-2015.pdf Aprofundamento de programação em redes] (até 27/nov/2014)
+* Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2015/04-mais-programacao-2015v3.pdf Aprofundamento de programação em redes] (até 27/nov/2014)
 * Teoria: [http://labmacambira.sourceforge.net/rfabbri/aulas/redes/2014/05-wireless.pdf Programando Wireless] (2/dez/2014)
 
 === Regras para Aulas de Laboratorio ===
