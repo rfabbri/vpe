@@ -1,0 +1,4 @@
+#include inside .bashrc
+LEMSVXL=$HOME/cprg/vxlprg/lemsvxl
+VXL_SRC=$HOME/cprg/vxlprg/vxl
+CDPATH=.:..:~:$LEMSVXL:$VXL_SRC/core:$VXL_SRC/contrib:$VXL_SRC/contrib/brl:$VXL_SRC/contrib/brl/bbas:$VXL_SRC/contrib/brl/bseg:$VXL_SRC/contrib/gel/mrc:$LEMSVXL/brcv:$LEMSVXL/basic:$LEMSVXL/brcv/rec:$LEMSVXL/brcv/seg:$LEMSVXL/contrib/rfabbri:$LEMSVXL/brcv/mvg:/vision:/mnt/
