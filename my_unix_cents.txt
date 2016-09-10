@@ -261,3 +261,9 @@ for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
 
 # Chroot
 sudo chroot /mnt
+
+----------------------------------------------------------------------
+Process files A.txt B.txt... with a vim script
+
+# This writes the result and quits vim at the end
+vim -c "argdo source script.vim | w" -c "qa" A.txt B.txt C.txt D.txt

@@ -1,1 +1,1 @@
-s/\<VXL_CORE_INCLUDE_DIR\>/&S/g
+s/://g
