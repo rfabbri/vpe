@@ -35,7 +35,18 @@ else if test  `echo $mypwd|grep pd-extended.git`; then
 else if test  `echo $mypwd|grep pd-gem/Gem`; then
   repodir=`echo $mypwd | sed 's/pd-gem\Gem/pd-svn-w-extended-git-plus-gem\/Gem/g'`
 else
-  pwd
+  basename=`basename $mypwd`
+  if [[ "$basename" = *-bin ]]; then
+    newdir=`echo ${mypwd} | sed 's/-bin\/$/\//g'`
+  else
+    newdir=`echo ${mypwd} | sed "s/$basename\/$/$basename-bin\//g"`
+  fi
+
+  if [[ -d "$newdir" ]]; then
+    echo $newdir
+  else
+    pwd # do nothing
+  fi
 fi
 fi
 fi
