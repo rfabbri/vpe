@@ -1,1 +1,1 @@
-s/{figs\//{/g
+s/\<VXL_CORE_INCLUDE_DIR\>/&S/g

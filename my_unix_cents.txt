@@ -237,6 +237,16 @@ ps2pdf file.ps
 ps2pdf -dPDFSETTINGS=/prepress c.ps 
 
 ----------------------------------------------------------------------
+Code to pdf with syntax highlighting
+In vim
+
+" select font size
+:set printfont=courier:h6   
+:set printoptions=number:y
+:hardcopy >code.ps
+ps2pdf code.ps
+
+----------------------------------------------------------------------
 Chrooting from live cd to fix problems in main install
 
 
