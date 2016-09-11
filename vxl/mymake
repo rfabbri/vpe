@@ -31,8 +31,19 @@ else if test `echo $mypwd|grep /pet/`; then
   # TODO cd root
   mvn test $*
 else
-  echo $0: Running make in current directory.
-  make $MYMAKEOPTS $*
+  basename=`basename $mypwd`
+  if [[ "$basename" != *-bin ]]; then
+    bindir=`echo ${mypwd} | sed "s/$basename\/$/$basename-bin\//g"`
+    if [[ -d "$bindir" ]]; then
+      make $MYMAKEOPTS -C $bindir $*
+    else
+      echo $0: Running make in current directory.
+      make $MYMAKEOPTS $*
+    fi
+  else
+    echo $0: Running make in current directory.
+    make $MYMAKEOPTS $*
+  fi
 fi
 fi
 fi

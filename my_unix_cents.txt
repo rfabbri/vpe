@@ -267,3 +267,10 @@ Process files A.txt B.txt... with a vim script
 
 # This writes the result and quits vim at the end
 vim -c "argdo source script.vim | w" -c "qa" A.txt B.txt C.txt D.txt
+
+----------------------------------------------------------------------
+Find
+
+# Searches for files modified within a specific time range
+# find . -type f -newermt 2008-05-01 ! -newermt 2008-06-01
+

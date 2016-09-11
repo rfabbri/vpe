@@ -22,3 +22,16 @@
 #     This variable should no longer be used as of CMake 2.6. Use the ARCHIVE_OUTPUT_DIRECTORY, LIBRARY_OUTPUT_DIRECTORY, and RUNTIME_OUTPUT_DIRECTORY target properties instead. They will override this variable if they are set.
 #     
 #     If set, this is the directory where all the libraries built during the build process will be placed.
+#
+#
+# 3(    STYLE: Prefer CMAKE_*_DIR to vxl_*_DIR
+#     
+#     Use a consistent variable name for relative
+#     reference to source and binary trees.
+#     
+#     The CMAKE prefixed variables are a more
+#     consistent nomenclature across multiple projects
+#     and also provides a distinction that this is
+#     an automatic implicit Cmake generated variable.
+# -# NO # INCLUDE_DIRECTORIES( $@{vxl_SOURCE_DIR@}/contrib/gel/vsol )
+# +# NO # INCLUDE_DIRECTORIES( $@{CMAKE_SOURCE_DIR@}/contrib/gel/vsol )
