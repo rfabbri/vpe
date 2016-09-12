@@ -1,1 +1,1 @@
-s/://g
+s/VCL_DEFINE_SPECIALIZATION/template <>/g

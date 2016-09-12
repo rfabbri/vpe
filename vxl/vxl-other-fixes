@@ -35,3 +35,6 @@
 #     an automatic implicit Cmake generated variable.
 # -# NO # INCLUDE_DIRECTORIES( $@{vxl_SOURCE_DIR@}/contrib/gel/vsol )
 # +# NO # INCLUDE_DIRECTORIES( $@{CMAKE_SOURCE_DIR@}/contrib/gel/vsol )
+#
+
+# DONE: 4) s/VCL_DEFINE_SPECIALIZATION/template <>/g
