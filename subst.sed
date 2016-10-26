@@ -1,1 +1,1 @@
-s/VCL_DEFINE_SPECIALIZATION/template <>/g
+s/\<subdirs\>\ *(/add_subdirectory(/g
