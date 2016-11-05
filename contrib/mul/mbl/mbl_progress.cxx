@@ -1,0 +1,140 @@
+#include "mbl_progress.h"
+// This is mul/mbl/mbl_progress.cxx
+#ifdef VCL_NEEDS_PRAGMA_INTERFACE
+#pragma implementation
+#endif
+
+#include <vcl_config_compiler.h>
+
+
+//=======================================================================
+void mbl_progress::set_estimated_iterations(const std::string& identifier,
+                                            const int iterations,
+                                            const std::string& display_text)
+{
+  identifier2estimatediterations_[identifier] = iterations;
+  identifier2progress_[identifier] = 0;
+  identifier2cancel_[identifier] = false;
+  identifier2displaytext_[identifier] = display_text;
+  on_set_estimated_iterations(identifier, iterations);
+}
+
+
+//=======================================================================
+void mbl_progress::set_progress(const std::string& identifier,
+                                const int progress)
+{
+  if (is_cancelled(identifier))
+  {
+    end_progress(identifier);
+#if VCL_HAS_EXCEPTIONS
+    if (throw_exception_on_cancel_)
+    {
+      throw mbl_progress_cancel_exception();
+    }
+#endif
+  }
+
+  std::map<std::string, int>::iterator it = identifier2progress_.find(identifier);
+  if (it != identifier2progress_.end())
+  {
+    it->second = progress;
+    on_set_progress(identifier, progress);
+  }
+}
+
+
+//=======================================================================
+void mbl_progress::increment_progress(const std::string& identifier,
+                                      const int n)
+{
+  std::map<std::string, int>::const_iterator it =
+    identifier2progress_.find(identifier);
+  if (it != identifier2progress_.end())
+  {
+    int progress = it->second + n;
+    set_progress(identifier, progress);
+  }
+}
+
+
+//=======================================================================
+void mbl_progress::end_progress(const std::string& identifier)
+{
+  on_end_progress(identifier);
+}
+
+
+//=======================================================================
+int mbl_progress::progress(const std::string& identifier) const
+{
+  int p = -1;
+  std::map<std::string, int>::const_iterator it =
+    identifier2progress_.find(identifier);
+  if (it != identifier2progress_.end())
+  {
+    p = it->second;
+  }
+  return p;
+}
+
+
+//=======================================================================
+std::string mbl_progress::display_text(const std::string& identifier) const
+{
+  std::string dt;
+  std::map<std::string, std::string>::const_iterator it =
+    identifier2displaytext_.find(identifier);
+  if (it != identifier2displaytext_.end())
+  {
+    dt = it->second;
+  }
+  return dt;
+}
+
+
+//=======================================================================
+int mbl_progress::estimated_iterations(const std::string& identifier) const
+{
+  int n = -1;
+  std::map<std::string, int>::const_iterator it =
+    identifier2estimatediterations_.find(identifier);
+  if (it != identifier2estimatediterations_.end())
+  {
+    n = it->second;
+  }
+  return n;
+}
+
+
+//=======================================================================
+// Modify the flag to cancel the current process.
+// identifier: Progress object to cancel.
+//=======================================================================
+void mbl_progress::set_cancelled(const std::string& identifier,
+                                 const bool cancel)
+{
+  std::map<std::string, bool>::iterator it = identifier2cancel_.find(identifier);
+  if (it != identifier2cancel_.end())
+  {
+    it->second = cancel;
+  }
+}
+
+
+//=======================================================================
+// Check whether a cancel request has been registered.
+// identifier:  Progress object to check for a cancel request.
+// Returns True if a cancel request has been received for this progress object.
+//=======================================================================
+bool mbl_progress::is_cancelled(const std::string &identifier) const
+{
+  bool retval = false;
+  std::map<std::string, bool>::const_iterator it = identifier2cancel_.find(identifier);
+  if (it != identifier2cancel_.end())
+  {
+    retval = it->second;
+  }
+  return retval;
+}
+

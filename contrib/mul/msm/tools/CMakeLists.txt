@@ -1,0 +1,23 @@
+# mul/msm/tools/CMakeLists.txt
+#
+#  Tim Cootes
+#
+
+link_libraries(msm msm_utils )
+
+add_executable(msm_build_shape_model msm_build_shape_model.cxx)
+add_executable(msm_draw_shape_modes  msm_draw_shape_modes.cxx)
+add_executable(msm_draw_points_on_image  msm_draw_points_on_image.cxx)
+add_executable(msm_apply_tps_warp msm_apply_tps_warp.cxx)
+add_executable(msm_plot_aligned_shapes msm_plot_aligned_shapes.cxx)
+add_executable(msm_get_shape_params msm_get_shape_params.cxx)
+add_executable(msm_add_dir_to_names msm_add_dir_to_names.cxx)
+add_executable(msm_estimate_residuals msm_estimate_residuals.cxx)
+add_executable(msm_reset_shape_modes msm_reset_shape_modes.cxx)
+add_executable(msm_get_bounds msm_get_bounds.cxx)
+add_executable(msm_select_large_shapes msm_select_large_shapes.cxx)
+add_executable(msm_images_from_list msm_images_from_list.cxx)
+add_executable(msm_concat_points msm_concat_points.cxx)
+add_executable(msm_points_subset msm_points_subset.cxx)
+add_executable(msm_compare_markups msm_compare_markups.cxx)
+add_executable(msm_average_points msm_average_points.cxx)
