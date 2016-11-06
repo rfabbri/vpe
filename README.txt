@@ -351,41 +351,61 @@ Locking commits and branches for sub-projects for sharing
 # Subtree variant for VPE
 This follows link [5]'s alternative in the response therein.
 
-## Adding vxl/vxd to vpe
+## Adding vxl to vpe
 
     git init
-    > deleteme.txt
+    > initial-dummy-file
     git add .
     git commit -m 'initial dummy commit'
 
-    git remote add -f vxl ../remotes/vxl
-    # tested with git 2.10
+    git remote add vxl ../vxl
+    git fetch vxl
     git merge --allow-unrelated-histories vxl/master
 
-    git rm deleteme.txt
+    git rm initial-dummy-file
     git commit -m 'cleaning up initial file'
     mkdir vxl
     git mv `ls|grep -v vxl` vxl
     git commit -m 'moved vxl to vxl/ folder'
 
-    # do the same for vxd
-    git remote add -f vxd ../remotes/vxd
-    # tested with git 2.10
+    git checkout -b vxl-master vxl/master  # keeps vxl history across git clones
+
+    git remote add origin git@github.com:rfabbri/vpe.git
+    git push -u origin master
+    git push origin vxl-master
+    git co master
+
+## Adding vxd to vpe
+
+    git remote add vxd ../vxd
+    git fetch vxd
     git merge --allow-unrelated-histories vxd/master
     mkdir vxd
-    git mv `ls|grep -v vxd | grep -v vxl` vxd
+    git mv `ls|grep -v '^vxd$' | grep -v '^vxl$'` vxd
     git commit -m 'moved vxd to vxd/ folder'
 
-    # histories look perfect
+    git checkout -b vxd-master vxd/master  # keeps vxl history across git clones
+    git push origin master
+    git push origin vxd-master
+    git co master
+
+    # check histories look perfect
+
+## Finalizing
+    - .gitignore
+    - 
 
 ## Pulling in changes from VXL/VXD
 
     # do it in steps to make sure whats going on
     git fetch vxl
-    git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # vxl/anybranch
+    git checkout vxl-master # create optional branch if you're fetching 
+                            # non-master branch, use vxl-master normally
+
+    git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
     git checkout master
-    git merge vxl-master
-    git push origin vxl/master
+    git merge vxl-master  # optional branch
+    git push origin vxl-master
 
     # you could also just merge directly!
     git fetch vxl
@@ -435,11 +455,19 @@ instead of cherrypicking (see similar approach 2 below).
 
 ## 3. Push edits
 
-    # double-check your vxl-master commits look good and linear
+    # double-check your future vxl-master commits will look good and linear
 
-    git push  # to push the vxl-master branch to toplevel VPE
+    git co vxl-master
+    git merge vxl-integration
+    git push origin vxl-master # to push the vxl-master branch to toplevel VPE
     git push vxl HEAD:master
     git branch -D master-reb
+
+    # tag master that you've done all integration up to here
+    git co master
+    git tag -d integrated-VXL 
+    git push origin :refs/tags/integrated-VXL
+    git tag -a integrated-VXL -m "Integrated all commits touching VXD up to this point."
 
     Rebase is nice, since rebasing interactively means that you have a chance to
     edit the commits which are rebased (inserting move-related info such as the
