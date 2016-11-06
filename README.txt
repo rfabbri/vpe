@@ -1,8 +1,8 @@
 # Ideas to make it easier to work on VXL + VXD + internal Project
 
-We call the superproject VPE: Vision Programming Environment.
+We call the superproject or monorepo VPE: Vision Programming Environment.
 It would be a way of working in tandem, to try to make some things easier for
-people that use and modify both VXL and VXD at the source level.
+people that use and modify all of VXL and VXD and internal project at the source level.
 
 The basic idea would be that the super repo would replicate a repo hierarchy
 most VXD developers would have:
@@ -190,13 +190,15 @@ push/pull directly without passing through VPE
 
     git remote add ...
 
+    In VPE we'll have booststrap/setup scripts for this.
+
 ### VXL/VXD change flow
 Edit vxl/ normally
 
     # eg:  echo '// test' >> vxl/CMakeLists.txt   # an existing VXL file is edited
-
     # if we want that change to be backported to VXL, we prepend TO VXL:
-    git ci -am "FROM VPE: cmakelists"  # this message shows up on upstream
+    git ci -am "VPE->VXL: cmakelists"  # this message shows up on upstream
+    # Or, if we forgot, we can tag the commit "TO-VXD"
 
 Keep doing other commits to anywhere in the tree.  When backporting, we have to
 cherry-pick when the original team has made free commits anywhere in the tree.
@@ -347,7 +349,7 @@ Locking commits and branches for sub-projects for sharing
       the id of the commit of the dependant repos plus the remote and branches being used (ouch).
 
 # Subtree variant for VPE
-This follows link [5]'s alternative in the response.
+This follows link [5]'s alternative in the response therein.
 
 ## Adding vxl/vxd to vpe
 
@@ -380,20 +382,49 @@ This follows link [5]'s alternative in the response.
 
     # do it in steps to make sure whats going on
     git fetch vxl
-    git checkout -b optional-branch  # useful if you're fetching non-master branch
-    git merge -s recursive optional-branch-to-merge -Xsubtree=vxl vxl/master    # vxl/anybranch
+    git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # vxl/anybranch
     git checkout master
-    git merge feature-in-progress
+    git merge vxl-master
+    git push origin vxl/master
 
     # you could also just merge directly!
-    git fetch
+    git fetch vxl
     git merge -s recursive -Xsubtree=vxl vxl/master
 
 ## Updating the remote
+### 1. Make edits
+    # Edit vxl/ normally
+
+    # eg:  echo '// test' >> vxl/CMakeLists.txt   # an existing VXL file is edited
+    # if we want that change to be backported to VXL, we prepend TO VXL:
+    git ci -am "VPE->VXL: cmakelists"  # this message shows up on upstream
+    # Or, if we forgot, we can tag the commit "TO-VXD"
+
+Keep doing other commits to anywhere in the tree.  When backporting, we have to
+cherry-pick when the original team has made free commits anywhere in the tree.
+If you yourself are working on the tree, and separate your commits to vxl/ and
+vxd/ folders in separate branches merged to your master, this becomes a rebase
+instead of cherrypicking (see similar approach 2 below).
+
+### 2. Cherrypick/Rebase edits
     git fetch vxl
-    git checkout -b vxl-integration vxl/master
+    git checkout -b vxl-integration vxl-master
+    git checkout vxl-integration
     # merge changes from master using subtree
     git cherry-pick -x --strategy=subtree -Xsubtree=vxl/ master
+    # check if that generates a commit with the wrong prefix, if so,
+    # undo the commit by resetting HEAD and give up, start again.
+    #
+    # --strategy=subtree (-s means something else in cherry-pick) also helps to make sure
+    # changes outside of the subtree (elsewhere in container code) will get quietly
+    # ignored. 
+
+    # use '-e' flag to cherry-pick to edit the commit message before passing upstream
+    # you may want to say something about it if it was a move from another package
+    #
+    # the -x in these commands annotate the commit message with the SHA1 of VPE
+    # Use the following to make sure files outside of the subtree (elsewhere in container code) 
+    # will get quietly ignored. This may be useful when cherypicking a rename, since move is rm+add
 
     # Or, if you organized your VXL commits directly into eg vxl-integration, just rebase
 
@@ -401,6 +432,11 @@ This follows link [5]'s alternative in the response.
     git rebase -s subtree -Xsubtree=vxl --onto vxl-integration feature-in-progress master-reb
     git checkout vxl-integration
     git merge master-reb
+
+## 3. Push edits
+
+    # double-check your vxl-master commits look good and linear
+
     git push  # to push the vxl-master branch to toplevel VPE
     git push vxl HEAD:master
     git branch -D master-reb
