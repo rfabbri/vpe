@@ -484,6 +484,43 @@ instead of cherrypicking (see similar approach 2 below).
   day-to-day workflow gets centralized and synced a lot easier (one repo) than
   before.
 
+### Creating a new Internal project based on VPE 
+
+    # clone VPE from github
+    git clone vpe internalvpe
+    # do all your edits in InternalVPE
+    # change the name and the remote to your new internal repo URL
+
+### Migrating a new Internal project to a workflow based on VPE
+    # lets call this new project LEMSVXL
+
+    # lemsvxl is a checked-out copy of Internal project
+    # we first create a VPE monorepo for that project
+    cp -R lemsvxl lemsvpe
+    cd lemsvpe
+
+    # new-master is the branch we work on LEMSVXL stuff
+    # it is the modernized version
+    git checkout new-master
+
+    # move everything to lemsvxl subdir, if you want
+    mkdir lemsvxl
+    git mv `ls |grep -v '^lemsvxl$'` lemsvxl
+
+    # do a ls -a to check for any hidden files
+
+
+    # check that VPE itself doesn't have conflicting file names with the
+    # existing project, as we merge it right in the root folder:
+    # if it does have conflicting files, checkout a copy of VPE,
+    # checkout a new branch, then remove the undesired files prior to merging
+    # it to your repo.
+
+    git remote add vpe ../vpe
+    git fetch vpe
+    # double-check no files match! Usually .gitignore is conflicted, or README
+    git merge --allow-unrelated-histories vpe/master
+
 
 # Submodules for VPE
 - well supported
@@ -587,6 +624,8 @@ Spull alias cover all cases:
 # Android Repo tool
 
 - barely any reliable doc on the web for the VPE case
+
+
 
 # Links
 
