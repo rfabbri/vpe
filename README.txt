@@ -376,6 +376,7 @@ This is an improvement to link [5]'s alternative in the response therein.
     # if you are importing a secondary subpackage, you might not want full history.
     # Then squash it, instead of the above merge:
     # To squash all commits since you branched away from master, do
+    # git checkout vxl-move-tmp
     # git rebase -i master
     # Note that rebasing to the master does not work if you merged the master into your feature branch while you were working on the new feature. If you did this you will need to find the original branch point and call git rebase with a SHA1 revision.
     # 
