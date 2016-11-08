@@ -285,5 +285,3 @@ youtube-dl -cit --merge-output-format mp4 -k https://www.youtube.com/playlist?li
 youtube-dl --extract-audio --audio-format mp3 https://www.youtube.com/playlist?list=PLD6030E61BF2B5C08
 
 # use -w if you are downloading in parallel in a folder 
-
-
