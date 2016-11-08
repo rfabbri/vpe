@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# script/setup-for-development: 
+# Start a new vxl programming environment (VPE), after a new git clone
+#
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+scripts/setup-user
+
+# Last thing: tips and suggestions
+scripts/tips

@@ -47,4 +47,6 @@ This is very loosely insipred in "Scripts To Rule Them All",
 a set of boilerplate scripts describing the [normalized script pattern
 that GitHub uses in its projects](http://githubengineering.com/scripts-to-rule-them-all/). 
 It also has some inspiration from Kitware's GitSetup, a copy of which you can
-find under `vxl/scripts/`.
+find under `vxl/scripts/`. These scripts, however, don't have any config file,
+but instead you have to customize one by one for a new project, which we found
+to be simple enough and more powerful.
