@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# script/test: Run test suite for application in a way convenient to current
+# project being worked on by team
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUG" ] || set -x
+
+script/setup
+
+echo "==> Running tests…"
+
+if [ -n "$1" ]; then
+  # you can pass --all etc 
+else
+  # default test useful for team at the moment
+fi
