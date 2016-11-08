@@ -393,7 +393,6 @@ This follows link [5]'s alternative in the response therein.
 
 ## Finalizing
     - .gitignore
-    - 
 
 ## Pulling in changes from VXL/VXD
 
@@ -474,16 +473,6 @@ instead of cherrypicking (see similar approach 2 below).
     origin sha1 etc). You can reorder the commits, and you can
     remove them (weeding out bad or otherwise unwanted patches).
 
-### Conclusion
-- same as before
-
-- Caveat: git log --follow doesn't work for sub folders to trace down to the orig repo
-
-- mere users only push to main repo, but will never ever push directly to the
-  subrepos, unless they are advanced users. this may be a good thing, as
-  day-to-day workflow gets centralized and synced a lot easier (one repo) than
-  before.
-
 ### Creating a new Internal project based on VPE 
 
     # clone VPE from github
@@ -520,6 +509,60 @@ instead of cherrypicking (see similar approach 2 below).
     git fetch vpe
     # double-check no files match! Usually .gitignore is conflicted, or README
     git merge --allow-unrelated-histories vpe/master
+
+    # Now replace the origin remote by a new one for LEMSVPE
+    git remote add origin git@bitbucket.org:rfabbri2/lemsvpe.git
+
+    # massive push
+    git push -u origin --all # pushes up the repo and its refs for the first time
+    git push origin --tags # pushes up any tags
+
+    # substitute remotes initially done locally to a proper remote
+
+    git remote remove vpe
+
+    # run all this in a bootstrap/setup script
+    git remote add vpe http://github.com/rfabbri/vpe
+    git fetch vpe
+    git branch --track vpe-master vpe/master
+
+    # run VPE's bootstrap first
+    git remote add vxl git@visionserver.lems.brown.edu:kimia_group/lemsvxl.git
+    git remote add vxd git@github.com:rfabbri/vxd.git
+    git fetch vxl
+    git fetch vxd
+    git branch --track vxl-master vxl/master
+    git branch --track vxd-master vxd/master
+
+    # check user's git is greater than 2.
+
+### First-timer cloning and seting up LEMSVPE
+    git clone git@bitbucket.org:rfabbri2/lemsvpe.git lemsvpe
+    git checkout -b new-master origin/new-master
+    git remote add vpe http://github.com/rfabbri/vpe
+    git fetch vpe
+    git branch --track vpe-master vpe/master
+    vpe-bootstrap
+    # check user's git is greater than 2.
+
+### Pulling in changes from VPE from within Internal project
+    # VPE was merged directly into the project root. That's where it lives.
+    # So we use regular merges. If there are conflicts (eg, for the README), we
+    # should always favour our version.
+
+    git fetch vpe
+    git merge -s ours vpe/master  # this didn't work, one commit had conflict,
+                                  # the rest got ignored. I just carefully
+                                  # cherry-picked the VPE changes I needed
+### Conclusion
+- same as before
+
+- Caveat: git log --follow doesn't work for sub folders to trace down to the orig repo
+
+- mere users only push to main repo, but will never ever push directly to the
+  subrepos, unless they are advanced users. this may be a good thing, as
+  day-to-day workflow gets centralized and synced a lot easier (one repo) than
+  before.
 
 
 # Submodules for VPE
