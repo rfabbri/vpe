@@ -352,8 +352,6 @@ Locking commits and branches for sub-projects for sharing
 This follows link [5]'s alternative in the response therein.
 
 ## Adding vxl to vpe
-
-    git init
     > initial-dummy-file
     git add .
     git commit -m 'initial dummy commit'
