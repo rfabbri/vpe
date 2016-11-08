@@ -6,6 +6,6 @@
 
 set -x
 #tmpf=/tmp/git-mv-tracked-$$.tar
-git archive HEAD | tar xf - -C $2
+git archive HEAD $1 | tar xf - -C $2
 #trap 'rm -f $tmpf; exit 1' 1 2 15
 #rm -f $tmpf

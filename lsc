@@ -2,7 +2,18 @@
 case $# in
 #       0)  ls *.c *.h *.cpp *.cxx *.txx *.m *.sci *.sce *.sh 2>/tmp/my---null;;
        0)  ls *.c *.h *.hxx *.cpp *.cxx *.txx *.sh *.java *.m 2>/tmp/my---null;;
-       1)  find . |egrep '\.(c|h|hxx|cxx|cpp|txx|m|sci|sce|sh|java|py|m)$' ;;
+       1)  
+         
+         if test `echo $PWD/|grep /lemsvxl/`; then
+#           echo in lems
+            find . -path ./vxd -prune -o -print |egrep '\.(c|h|hxx|cxx|cpp|txx|m|sci|sce|sh|java|py|m)$' 
+         else
+#           echo out
+            find . |egrep '\.(c|h|hxx|cxx|cpp|txx|m|sci|sce|sh|java|py|m)$' 
+         fi
+
+         
+         ;;
        *)      echo "Usage: $0 [-r|--recursive]" 1>&2
                exit 1
                ;;

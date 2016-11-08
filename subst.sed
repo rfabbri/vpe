@@ -1,1 +1,1 @@
-s/\<subdirs\>\ *(/add_subdirectory(/g
+s/rfabbri@gmail.com/rfabbri.github.io/g
