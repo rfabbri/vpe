@@ -369,7 +369,9 @@ This is an improvement to link [5]'s alternative in the response therein.
     # git commit -m 'moved vxl to vxl/ folder'
     # git checkout master
     # an _then_ merge. This would work for adding other subtrees later on
-    git merge --allow-unrelated-histories vxl/master
+    # lgit merge --allow-unrelated-histories vxl/master
+    git merge --allow-unrelated-histories vxl-move-tmp
+
     # if you did move with a branch, now delete the branch
     # git branch -D vxl-move-tmp
     # --- SQUASHING HISTORY ------------------------------------------------
@@ -445,14 +447,15 @@ This is an improvement to link [5]'s alternative in the response therein.
                                        # non-master branch, else use vxl-master normally
 
     git checkout master
+    # merges vxl/master into vxl-master
     git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
-    git checkout master
+    # check that vxl-master has the commits as you want them
     git merge vxl-master  # optional branch
     git push origin vxl-master
 
-    # you could also just merge directly!
-    git fetch vxl
-    git merge -s recursive -Xsubtree=vxl vxl/master
+    # you could also just merge directly! (be careful)
+    # git fetch vxl
+    # git merge -s recursive -Xsubtree=vxl vxl/master
 
 ## Pulling in changes from secondary packages (if any)
 
