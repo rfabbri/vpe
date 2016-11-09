@@ -453,10 +453,11 @@ This is an improvement to link [5]'s alternative in the response therein.
     git fetch vxl
     git merge -s recursive -Xsubtree=vxl vxl/master
 
-## Pulling in changes from secondary packages (utils)
+## Pulling in changes from secondary packages (if any)
 
-    # if you want to keep history, just adapt the VXL/VXD instructions above
-    # otherwise,
+    # for now all our packages are like VXL/VXD, with full history merged
+    # in. These instructions are here if you want to include some other package
+    # without history merging (ie, you have squashed its commits and rebased)
     git fetch utils
 
     git checkout -b utils-rebase utils/master
