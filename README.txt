@@ -453,6 +453,17 @@ This is an improvement to link [5]'s alternative in the response therein.
     git fetch vxl
     git merge -s recursive -Xsubtree=vxl vxl/master
 
+## Pulling in changes from secondary packages (utils)
+
+    # if you want to keep history, just adapt the VXL/VXD instructions above
+    # otherwise,
+    git fetch utils
+
+    git checkout -b utils-rebase utils/master
+
+    # TO TEST: merge with squash (so we don't keep their history)
+    git merge -s recursive --squash utils-rebase -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
+
 ## Updating the remote
 ### 1. Make edits
     # Edit vxl/ normally
