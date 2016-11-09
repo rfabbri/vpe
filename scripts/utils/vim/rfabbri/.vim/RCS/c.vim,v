@@ -1,0 +1,70 @@
+head	1.1;
+access;
+symbols;
+locks
+	rfabbri:1.1; strict;
+comment	@# @;
+
+
+1.1
+date	2003.07.20.19.57.24;	author rfabbri;	state Exp;
+branches;
+next	;
+
+
+desc
+@local C/C++ mappings, etc
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@"
+" My local C settings (rfabbri)
+" This is not the plugin 
+"
+
+
+so $HOME/.vim/sem_acento.vim
+"so $HOME/.vim/acento.vim
+set noai
+set cindent
+ab ae AnimalExport
+"map <F5> :!make
+"map <F5> :!gcc -o %< %
+map <F8> :!ctags *.c *.h
+map <F9> :!%<
+map <F10> 0i	j
+map <F11> 0i//j
+map <F12> :!gvd %< &
+"-------------------------------------------------------------------------------
+"  some additional hot keys
+"-------------------------------------------------------------------------------
+"
+"     F4  -  show tag under curser in the preview window
+"     F6  -  list all errors           
+"     F7  -  display previous error
+"     F8  -  display next error   
+
+nmap  <silent> <F4>    :exe ":ptag ".expand("<cword>")<CR>
+map   <silent> <F6>    :copen<CR>
+map   <silent> <F7>    :cp<CR>
+map   <silent> <F8>    :cn<CR>
+"
+imap  <silent> <F4>    <Esc>:exe ":ptag ".expand("<cword>")<CR>
+imap  <silent> <F6>    <Esc>:copen<CR>
+imap  <silent> <F7>    <Esc>:cp<CR>
+imap  <silent> <F8>    <Esc>:cn<CR>
+
+" Rfabbri's construct maps
+" C comment
+map    ;co               a/*  */<Esc>2hi
+
+
+" This one inserts a {} block after a function definition
+map    ;bl               o<Esc>0i{<CR>}<Esc>O
+c.vim
+@

@@ -1,0 +1,40 @@
+# 1)
+# s/SUBDIRS/add_subdirectory/g
+
+# 2)
+#     After CMake version 2.6, the variables:
+#     -CMAKE_RUNTIME_OUTPUT_DIRECTORY
+#     -CMAKE_LIBRARY_OUTPUT_DIRECTORY
+#     -CMAKE_ARCHIVE_OUTPUT_DIRECTORY
+#     should be used instead of
+#     -EXECUTABLE_OUTPUT_PATH and
+#     -LIBRARY_OUTPUT_PATH.
+#     
+#     from the cmake 2.6 documentation:
+#     https://cmake.org/cmake/help/cmake2.6docs.html#variable:EXECUTABLE_OUTPUT_PATH
+#     
+#     EXECUTABLE_OUTPUT_PATH: Old executable location variable.
+#     This variable should no longer be used as of CMake 2.6. Use the RUNTIME_OUTPUT_DIRECTORY target property instead. It will override this variable if it is set.
+#     
+#     If set, this is the directory where all executables built during the build process will be placed.
+#     
+#     LIBRARY_OUTPUT_PATH: Old library location variable.
+#     This variable should no longer be used as of CMake 2.6. Use the ARCHIVE_OUTPUT_DIRECTORY, LIBRARY_OUTPUT_DIRECTORY, and RUNTIME_OUTPUT_DIRECTORY target properties instead. They will override this variable if they are set.
+#     
+#     If set, this is the directory where all the libraries built during the build process will be placed.
+#
+#
+# 3(    STYLE: Prefer CMAKE_*_DIR to vxl_*_DIR
+#     
+#     Use a consistent variable name for relative
+#     reference to source and binary trees.
+#     
+#     The CMAKE prefixed variables are a more
+#     consistent nomenclature across multiple projects
+#     and also provides a distinction that this is
+#     an automatic implicit Cmake generated variable.
+# -# NO # INCLUDE_DIRECTORIES( $@{vxl_SOURCE_DIR@}/contrib/gel/vsol )
+# +# NO # INCLUDE_DIRECTORIES( $@{CMAKE_SOURCE_DIR@}/contrib/gel/vsol )
+#
+
+# DONE: 4) s/VCL_DEFINE_SPECIALIZATION/template <>/g

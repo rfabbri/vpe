@@ -1,0 +1,126 @@
+[[Image:Ubuntu-logox45.png|right]]This is a checklist and a set of tips on setting up a complete ubuntu installation suitable for software development and scientific research.  
+
+These instructions were tested on Ubuntu 15.04 but are almost the same for 12.04, 11.10, down to 11.04.
+
+==Partitioning for Programming==
+
+For programming, I use the following partition guidelines
+* <tt>/</tt> : from 20 to 100GB (usually a full-fledged Ubuntu install for multimedia development will consume 16GB, from my experience)
+* <tt>/linux2</tt> : I place another Linux partition here, so that I can have 2 linux distros. The size is the same guidelines as I mentioned above for '/'.
+* <tt>/home</tt> : your files that are visible to all linux distros and remain untouched between reinstalls.
+* Swap: if you do heavy simulations, double your RAM is a good rule of thumb here; otherwise, you'll do fine with just a couple GB here.
+
+File system: choose ext4, it performs very well on most circumstances.
+
+In the case of a laptop with a small internal SSD and a large slow HD, I've successfully used the following sheme
+* <tt>/</tt>: goes into the SSD, minus /var
+* <tt>/var</tt>: goes into the slow HD. 10GB should be more than enough here.
+
+In the case of most modern UEFI firmware (replacing BIOS), you need to make sure there's an EFI partition.
+
+
+== Installing Packages ==
+
+Be resourceful. Install most of the stuff you'll ever need so you don't have to worry about it later. After this, your system will consume about 15GB total
+
+ apt-get install kdenlive kino texlive-full blender konqueror konq-plugins  glade gtk-gnutella freemind emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk php5 libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv
+
+=== Getting back to Ubuntu / Unity (for 13.10 users) ===
+The above commands installs kubuntu-full to get programs and libs from ubuntu. But if you want to go back to unity just do this:
+* edit the file /etc/lightdm/lightdm.conf  
+* change the line user-session to be
+ user-session=ubuntu
+* change the line greeter-session to be
+ greeter-session=unity-greeter 
+
+=== Remove the unified menu feature ===
+ apt-get remove indicator-appmenu 
+
+=== Clipboard history manager ===
+<syntaxhighlight lang="bash">sudo add-apt-repository ppa:diodon-team/stable
+sudo apt-get update
+sudo apt-get install diodon
+</syntaxhighlight>
+
+=== System usage indicator ===
+
+ sudo add-apt-repository ppa:indicator-multiload/stable-daily
+ sudo apt-get update
+ sudo apt-get install indicator-multiload
+
+=== Dev libs ===
+Get dev libs indirectly through build-dep:
+
+ apt-get build-dep scilab evince okular digikam mplayer gimp libreoffice firefox empathy kino vlc gxine puredata ardour lmms
+
+=== Dev utilities ===
+==== Apt-file ====
+Apt-file to search for packages containing a specified file (useful for compiling)
+ apt-get install apt-file
+
+sample usage:
+ # one-time: 
+ apt-file update    
+ # all other times:
+ apt-file find arquivo_exemplo.h
+
+==== Apt-rdepends ====
+Apt-rdepends to search for packages depending on a specified package (useful for compiling)
+ apt-get install apt-rdepends
+
+sample usage:
+ apt-rdepends --reverse (packagename)
+
+==== Other ====
+No Ubuntu 11.10, Gnome shell:
+ apt-get install gnome-shell
+
+==Other Configs==
+
+* capslock -> additional control
+* nvidia-drivers
+* wish 8.5 (see listamacambira email) - nice tcl/tk GUI
+* Explore o gnome-tweak-tool
+
+You might want to change UID to same as the UID of your other computers or external hard drives (same with GID)
+
+ usermod -u UID username
+ groupmod -g GID username
+
+This will take care of everything inside /home/username, /etc/passwd and the like. Remember to edit /etc/login.defs if your UID is below 1000
+
+== Cuda ==
+
+The following steps makes CUDA (for NVidia cards) work with software such as [[Blender]] [http://blender.stackexchange.com/questions/7485/enabling-gpu-rendering-for-cycles]
+[http://blender.stackexchange.com/questions/31045/cuda-rendering-on-linux-mint-or-ubuntu-variants/31111#31111] 
+* Install the proprietary NVIDIA drivers.
+** Go to System Settings -> Software Updates -> Additional Drivers Tab and select the latest stable.
+** Install some cuda-specific packages: 
+ sudo apt-get install nvidia-modprobe nvidia-cuda-toolkit
+
+=== Other Instructions ===
+You can try to follow this:
+ http://hdfpga.blogspot.com/2011/05/install-cuda-40-on-ubuntu-1104.html
+[[Image:Ubuntu-logox45.png|right]]
+[[Category:Lab Macambira]]
+[[Category:Linux]]
+
+== Automation Script ==
+The latest instructions on this page are automated inside an install script that is shipped as part of the [[Lab Macambira]] utils Git repository:
+
+http://labmacambira.git.sourceforge.net/git/gitweb.cgi?p=labmacambira/utils;a=blob;f=configure-ubuntu-for-programming;hb=HEAD
+
+You can download it using Git (for easily downloading later updates) like this:
+
+
+    $ git clone git://labmacambira.git.sourceforge.net/gitroot/labmacambira/utils
+
+Or, if you are a [[Lab Macambira]] comitter or if you have a sourceforge user:
+
+    $ git clone ssh://<usuario>@labmacambira.git.sourceforge.net/gitroot/labmacambira/utils
+
+The above script is pretty much like achieving a developer's distro on top of a raw ubuntu installation.
+
+== See also ==
+* [[Manual do Novato]] for [[Lab Macambira]] n00b guidance
+* [[Mac|Configuring Mac OS X for programming]] open source and beyond

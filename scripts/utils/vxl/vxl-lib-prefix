@@ -1,0 +1,4 @@
+#!/bin/sh
+# see vxl-lib-prefix.vim for info
+
+vim -c "argdo source `dirname $0`/vxl-lib-prefix.vim | w" -c 'qa' $*

@@ -1,0 +1,58 @@
+#!/bin/sh
+# This is just to make from a source directory 'path/foosrc', when the binary tree is in
+# another directory 'path/foo-bin'.
+
+mypwd=$PWD'/'
+
+if test `echo $mypwd|grep /lemsvxl/`; then
+  bindir=`echo $mypwd | sed 's/\/lemsvxl\//\/lemsvxl-bin\//g'`
+  echo $bindir
+else if test `echo $mypwd|grep /vxl/`; then
+  bindir=`echo $mypwd | sed 's/\/vxl\//\/vxl-bin\//g'`
+  echo $bindir
+else if test `echo $mypwd|grep /vxl-bin/`; then
+  srcdir=`echo $mypwd | sed 's/\/vxl-bin\//\/vxl\//g'`
+  echo $srcdir
+else if test `echo $mypwd|grep /lemsvxl-bin/`; then
+  srcdir=`echo $mypwd | sed s/lemsvxl-bin/lemsvxl/g`
+  echo $srcdir
+else if test `echo $mypwd | grep pd-svn-w-extended-git-plus-gem`; then
+  if test `echo $mypwd|grep Gem`; then
+#    repodir=`echo $mypwd |sed 's/pd-svn-w-extended-git-plus-gem.*Gem/pd-gem/g'`
+    repodir=`echo $mypwd |sed 's/pd-svn-w-extended-git-plus-gem.*Gem/pd-svn-w-extended-git-plus-gem\/gem-git/g'`
+  else if test `echo $mypwd|grep pd-svn-w-extended-git-plus-gem/pd`; then
+      repodir=`echo $mypwd |sed 's/pd-svn-w-extended-git-plus-gem\/pd/pd-extended-git/g'`
+  else
+      repodir=`echo $mypwd |sed 's/pd-svn-w-extended-git-plus-gem/pd-svn/g'`
+  fi
+  fi
+  echo $repodir
+else if test `echo $mypwd|grep /pd-svn/`; then
+  repodir=`echo $mypwd | sed 's/pd-svn/pd-svn-w-extended-git-plus-gem/g'`
+  echo $repodir
+else if test  `echo $mypwd|grep pd-extended.git`; then
+  repodir=`echo $mypwd | sed 's/pd-extended.git/pd-svn-w-extended-git-plus-gem\/pd/g'`
+else if test  `echo $mypwd|grep pd-gem/Gem`; then
+  repodir=`echo $mypwd | sed 's/pd-gem\Gem/pd-svn-w-extended-git-plus-gem\/Gem/g'`
+else
+  basename=`basename $mypwd`
+  if [[ "$basename" = *-bin ]]; then
+    newdir=`echo ${mypwd} | sed 's/-bin\/$/\//g'`
+  else
+    newdir=`echo ${mypwd} | sed "s/$basename\/$/$basename-bin\//g"`
+  fi
+
+  if [[ -d "$newdir" ]]; then
+    echo $newdir
+  else
+    pwd # do nothing
+  fi
+fi
+fi
+fi
+fi
+fi
+fi
+fi
+fi
+

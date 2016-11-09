@@ -1,0 +1,287 @@
+== INTRO ==
+
+This is a collection of random unix tips and tricks by Ricardo Fabbri.
+Separate each unix tip by a line of '------'s
+
+
+
+-------------------------------------------------
+1-    ctl-s para uma saida extensa de um programa (suspend).
+      ctl-q resume a execucao.
+-------------------------------------------------
+2-    grep -v <pattern> <file> --> mostra linhas SEM pattern.
+-------------------------------------------------
+3-    deleta os espacos ao final de cada linha:
+      sed 's/[ ^t]*$//' file
+------------------------------------------------
+4-    renomeia arquivos, um a um:
+      for i in `ls | sed 's/kmid_//g'`
+      do
+         mv kmid_$i $i
+      done
+
+------------------------------------------------
+indent -kr --no-tabs --indent-level 3
+(tem tbm dica de indent nas minha developer guideline do animal)
+------------------------------------------------
+
+DIRETORIO COMUM:
+chmod -R g+rw dir
+chgrp -R newgrp dir
+chmod -R g+s dir 
+umask
+
+Explicacao: The setgid bit, 's' or 'S' if there is no corresponding group 'x' bit, influences the creation of new files in the directory. New files are created with their group ID set to that of the directory; the same is true of new directories but in addition they have the setgid bit set.  
+---------------------------------------------
+Traditional unix encrypt format:
+
+mdecrypt/mcrypt -a enigma --keymode scrypt --bare
+
+
+
+----------------------------------------------------------------------
+netstat -tep --numeric-users
+----------------------------------------------------------------------
+CVS
+  look at cvs-misc file
+
+
+mutt -x -a filename.to.attach -s "Subject that you want" email@address.to.send.to
+
+The -x will start in mailx emulation mode, you can leave that off and get the body of the email from a file instead:
+
+mutt -a filename.to.attach -s "Subject that you want" email@address.to.send.to < file.name.for.body.of.email
+
+----------------------------------------------------------------------
+Coredump w PID name
+
+echo "core.%e.%p" > /proc/sys/kernel/core_pattern
+
+----------------------------------------------------------------------
+Extract all frames from a video:
+
+mogrify -format png video.avi
+
+or
+
+mplayer video.m2t -vo png -frames 5
+
+----------------------------------------------------------------------
+Make a video from a series of images:
+
+
+fmpeg -pattern_type glob -i '*.jpg' movie.mp4
+
+mencoder mf://snakepit*edgepara*A.png -mf fps=2 -o output.avi -ovc copy
+
+Better:
+
+mencoder mf://*.png -mf fps=10 -o output2.avi -ovc lavc -of lavf -vf scale=500:279,crop=490:279:0:0
+
+Get help about codes by specifying -of help or -ovc help
+
+----------------------------------------------------------------------
+Convert all images to a PDF
+
+convert *.jpg document.pdf
+
+----------------------------------------------------------------------
+Manipulate PDF files: rotate, join, etc:
+
+Concatenate pdfs:
+
+convert -density 140 *.pdf out.pdf
+
+or
+
+gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf file1.pdf file2.pdf file3.pdf [...] lastfile.pdf
+
+Rotate an upside-down pdf page to upright:
+
+convert -density 140 -flip -flop input.pdf out.pdf
+
+Extract pages from a pdf (or alternatively, slice/remove pages):
+
+pdftk old.pdf cat 1-9 26-end output new.pdf
+
+----------------------------------------------------------------------
+Convert PDF to TIFF
+
+
+gs -dNOPAUSE -q -r200x200 -sDEVICE=tiffg4 -dBATCH -sOutputFile=output_file_name.tif ALINEAR1de2.pdf
+
+That uses 200dpi. Change the -r flag to the desired DPI, eg -r300x300 etc
+
+----------------------------------------------------------------------
+Convert FLV to MPEG
+~/bin/convert-flv
+
+----------------------------------------------------------------------
+Convert OGV to MPEG
+
+mencoder -idx input.ogv -ovc lavc -oac mp3lame -o output.avi
+
+or, improving quality:
+
+mencoder -idx input.ogv -ovc lavc -lavcopts vcodec=mjpeg -oac mp3lame -o output.avi
+
+or
+
+ffmpeg -i input.ogv output.avi
+
+
+----------------------------------------------------------------------
+INVERT VIDEO
+
+mencoder serve-twist-30.WMV -idx -ovc lavc -oac mp3lame -vf eq=0:-100  -o bla.ogv
+
+----------------------------------------------------------------------
+VIDEO -> ANIMATED GIF
+
+See my blog post:
+http://maverickranter.blogspot.com/2009/02/video-screen-shots-in-linux.html
+
+::Method 1::
+
+mplayer input.avi -vo gif89a:output=output.gif:fps=1 -vf -frames 999
+
+mplayer input.avi -vo gif89a:output=output.gif:fps=1 -vf crop=850:562:17:99 -frames 999
+
+If there is something wrong with the GIF output, then:
+
+::Method 2::
+
+
+mplayer file.avi -vo jpeg -vop scale=100:100 -frames 240
+
+You can crop on the fly as well:
+
+It'll produce 240 JPG files.
+
+Step 2
+
+mogrify -format gif *.jpg
+
+Step 3
+
+convert  -adjoin  -loop 0  -delay 5  *.gif  animation.gif
+
+Meaning: infinite loop; leave 5/100 second delay between the images.
+
+
+You can nonlinearly edit the video by opening the GIF in GIMP and deleting the
+frames you don't want as layers, then saving it.
+
+----------------------------------------------------------------------
+BATCH CONVERT PNG -> JPEG
+
+convert -format jpg *.png
+
+the above seems to too require too much mem. Instead, use my script 2jpeg:
+~/bin/2jpeg *.png
+
+----------------------------------------------------------------------
+REMOVE SOUND OF A VIDEO
+
+ffmpeg -i test.avi -an -vcodec copy output.avi
+
+----------------------------------------------------------------------
+LATEX FORMULA -> SVG
+1) create a file eq.tex with the contents
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\thispagestyle{empty}
+\begin{document}
+
+% INSERT FORMULA HERE LIKE:
+
+$ x^2 $
+\end{document}
+
+2) 
+
+latex eq
+dvips -q -f -E -D 600 -y 5000 -o eq.ps eq.dvi
+pstoedit -f plot-svg -dt -ssp eq.ps eq.svg
+
+
+----------------------------------------------------------------------
+PDF -> SVG
+pdf2svg filename.pdf output-page%03d.svg all
+
+----------------------------------------------------------------------
+Scanning (my script in OSX, should be same in linux)
+
+myscan file.ppm
+convert file.ppm file.pdf
+
+
+----------------------------------------------------------------------
+Reducing PDF Size
+
+reduce-pdf-size file.pdf
+
+For smaller file:
+
+convert file.ppm file.pdf
+
+pdf2ps file.pdf
+ps2pdf file.ps
+
+# Better quality, still smaller than convert's pdf:
+
+ps2pdf -dPDFSETTINGS=/prepress c.ps 
+
+----------------------------------------------------------------------
+Code to pdf with syntax highlighting
+In vim
+
+" select font size
+:set printfont=courier:h6   
+:set printoptions=number:y
+:hardcopy >code.ps
+ps2pdf code.ps
+
+----------------------------------------------------------------------
+Chrooting from live cd to fix problems in main install
+
+
+# Mount root partition:
+sudo mount /dev/sdXY /mnt # /dev/sdXY is your root partition, e.g. /dev/sda1
+
+# If you have a separate boot partition you'll need to mount it also:
+sudo mount /dev/sdYY /mnt/boot
+
+# Mount your virtual filesystems:
+for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+
+# Chroot
+sudo chroot /mnt
+
+----------------------------------------------------------------------
+Process files A.txt B.txt... with a vim script
+
+# This writes the result and quits vim at the end
+vim -c "argdo source script.vim | w" -c "qa" A.txt B.txt C.txt D.txt
+
+----------------------------------------------------------------------
+Find
+
+# Searches for files modified within a specific time range
+# find . -type f -newermt 2008-05-01 ! -newermt 2008-06-01
+
+----------------------------------------------------------------------
+Download youtube playlists
+
+# use -k if you want to keep the intermediate audio/video before it merges
+youtube-dl -cit --merge-output-format mp4 -k https://www.youtube.com/playlist?list=PL1tkMA9lsTiWppAn3QbZePg5QyS9cRZhF
+youtube-dl -cit --merge-output-format mp4 -k https://www.youtube.com/playlist?list=PL1tkMA9lsTiWppAn3QbZePg5QyS9cRZhF
+
+# cit is default now
+youtube-dl --extract-audio --audio-format mp3 https://www.youtube.com/playlist?list=PLD6030E61BF2B5C08
+
+# use -w if you are downloading in parallel in a folder 

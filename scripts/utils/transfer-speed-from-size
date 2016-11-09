@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Measure actual transfer rate of a file (or bunch of files) that is being
+# downloaded. Lets say foo.tar.gz is being downloaded and is partially complete.
+# You can measure the actual transfer speed by
+#
+# transfer-speed-from-size  foo.tar.gz
+#
+# OR
+#
+# transfer-speed-from-size  *zip
+#
+
+ns=10
+kbs_1=`du -skc "$*" | cut -f 1 | sed -n '$p'`
+sleep $ns; 
+kbs_2=`du -skc "$*" | cut -f 1 | sed -n '$p'`
+
+rate=`echo "($kbs_2 - $kbs_1) / $ns" | bc`
+echo $rate 'KB/s'

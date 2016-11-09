@@ -1,0 +1,45 @@
+#!/bin/sh
+# Source code search tool for Scilab
+#
+#
+# AUTHOR
+# Ricardo Fabbri and IPRJ / Lab Macambira Team
+#
+
+# How do you call your scilab base dir
+SCILABBASEDIR=scilab
+
+case $# in
+    0) echo 'Usage1: scisearch -name string' 1>&2; 
+       echo 'Usage2: scisearch string' 1>&2; 
+       exit 2
+esac
+
+case $1 in
+  -name)
+    shift
+    myxargs=""
+  ;;
+  *)
+    myxargs="xargs"
+  ;;
+esac
+
+if test -x "`which glocate`"; then
+  mylocate=glocate
+elif test -x "`which locate`"; then
+  if [[ "`uname`" == 'Darwin' ]]; then
+    echo "ERROR: GNU Locate needed in OSX not found"
+  fi
+  mylocate=locate
+else
+  echo "ERROR: no locate application found!"
+  exit
+fi
+
+ext="sci sce java h cpp c tcl xml"
+
+for i in $ext; do
+  echo =================== $i ======================
+  $mylocate -r "$USER.*$SCILABBASEDIR/scilab.*\.$i$" | $myxargs grep --color "$*"
+done

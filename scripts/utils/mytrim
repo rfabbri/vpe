@@ -1,0 +1,28 @@
+#!/bin/sh
+case $1 in
+  -eps)
+    shift
+    echo 'doing eps trimming';
+    for i in $*; do
+      epstool --copy --bbox $i /tmp/tmp-$$.eps
+      cp /tmp/tmp-$$.eps $i
+    done
+  ;;
+  -pdf)
+    shift
+    echo 'doing PDF trimming';
+    for i in $*; do
+      pdfcrop $i crop-$i
+      mv crop-$i $i
+#      pdftrimwhite $i
+#      mv pdftrimwhite.pdf $i
+    done
+  ;;
+  -h|--help)
+    echo 'Usage:  mytrim [-pdf|-eps] FILE'
+    echo 'or, for raster trimming:  mytrim FILE'
+  ;;
+  *)
+    echo 'doing raster trimming';
+    mogrify -trim +repage $*
+esac

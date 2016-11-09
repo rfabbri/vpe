@@ -1,0 +1,51 @@
+#!/bin/sh
+# This is just to make from a source directory 'path/foosrc', when the binary tree is in
+# another directory 'path/foo-bin'.
+
+#set -x
+#MYMAKEOPTS="-j9"
+
+case $# in
+#       0)  ls *.c *.h *.cpp *.cxx *.txx *.m *.sci *.sce *.sh 2>/tmp/my---null;;
+       0)  MYMAKEOPTS="-j9" ;;
+       *)  MYMAKEOPTS="" ;;
+esac
+
+mypwd=$PWD'/'
+
+#set -x
+
+echo
+echo "MYMAKEOPTS=$MYMAKEOPTS"
+echo
+if test `echo $mypwd|grep '/lemsvxl/'`; then
+  echo $0: Inside lemsvxl.
+  bindir=`echo $mypwd |  sed 's/\/lemsvxl\//\/lemsvxl-bin\//g'`
+  make $MYMAKEOPTS -C $bindir $*
+else if test `echo $mypwd|grep /vxl/`; then
+  echo $0: In vxl-source area.
+  bindir=`echo $mypwd | sed 's/\/vxl\//\/vxl-bin\//g'`
+  make $MYMAKEOPTS -C $bindir $*
+else if test `echo $mypwd|grep /pet/`; then
+  echo $0: In pet project area.
+  # TODO cd root
+  mvn test $*
+else
+  basename=`basename $mypwd`
+  if [[ "$basename" != *-bin ]]; then
+    bindir=`echo ${mypwd} | sed "s/$basename\/$/$basename-bin\//g"`
+    if [[ -d "$bindir" ]]; then
+      make $MYMAKEOPTS -C $bindir $*
+    else
+      echo $0: Running make in current directory.
+      make $MYMAKEOPTS $*
+    fi
+  else
+    echo $0: Running make in current directory.
+    make $MYMAKEOPTS $*
+  fi
+fi
+fi
+fi
+
+say 'yes.'

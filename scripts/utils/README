@@ -1,0 +1,44 @@
+= UTILS MACAMBIRA =
+
+This is a collection of unix and other misc. utilities by the Lab Macambira
+team
+
+== Description of the Tools ==
+
+* configure-ubuntu-for-programming - run a series of configurations, among
+  apt-get's and other things, for setting up a full-fledged programming
+  environment from a raw ubuntu installation. 
+
+* ow - overwrite files in a pipe (adapted from Kernighan & Pike)
+
+* subst - use this to do massive in-place substitution on sets of files 
+       find . |xargs subst
+
+* subst.sed - file that contains the search-and-replace SED commands
+
+* 2eps - convert images to EPS using the best available tool
+        2eps *.png
+
+* cx - basically just a shortcut to chmod a+x
+
+
+* lsc - search like 'find .' but using a list of source code extensions, in
+order to skip unwanted files
+
+* mytrim - cut excess homogeneous borders of a figure. works for both raster
+formats like .png, .jpg, as well as for vector formats such as .eps
+
+* detab - remove tabs from files
+
+* scisearch - speacialized search for working with the Scilab sourcecode tree,
+based on locate. Can be easily adapted to other software
+
+* my_unix_cents.txt - a collection of unix tips and tricks
+
+== See Also ==
+
+funcoeszz.net - a large and very useful collection of shell utilities
+
+== Authors ==
+
+Ricardo Fabbri and the rest of the Lab Macambira team

@@ -1,0 +1,13 @@
+#!/bin/sh
+case $# in
+    0) echo 'Usage: subst files' 1>&2; exit 2
+esac
+
+case `uname` in Darwin*) mysed=gsed ;;
+  *) mysed=sed ;; esac
+
+for i in $*
+do
+echo doing $i
+ow $i $mysed -f $HOME/bin/subst.sed $i
+done
