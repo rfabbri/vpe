@@ -17,17 +17,41 @@
 # AUTHOR
 #   Ricardo Fabbri, Lab Macambira Team, UERJ IPRJ Team
 #
+apt-get -y install kdenlive kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends
 
-apt-get -y install quickly kdenlive kino texlive-full blender kile konqueror konq-plugins  glade gtk-gnutella freemind emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk php5 libproc-processtable-perl guvcview exuberant-ctags
+# if you get any error, remove the package one by one.
 
-apt-get -y build-dep scilab evince okular mplayer gimp libreoffice firefox empathy kino vlc gxine puredata  lmms
+apt-get -y build-dep blender evince okular mplayer mpv gimp libreoffice empathy kino vlc gxine puredata lmms inkscape
 
+# if you get any error, remove the package one by one.
+# Even if you get a "but it is not going to be installed" message, remove the
+# package from the above line. For Ubuntu 15.10, I removed scilab and firefox.
+# But you can try them anyways
+#
+#
+# Try:
+# apt-get -y build-dep scilab
+# apt-get -y build-dep firefox
+#
+
+# Remove the unified menu
+#
 apt-get remove indicator-appmenu 
 
-sudo add-apt-repository ppa:diodon-team/stable
-sudo apt-get update
+# Diodon clipboard history manager
+#
+# Newer ubuntu ship this by default
+# For older ubuntu, you might have to uncomment the following lines
+#sudo add-apt-repository ppa:diodon-team/stable
+#sudo apt-get update
 sudo apt-get -y install diodon
 
-sudo add-apt-repository ppa:indicator-multiload/stable-daily
-sudo apt-get update
+# Multiload system usage indicator
+# Newer ubuntu ship this by default
+# For older ubuntu, you might have to uncomment the following lines
+#sudo add-apt-repository ppa:indicator-multiload/stable-daily
+#sudo apt-get update
 sudo apt-get -y install indicator-multiload
+
+# apt-file find example.h will locate package that has it
+sudo apt-file update
