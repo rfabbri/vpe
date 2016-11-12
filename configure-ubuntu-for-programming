@@ -55,3 +55,14 @@ sudo apt-get -y install indicator-multiload
 
 # apt-file find example.h will locate package that has it
 sudo apt-file update
+
+# install the latest stable git possible
+# this is important for certain features, specially for subtrees
+# and submodules. Also cool for diff highlighting and other sugar
+
+sudo apt-add-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get upgrade git
+
+# so you can use locate to search for files
+sudo updatedb
