@@ -17,7 +17,7 @@
 # AUTHOR
 #   Ricardo Fabbri, Lab Macambira Team, UERJ IPRJ Team
 #
-apt-get -y install kdenlive kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends
+apt-get -y install kdenlive meshlab kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends
 
 # if you get any error, remove the package one by one.
 
@@ -66,3 +66,7 @@ sudo apt-get upgrade git
 
 # so you can use locate to search for files
 sudo updatedb
+
+# enable workspaces, linearly for consistency with Mac OS workflows
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 4
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
