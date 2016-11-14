@@ -45,6 +45,7 @@ apt-get remove indicator-appmenu
 #sudo add-apt-repository ppa:diodon-team/stable
 #sudo apt-get update
 sudo apt-get -y install diodon
+echo Tip: go to diodon preferences and set all options
 
 # Multiload system usage indicator
 # Newer ubuntu ship this by default
