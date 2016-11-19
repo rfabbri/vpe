@@ -17,7 +17,7 @@
 # AUTHOR
 #   Ricardo Fabbri, Lab Macambira Team, UERJ IPRJ Team
 #
-apt-get -y install kdenlive meshlab kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends unity-tweak-tool okular
+apt-get -y install kdenlive meshlab kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended lynx gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends unity-tweak-tool okular python-setuptools python3-setuptools python-pip
 
 # if you get any error, remove the package one by one.
 
@@ -86,8 +86,29 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
 # copy paste between windows without clicking, without messing up window order- R. Fabbri
 # - Go to General -> Additional. Focus mode: Sloppy or Mouse.
 # Basically try out sloppy or mouse, see what works with Alt-Tab etc.
+#
+#
+# Run:
+#   gnome-tweak-tool
+#
+# Enable Capslock as an additional Ctrl under Typing
+
 
 # Firefox tweaks
 # Reduce firefox font and menu sizes
 #
 # Reduce UI size for Unity
+
+# Preload the mostly used apps in RAM. Just do:
+# sudo apt install preload
+
+# I regorganize all icons on the unity tray as follows:
+# - 1. browser 2. terminal 3. vim
+
+# IRC
+# Configure your client. I use IRSSI, but if you're a Newbie, use XChat :P
+# Add it to startup applications per
+# 
+# http://wiki.nosdigitais.teia.org.br/IRC
+
+
