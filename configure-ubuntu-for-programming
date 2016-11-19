@@ -54,6 +54,8 @@ echo Tip: go to diodon preferences and set all options
 #sudo apt-get update
 sudo apt-get -y install indicator-multiload
 
+# Apt-file to search for packages containing a specified file (useful for compiling)
+#
 # apt-file find example.h will locate package that has it
 sudo apt-file update
 
@@ -88,22 +90,27 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
 # Basically try out sloppy or mouse, see what works with Alt-Tab etc.
 #
 #
-# Run:
-#   gnome-tweak-tool
+# Tray Icons 
 #
-# Enable Capslock as an additional Ctrl under Typing
-
-
+#   I regorganize all icons on the unity tray as follows:
+#     - 1. browser 2. terminal 3. vim
+#
 # Firefox tweaks
-# Reduce firefox font and menu sizes
+#   Reduce firefox font and menu sizes
 #
-# Reduce UI size for Unity
+#   Reduce UI size for Unity
+#
+# gnome-tweak-tool
+#     Enable Capslock as an additional Ctrl under Typing
+#
+# dconf-editor
+#     org > gtk > settings > file-chooser set Location Mode path-bar
+#
 
+#
 # Preload the mostly used apps in RAM. Just do:
 # sudo apt install preload
 
-# I regorganize all icons on the unity tray as follows:
-# - 1. browser 2. terminal 3. vim
 
 # IRC
 # Configure your client. I use IRSSI, but if you're a Newbie, use XChat :P
@@ -111,4 +118,19 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
 # 
 # http://wiki.nosdigitais.teia.org.br/IRC
 
+
+# Apt-rdepends sample usage:
+# apt-rdepends --reverse (packagename)
+
+# == Cuda ==
+# The following steps makes CUDA (for NVidia cards) work with software such as
+# [[Blender]]
+# [http://blender.stackexchange.com/questions/7485/enabling-gpu-rendering-for-cycles]
+# [http://blender.stackexchange.com/questions/31045/cuda-rendering-on-linux-mint-or-ubuntu-variants/31111#31111] 
+
+# Install the proprietary NVIDIA drivers.
+# Go to System Settings -> Software Updates -> Additional Drivers Tab and select the latest stable.
+# Install some cuda-specific packages: 
+#
+# sudo apt-get install nvidia-modprobe nvidia-cuda-toolkit
 
