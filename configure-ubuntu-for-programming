@@ -17,8 +17,7 @@
 # AUTHOR
 #   Ricardo Fabbri, Lab Macambira Team, UERJ IPRJ Team
 #
-apt-get -y install kdenlive meshlab kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended lynx gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends unity-tweak-tool okular python-setuptools python3-setuptools python-pip
-
+apt-get -y install kdenlive meshlab kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended lynx gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev libmagickwand-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends unity-tweak-tool okular python-setuptools python3-setuptools python-pip python-sqlite espeak valgrind libtool-bin
 # if you get any error, remove the package one by one.
 
 apt-get -y build-dep blender evince okular mplayer mpv gimp libreoffice empathy kino vlc gxine puredata lmms inkscape
@@ -58,6 +57,12 @@ sudo apt-get -y install indicator-multiload
 #
 # apt-file find example.h will locate package that has it
 sudo apt-file update
+
+# Apt-rdepends sample usage:
+# apt-rdepends --reverse (packagename)
+
+# Apt-cache sample usage:
+# apt-cache search keyword (search all packages containing name keyword)
 
 # install the latest stable git possible
 # this is important for certain features, specially for subtrees
@@ -118,9 +123,6 @@ gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
 # 
 # http://wiki.nosdigitais.teia.org.br/IRC
 
-
-# Apt-rdepends sample usage:
-# apt-rdepends --reverse (packagename)
 
 # == Cuda ==
 # The following steps makes CUDA (for NVidia cards) work with software such as
