@@ -3,9 +3,9 @@
 VPE (the Vision Programming Environment) is a monolithic superproject (a.k.a.
 monorepo) for tightly
 coupled projects based on [VXL](http://vxl.sourceforge.net) and
-[VXD](http://github.com/rfabbri/vxd).  It bundles VXL, VXD and related utilities
-into a unified programming environment, making the setup more homogeneous among
-developers of a team. It makes life easier:
+[VXD](http://github.com/rfabbri/vxd).  It bundles VXL, VXD, project code and
+related utilities into a unified programming environment, making the setup more
+homogeneous among a team. Advantages:
 
 - **No dependency mess:** everyone in the team use the same VXL and VXD versions when working on master.
 - **Plain old Git:** most of the time, updating to/from VXL or VXD within VPE is tracked in VPE.
@@ -16,51 +16,187 @@ developers of a team. It makes life easier:
   upstream VXL/VXD.  While it is seamless to share VXL or VXD changes with the
   team through VPE, one has to be disciplined to share with upstream, which
   should only occur when needed, with proper branches and code quality.
-- **Promoting across VXL/VXD gets tracked:** If you promote code across the
-  different VXL-based projects (VPE/VXD/VXL),
-  these operations will get documented and tracked as commits within VPE.
+- **Promoting across VXL/VXD is tracked:** If you promote code across the
+  different VXL-based projects, these operations will get documented and tracked
+  as commits within VPE.
 
-- We call the superproject or monorepo .
-It would be a way of working in tandem, to try to make some things easier for
-people that use and modify all of VXL and VXD and internal project at the source level.
-
-The basic idea would be that the super repo would replicate a repo hierarchy
-most VXD developers would have:
-
-    vpe
+The basic idea is to replicate a repo hierarchy most VXD developers would have:
+```
+    vpe/
       vxl
       vxd
       scripts
+      vxl-bin
+      vxd-bin
+```
+Within `scripts/` one can find general VXL development scripts, such as scripts to aid
+switching between build '-bin' and source folders, and general developer
+scripts for searching code, configuring your Ubuntu or Mac OS system for
+programming, etc.
   
-Here are some concrete ideas and Git experiments on how it could work out.
+The technique for building VPE is a variant of *git subtree*, mainly for the
+above advantages. If we had many submodules, git submodules would be used.
 
-TL;DL : the conclusion is that:
+## First steps: bootstrapping the environment
 
-- Our own scripting of a unified environment would work best
-- **Main principle of good collaboration: keep in sync.** In practice, the principle of
-  always having the working repos synced to master (and getting all layers
-  promoted) is the new equivalent of making a tarball release. Striving to sync
-  to master is much simpler than trying to share branches, though this may be
-  needed for hacks and work arounds. Strive to fix 'master'! its a lot easier
-  and imensely more useful than heavy strategies for propagating patches around.
-- **Subtrees almost work** at the small scale of VPE, but still have problems with
-  history which breaks regular git workflow. You simply can't even see the
-  history inside vxl/ or vxd/ from vpe. But subtrees seem to be nice in that you
-  can merge and track changes across the projects, and use regular git in the
-  vast majority of useful cases. This is very cool.
-- **Submodules complicate the regular git workflow** when we want to hack into the
-  submodule.  It is well-defined, but requires a great deal of training. If
-  people wouldn't hack into vxl all that much, and stay with top level changes,
-  then it could work. But most people will hack away both vxl and vxd, and can't
-  afford to lose changes. Submodules have some good ideas, though, such as
-  vpe/ locking specific commits in vxl/ and vxd/ so that people that pull VPE get
-  the same state in vxl/ and vxd/. Also, moving stuff across VPE/VXL/VXD doesn't
-  really get tracked. Submodules are a monster whose overhead may pay off for
-  projects requiring a huge number of repos for the developer to work on.
-- **Android repo tool doesn't have good documentation**, and seems to demand that
-  all sub repos be pulled from the same remote. It does bring some interesting ideas,
-  such as having a manifest repository for meta-information of what repositories
-  and branches the project uses/used for vxl/vxd etc at a particular commit.
+```
+git clone http://github.com/rfabbri/vpe
+cd vpe/
+```
+
+### If you just want to build and use VPE
+
+Run the following script within vpe:
+```
+./setup-for-use
+```
+This will create symlinks for vxl-bin and vxd-bin
+
+### If you want to develop VPE-based project heavily
+Run the following script within vpe:
+```
+./setup-for-development
+```
+This will create useful `vxl-bin` and `vxd-bin` symlinks,
+establish useful remotes and branches.
+
+### A tour of VPE
+Once bootstrapped for development, you will get the following files
+
+```
+other-workflows.md             Other possible workflows for VPE beyond subtrees
+
+scripts/devsetup/              Scripts used by ./setup-for-development
+
+scripts/utils/                 Utilities for VXL development, templates, shell/editor config
+
+vxl/                           VXL folder tracked within VPE
+vxl-bin -> vxl-bin-dbg         Default VXL build folder pointing to possible debug version
+vxl-bin-dbg/                   VXL build folder with debug flags
+vxl-bin-rel/                   VXL build folder without debug flags.
+vxl-orig/                      Original VXL as a separate repository (mostly for history)
+
+vxd/                           VXD folder tracked within VPE
+vxd-bin -> vxd-bin-dbg         Default VXL build folder pointing to possible debug version
+vxd-bin-dbg/                   VXD build folder with debug flags
+vxd-bin-rel/                   VXD build folder without debug flags.
+vxl-orig/                      Original VXD as a separate repository (mostly for history)
+```
+
+## Building VPE
+
+### Compile VXL
+```
+
+  cd ./vxl-bin
+  ccmake ../vxl
+  make   # use mymake from scripts/utils/vxl to run it from from both vxl-bin and vxl
+```
+
+### Compile VXD
+```
+  cd ../vxd-bin
+  ccmake ../vxd
+  make'
+```
+For further information on building each of these libraries and the best CMake flags to
+use, see http://wiki.nosdigitais.teia.org.br/VXL.
+
+## Scripts to help with sourcecode
+
+Follow the tips in `scripts/devsetup/tips` closely. 
+
+### Put `scripts/utils` in your PATH
+
+I recommend having a ~/bin folder in your PATH for your personal scripts,
+then issuing:
+
+```
+cd scripts/utils/vxl
+ln -s $PWD/* ~/bin
+```
+
+### Switching between builds
+
+For example, you are working in `vgl/algo` but would like to switch
+to a bin folder in order to debug an executable.
+```
+pwd           # we are in vpe/vxl/core/vgl/algo
+sw            # switches path between vxl source and vxl-bin
+pwd           # we are in vpe/vxl-bin/core/vgl/algo
+sw
+pwd           # we are in vpe/vxl/core/vgl/algo
+```
+
+This requires a `.bash_profile` line described in `scripts/devsetup/tips`.
+
+### Make anywhere with mymake
+
+```
+pwd           # we are in vpe/vxl/core/vgl/algo
+mymake        # makes in vpe/vxl-bin
+sw            # switches path between vxl source and vxl-bin
+mymake        # works the same if you are already in vxl-bin
+```
+
+### CD Path
+
+If you setup your CDPATH per `scripts/devsetup/tips`,
+you can get to any folder from anywhere, for instance:
+```
+cd vgl/algo
+cd vpgl
+cd vxl
+cd vxd
+```
+
+### Switching builds between Debug/Release
+
+```
+ls -ld vxl-bin vxd-bin
+
+    vxd-bin -> vxd-bin-dbg
+    vxl-bin -> vxl-bin-dbg
+```
+```
+switchbuild rel
+```
+
+Will relink all build folders to release:
+
+```
+ls -ld vxl-bin vxd-bin
+
+    vxd-bin -> vxd-bin-rel
+    vxl-bin -> vxl-bin-rel
+```
+
+It is up to the programmer to configure CMAKE to be consistent with DBG or REL naming.
+The programmer is by no means tied to these folder names, but the scripts assume
+this convention.
+
+You will want relink by hand if you have different builds with different compile
+flags. The following command is equivalent to `switchbuild rel`
+
+```
+rm vxl-bin vxd-bin
+ln -s vxl-bin-rel vxl-bin
+ln -s vxd-bin-rel vxd-bin
+```
+
+I myself have something like this:
+```
+vxl-bin -> vxl-bin-clang-libstdcxx-c11-dbg-new
+```
+
+As long as you use the `vxl-bin/vxd-bin` symlinks, you are good to go with the
+`sw` and `mymake` scripts.
+
+
+### Code searching with tags
+
+See `scripts/devsetup/tips`.
+
 
 # Requirements
 

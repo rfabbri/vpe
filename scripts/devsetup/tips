@@ -88,6 +88,13 @@ programming.
   # the VPE naming convention of appending a *-bin to your build folders or
   # symlinks
 
+  You will need the following into your `~/.bash_profile`
+  ```
+    [[ -f ~/bin/switchpath.incl.sh ]] && . ~/bin/switchpath.incl.sh
+  ```
+
+  After that, type `bash -ls` or restart your computer.
+
 * Vim users: make sure you use exhuberant Ctags
   ctags --version    # must show exhuberant ctags
   ctags -R vxl vxd scripts
@@ -104,7 +111,18 @@ programming.
     sudo LC_ALL=C gupdatedb &
   Example: Search files with 
     locate 'vsol*cxx'       # or 'glocate -ri 'vsol.*cxx''
+
     
+* Setup CDPATH by adapting the following code to your ~/.bashrc
+  VXL_SRC=$HOME/src/vpe/vxl
+  VXD_SRC=$HOME/src/vpe/vxd
+  VPE_SRC=$HOME/src/vpe
+  # Put the folders you use the most into this variable
+  CDPATH=.:..:~:$VPE_SRC:$VXL_SRC/core:$VXL_SRC/contrib:$VXL_SRC/contrib/brl:$VXL_SRC/contrib/brl/bbas:$VXL_SRC/contrib/brl/bseg:$VXL_SRC/contrib/gel/mrc:$LEMSVXL/brcv:$LEMSVXL/basic:$LEMSVXL/brcv/rec:$LEMSVXL/brcv/seg:$LEMSVXL/contrib/rfabbri:$LEMSVXL/brcv/mvg:
+  export CDPATH VXL_SRC VXD_SRC VPE_SRC
+
+  Now you can just type 'cd vgl/algo' from anywhere.
+
 See  http://wiki.nosdigitais.teia.org.br/VXL  for detailed compile instructions, what
 CMake flags to use, etc.'
 

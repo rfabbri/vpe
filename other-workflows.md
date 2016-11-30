@@ -1,5 +1,31 @@
 # Further Ideas to make it easier to work on VXL + VXD + internal Project
 
+## Why git subtrees ?
+- **Main principle of good collaboration: keep in sync.** In practice, the principle of
+  always having the working repos synced to master (and getting all layers
+  promoted) is the new equivalent of making a tarball release. Striving to sync
+  to master is much simpler than trying to share branches, though this may be
+  needed for hacks and work arounds. Strive to fix 'master'! its a lot easier
+  and imensely more useful than heavy strategies for propagating patches around.
+- **Subtrees almost work** at the small scale of VPE, but still have problems with
+  history which breaks regular git workflow. You simply can't even see the
+  history inside vxl/ or vxd/ from vpe. But subtrees seem to be nice in that you
+  can merge and track changes across the projects, and use regular git in the
+  vast majority of useful cases. This is very cool.
+- **Submodules complicate the regular git workflow** when we want to hack into the
+  submodule.  It is well-defined, but requires a great deal of training. If
+  people wouldn't hack into vxl all that much, and stay with top level changes,
+  then it could work. But most people will hack away both vxl and vxd, and can't
+  afford to lose changes. Submodules have some good ideas, though, such as
+  vpe/ locking specific commits in vxl/ and vxd/ so that people that pull VPE get
+  the same state in vxl/ and vxd/. Also, moving stuff across VPE/VXL/VXD doesn't
+  really get tracked. Submodules are a monster whose overhead may pay off for
+  projects requiring a huge number of repos for the developer to work on.
+- **Android repo tool doesn't have good documentation**, and seems to demand that
+  all sub repos be pulled from the same remote. It does bring some interesting ideas,
+  such as having a manifest repository for meta-information of what repositories
+  and branches the project uses/used for vxl/vxd etc at a particular commit.
+
 # Subtrees for VPE
 
 We're in VPE, and want to add VXD and VXL
