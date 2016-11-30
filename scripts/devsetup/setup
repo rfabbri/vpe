@@ -27,22 +27,25 @@ git branch vxd-master origin/vxd-master
 ln -s vxl-bin-dbg vxl-bin
 ln -s vxd-bin-dbg vxd-bin
 
-# wait fetches to finish
-wait
-
 # Setup separate hardlinked clones for each sub package, for history searching,
 # Or for those who prefer it. This should not consume more space (hardlinks).
-git clone $PWD vxl-orig
+git clone $PWD vxl-orig &
+git clone $PWD vxd-orig &
+
+# wait fetches and clones to finish
+wait
+
 cd vxl-orig
 git checkout -b vxl-master origin/vxl-master
 git remote add vxl	https://github.com/vxl/vxl.git
 
-git clone $PWD vxd-orig
-cd vxd-orig
+cd ../vxd-orig
 git checkout -b vxd-master origin/vxd-master
 git remote add vxd	https://github.com/rfabbri/vxd.git
 
+echo "==>"
 echo "==> VPE is now ready to go!"
+echo "==>"
 
 # Extra things to do
 # - git tags

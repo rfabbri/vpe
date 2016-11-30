@@ -6,6 +6,11 @@
 
 set -e
 
+if test "`git remote | grep vxl`" = 'vxl'; then
+  echo 'Looks like this repository has already been setup.'
+  exit
+fi
+
 # Install dependencies,
 # Add user-independent branches, remotes etc
 scripts/devsetup/setup
