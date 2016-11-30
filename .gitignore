@@ -43,3 +43,6 @@ utils-orig
 # you may have vxl-bin-dbg and vxl-bin-rel etc
 vxl-bin*
 vxd-bin*
+
+# Ctags
+tags
