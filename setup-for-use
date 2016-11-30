@@ -10,7 +10,8 @@ fi
 ln -s vxl-bin-dbg vxl-bin
 ln -s vxd-bin-dbg vxd-bin
 
+echo '==> VPE all set for basic compilation. '
+
 scripts/devsetup/usertips
 
-echo '==> VPE all set. '
 
