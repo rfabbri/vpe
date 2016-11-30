@@ -71,9 +71,10 @@ git remote add origin git@github.com:rfabbri/vpe.git
 git push -u origin master
 git push origin vxl-master
 git co master
+```
 
 ## Adding vxd to vpe
-
+```bash
     git remote add vxd ../vxd
     git fetch vxd
     git merge --allow-unrelated-histories vxd/master
@@ -87,6 +88,7 @@ git co master
     git co master
 
     # check histories look perfect
+```
 
 ## Finalizing
     - .gitignore
