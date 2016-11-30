@@ -211,31 +211,35 @@ See `scripts/devsetup/tips`.
 Always use Git version >= 2 when working with monorepos.
 
 
-## Ideal Workflow Requirements
+## Workflow Usage Patterns
 
 ### VPE
 #### Basic usage (99% of the time)
-  Edit pattern
+Edit pattern
 
   - heavy edits to VXD
   - small edits or tweaks to VXL
 
-  Share pattern
+Share pattern
   
-  - VXD edits and pushes done in agreed upon feature branches (curve-cues),
-    merged often into master
-  - less often: VXL small edits shared on VXL feature branches on a peer remote
-    which is not the official one
+  - VXD edits and pushes done in agreed upon feature branches (eg, `curve-cues`),
+    merged often into `master`
+  - VXL small edits shared on VXL branches inside VPE 
 
-  New collab working with the team needs to know
-  - remote and feature branch to work in VXD
-  - corresponding remote and patch branch to work in VXL
+New collab working with the team needs to know
 
-#### Fairly common
-  - Integrate to VXD master done by more experienced/more active peer
+  - most of the time: only the master branch, which already has proper VXD and VXL merged in
+  - If new collab wants to work on a feature, he needs to know the feature
+    branch to work on VPE
+
+#### About once a week
+  - Integrate to VXD upstream done by more experienced/more active peer
+
+#### About once a month
+  - Pull changes from VXL and integrate into VPE
 
 #### Very rare
-  - Integrate to VXL master done by more experienced/more active peer
+  - Integrate to VXL upstream done by more experienced/more active peer
   
 ### Internal/ LEMS
 
