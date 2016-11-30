@@ -46,9 +46,7 @@ cd ../vxd-orig
 git checkout -b vxd-master origin/vxd-master
 git remote add vxd	https://github.com/rfabbri/vxd.git
 
-echo "==>"
-echo "==> VPE is now ready to go!"
-echo "==>"
+cd ..
 
 # Extra things to do
 # - git tags

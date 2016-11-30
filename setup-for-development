@@ -15,14 +15,20 @@ fi
 # Add user-independent branches, remotes etc
 scripts/devsetup/setup
 
-# User-dependent settings: git email, etc
-scripts/devsetup/setup-user
-
+echo '==> enter password for updatedb (updating file search)'
 sudo -v   # prompts for password
 sudo updatedb&
+
+# User-dependent settings: git email, etc
+scripts/devsetup/setup-user
 
 # Last thing: tips and suggestions
 scripts/devsetup/tips | less
 
-echo waiting for updatedb to finish up
+echo '==> waiting for updatedb to finish up'
 wait
+
+echo "==>"
+echo "==> VPE is now ready to go!"
+echo "==>"
+
