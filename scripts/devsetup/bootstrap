@@ -8,11 +8,10 @@ set -e
 cd "$(dirname "$0")/.."
 
 
-if [[ "`uname`" != Linux ]]; then
+#if [[ "`uname`" != Linux ]]; then
   # MYOS="OSX"
   # Install macports or homebrew packages
-else
+#else
   # MYOS="Linux"
   # Attempt to install Ubuntu packages or other distro packages
-fi
-
+#fi
