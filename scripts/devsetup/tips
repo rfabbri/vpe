@@ -109,6 +109,8 @@ See  http://wiki.nosdigitais.teia.org.br/VXL  for detailed compile instructions,
 CMake flags to use, etc.'
 
 echo '
-Please use Git 2 or later with VPE! Instructions on how to upgrade your git in
-Ubuntu Linux are available at scripts/utils/configure-ubuntu-for-programming.
+* Please use Git 2 or later with VPE! Instructions on how to upgrade your git in
+  Ubuntu Linux are available at scripts/utils/configure-ubuntu-for-programming.
+
+* You may come back to these tips by running scripts/devsetup/tips
 '

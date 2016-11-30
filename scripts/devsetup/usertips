@@ -1,14 +1,14 @@
 #!/bin/sh
 
-echo ' Now go run cmake and make as follows:
+echo 'You can compile VPE as follows:
 
-# 1. Compile VXL
+#1 Compile VXL
 
   cd ./vxl-bin
   ccmake ../vxl
   make   # use mymake from scripts/utils/vxl to run it from from both vxl-bin and vxl
 
-# 2. Compile VXD
+#2 Compile VXD
 
   cd ../vxd-bin
   ccmake ../vxd
