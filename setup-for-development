@@ -18,6 +18,7 @@ scripts/devsetup/setup
 # User-dependent settings: git email, etc
 scripts/devsetup/setup-user
 
+sudo -v   # prompts for password
 sudo updatedb&
 
 # Last thing: tips and suggestions

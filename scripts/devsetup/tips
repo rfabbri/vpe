@@ -23,6 +23,12 @@ egrep-q() {
 	egrep "$@" >/dev/null 2>/dev/null
 }
 
+echo '
+==============
+DEVELOPER TIPS  <-----  (Read it!)
+==============
+'
+
 # Suggest color configuration.
 if test -z "$(git config --get color.ui)"; then
 	echo '
@@ -82,9 +88,17 @@ programming.
   # the VPE naming convention of appending a *-bin to your build folders or
   # symlinks
 
+* Vim users: make sure you use exhuberant Ctags
+  ctags --version    # must show exhuberant ctags
+  ctags -R vxl vxd scripts
+  # Now update your Vim tags variable to this. 
+  # I put this in my ~/.vim/ftplugins/c_rfabbri.vim
+  # set tags=./tags,tags,~/tags,~/src/vpe/tags
+  # Adapt it to your case.
 
 See  http://wiki.nosdigitais.teia.org.br/VXL  for detailed compile instructions, what
 CMake flags to use, etc.'
+
 
 echo '
 Please use Git 2 or later with VPE! Instructions on how to upgrade your git in
