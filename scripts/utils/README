@@ -11,7 +11,7 @@ team
 
 * ow - overwrite files in a pipe (adapted from Kernighan & Pike)
 
-* subst - use this to do massive in-place substitution on sets of files 
+* subst - massive in-place substitution on sets of files 
        find . |xargs subst
 
 * subst.sed - file that contains the search-and-replace SED commands

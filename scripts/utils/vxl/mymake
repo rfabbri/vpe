@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # This is just to make from a source directory 'path/foosrc', when the binary tree is in
 # another directory 'path/foo-bin'.
 
