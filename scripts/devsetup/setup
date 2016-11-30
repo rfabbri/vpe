@@ -6,11 +6,28 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+# Basic deps
 script/bootstrap
 
-echo "==> App is now ready to go!"
+# Setup sub remotes. All readonly for now (bulk of workflow).
+git remote add vxl	https://github.com/vxl/vxl.git
+git remote add vxd	https://github.com/rfabbri/vxd.git
+git remote add utils git://git.code.sf.net/p/labmacambira/utils
+
+git fetch vxl
+git fetch vxd
+git fetch utils
+
+# Setup branches
+git branch utils-master origin/utils-master
+git branch vxl-master origin/vxl-master
+git branch vxd-master origin/vxd-master
+
+# Setup separate hardlinked clones for each sub package, for history searching,
+# Or for those who prefer it
+
+
+echo "==> VPE is now ready to go!"
 
 # Extra things to do
 # - git tags
-# - updatedb for locate
-# - etc

@@ -20,6 +20,8 @@ This will add useful branches and remotes to your projects.
 After this, you can run CMake inside every `*-bin` folder, starting with `vxl/`,
 moving up to `vxd/` and then any other specific project folders.
 
+Runs bootstrap
+
 ### scripts/update
 
 [`scripts/update`][update] is used to update the project after a fresh pull.

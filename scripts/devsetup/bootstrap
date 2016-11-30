@@ -7,8 +7,12 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-vxl/scripts/gitsetup/setup-user
 
-vxl/scripts/gitsetup/tips
-
+if [[ "`uname`" != Linux ]]; then
+  # MYOS="OSX"
+  # Install macports or homebrew packages
+else
+  # MYOS="Linux"
+  # Attempt to install Ubuntu packages or other distro packages
+fi
 

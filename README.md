@@ -233,7 +233,9 @@ This is an improvement to link [5]'s alternative in the response therein.
     # git merge -s recursive utils-master -Xsubtree=scripts/utils utils/master   # for utils
 
     # Check that vxl-master has the commits as you want them
+    # If necessary, checkout vxl-master and see if the files are in the right subfolder
     git merge vxl-master  # optional branch
+    git push origin master
     git push origin vxl-master
 
     # you could also just merge directly! (be careful)

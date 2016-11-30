@@ -23,10 +23,6 @@ contrib/brl/bseg/bvxm/pyscripts/*pyc
 # compiled python files
 *.pyc
 
-# Binary directory
-BUILD*
-build*
-
 # qtcreator
 CMakeLists.txt.user*
 
@@ -40,3 +36,10 @@ CMakeLists.txt.user*
 
 # Clion editor internal project information
 .idea
+
+vxl-orig
+vxd-orig
+utils-orig
+# you may have vxl-bin-dbg and vxl-bin-rel etc
+vxl-bin*  
+vxd-bin*

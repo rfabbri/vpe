@@ -54,5 +54,12 @@ See "git help mergetool" for more information.
 '
 fi
 
+echo Periodically, you may run scripts/update to fetch all remotes. It will not merge anything.
+
+echo You may also run scripts/test to test all packages (VXL, VXD, ETC).
+
+echo You should go through scripts/utils/configure-ubuntu-for-programming to configure your Linux programming environment
+
+echo script/utils/vxl also has other utilities you may want to use for VXL programming
 
 # Download utils-macambira
