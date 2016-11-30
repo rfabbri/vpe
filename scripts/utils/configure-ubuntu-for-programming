@@ -17,17 +17,122 @@
 # AUTHOR
 #   Ricardo Fabbri, Lab Macambira Team, UERJ IPRJ Team
 #
+apt-get -y install kdenlive meshlab kino texlive-full blender konqueror konq-plugins glade gtk-gnutella emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended lynx gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer mpv gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev libmagickwand-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils php synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk libproc-processtable-perl guvcview exuberant-ctags gthumb xzgv apt-file apt-rdepends unity-tweak-tool okular python-setuptools python3-setuptools python-pip python-sqlite espeak valgrind libtool-bin
+# if you get any error, remove the package one by one.
 
-apt-get -y install quickly kdenlive kino texlive-full blender kile konqueror konq-plugins  glade gtk-gnutella freemind emacs scilab octave ipython ddd xmaxima gap r-base r-base-dev r-recommended gnuplot imagemagick inkscape gimp digikam compizconfig-settings-manager pitivi python-kiwi apache2 ssh recordmydesktop mplayer gxine vlc ffmpeg puredata puredata-import git-core git-svn git-cvs kubuntu-full amarok cmake cmake-curses-gui autoconf automake libtool ekiga chromium-browser konsole  gitk gitg irssi xfig gv amule amule-emc qbittorrent nicotine gtk-gnutella kubuntu-full kubuntu-desktop vim-gnome mesa-utils dconf-tools sshfs pdftk libmagick++-dev gimp-data-extras gimp-plugin-registry gnome-tweak-tool v4l-utils synaptic libv4l-dev swig tcllib ardour audacity audacious jackd qjackctl unrar unison-gtk php5 libproc-processtable-perl guvcview exuberant-ctags
+apt-get -y build-dep blender evince okular mplayer mpv gimp libreoffice empathy kino vlc gxine puredata lmms inkscape
 
-apt-get -y build-dep scilab evince okular mplayer gimp libreoffice firefox empathy kino vlc gxine puredata  lmms
+# if you get any error, remove the package one by one.
+# Even if you get a "but it is not going to be installed" message, remove the
+# package from the above line. For Ubuntu 15.10, I removed scilab and firefox.
+# But you can try them anyways
+#
+#
+# Try:
+# apt-get -y build-dep scilab
+# apt-get -y build-dep firefox
+#
 
+# Remove the unified menu
+#
 apt-get remove indicator-appmenu 
 
-sudo add-apt-repository ppa:diodon-team/stable
-sudo apt-get update
+# Diodon clipboard history manager
+#
+# Newer ubuntu ship this by default
+# For older ubuntu, you might have to uncomment the following lines
+#sudo add-apt-repository ppa:diodon-team/stable
+#sudo apt-get update
 sudo apt-get -y install diodon
+echo Tip: go to diodon preferences and set all options
 
-sudo add-apt-repository ppa:indicator-multiload/stable-daily
-sudo apt-get update
+# Multiload system usage indicator
+# Newer ubuntu ship this by default
+# For older ubuntu, you might have to uncomment the following lines
+#sudo add-apt-repository ppa:indicator-multiload/stable-daily
+#sudo apt-get update
 sudo apt-get -y install indicator-multiload
+
+# Apt-file to search for packages containing a specified file (useful for compiling)
+#
+# apt-file find example.h will locate package that has it
+sudo apt-file update
+
+# Apt-rdepends sample usage:
+# apt-rdepends --reverse (packagename)
+
+# Apt-cache sample usage:
+# apt-cache search keyword (search all packages containing name keyword)
+
+# install the latest stable git possible
+# this is important for certain features, specially for subtrees
+# and submodules. Also cool for diff highlighting and other sugar
+
+sudo apt-add-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get upgrade git
+
+# so you can use locate to search for files
+sudo updatedb
+
+
+# enable workspaces, linearly for consistency with Mac OS workflows
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 4
+gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ vsize 1
+
+
+# Tweaks
+#  ...... and this is why Linux is much more professional than Mac OS for
+#  advanced (truly pro) users
+#
+# Run:
+#   unity-tweak-tool
+# And enable auto-hide for the launcher
+#
+# Enable focus follow mouse. This is excellent for productivity as you can
+# copy paste between windows without clicking, without messing up window order- R. Fabbri
+# - Go to General -> Additional. Focus mode: Sloppy or Mouse.
+# Basically try out sloppy or mouse, see what works with Alt-Tab etc.
+#
+#
+# Tray Icons 
+#
+#   I regorganize all icons on the unity tray as follows:
+#     - 1. browser 2. terminal 3. vim
+#
+# Firefox tweaks
+#   Reduce firefox font and menu sizes
+#
+#   Reduce UI size for Unity
+#
+# gnome-tweak-tool
+#     Enable Capslock as an additional Ctrl under Typing
+#
+# dconf-editor
+#     org > gtk > settings > file-chooser set Location Mode path-bar
+#
+
+#
+# Preload the mostly used apps in RAM. Just do:
+# sudo apt install preload
+
+
+# IRC
+# Configure your client. I use IRSSI, but if you're a Newbie, use XChat :P
+# Add it to startup applications per
+# 
+# http://wiki.nosdigitais.teia.org.br/IRC
+
+
+# == Cuda ==
+# The following steps makes CUDA (for NVidia cards) work with software such as
+# [[Blender]]
+# [http://blender.stackexchange.com/questions/7485/enabling-gpu-rendering-for-cycles]
+# [http://blender.stackexchange.com/questions/31045/cuda-rendering-on-linux-mint-or-ubuntu-variants/31111#31111] 
+
+# Install the proprietary NVIDIA drivers.
+# Go to System Settings -> Software Updates -> Additional Drivers Tab and select the latest stable.
+# Install some cuda-specific packages: 
+#
+# sudo apt-get install nvidia-modprobe nvidia-cuda-toolkit
+

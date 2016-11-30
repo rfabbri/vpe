@@ -1,6 +1,6 @@
 #!/bin/sh
 #set +x
-gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=50 -dNOPAUSE  -dBATCH -sOutputFile=$2 $1
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=250 -dNOPAUSE  -dBATCH -sOutputFile=$2 $1
 
 #pdf2ps $1 /tmp/$$-out.ps
 #ps2pdf /tmp/$$-out.ps $1
