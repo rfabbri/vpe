@@ -15,8 +15,10 @@ devsetup/setup
 # User-dependent settings: git email, etc
 devsetup/setup-user
 
+sudo updatedb&
+
 # Last thing: tips and suggestions
-devsetup/tips
+devsetup/tips | less
 
-
-sudo updatedb
+echo waiting for updatedb to finish up
+wait

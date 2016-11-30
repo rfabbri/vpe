@@ -35,7 +35,7 @@ fi
 # Suggest bash completion.
 if ! bash -i -c 'echo $PS1' | egrep-q '__git_ps1'; then
 	echo '
-A dynamic, informative Git shell prompt can be obtained by sourcing
+* A dynamic, informative Git shell prompt can be obtained by sourcing
 the git bash-completion script in your "~/.bashrc".  Set the PS1
 environmental variable as suggested in the comments at the top of the
 bash-completion script.  You may need to install the bash-completion
@@ -43,26 +43,50 @@ package from your distribution to obtain it.
 '
 fi
 
-# Suggest merge tool.
-if test -z "$(git config --get merge.tool)"; then
-	echo '
-One may configure Git to load a merge tool with
+echo '
+* Periodically, you may run scripts/update to fetch all remotes. It will not
+merge anything. 
 
-  git config merge.tool <toolname>
+* You may also run scripts/test to test all packages (VXL, VXD, etc.).
 
-See "git help mergetool" for more information.
+* You should go through scripts/utils/configure-ubuntu-for-programming to
+configure your Linux programming environment echo
+script/utils/vxl also has other utilities you may want to use for VXL
+programming.
+
+* Remember to add script/utils/vxl to your PATH
+
+* Basic workflow:
+  cd ./vxl-bin
+  ccmake ../vxl
+  make   # use mymake from scripts/utils/vxl to run it from from both vxl-bin and vxl
+
+  cd ../vxd-bin
+  ccmake ../vxd
+  make
+
+  # Test
+  scripts/test
+
+* Switching bewtween source and bin folders
+  The scripts in scripts/utils/vxl/ greatly help in traversing VXL/VXD folders
+  
+  cd vxl/core/vgl
+  pwd
+  # we are in vxl/core/vgl
+  sw     # switches to *-bin
+  # we are in vxl-bin/core/vgl  (useful for debugging)
+  sw
+  # we are back in vxl/core/vgl
+  # 'mymake' will run from any of source or bin folders, as long as you keep
+  # the VPE naming convention of appending a *-bin to your build folders or
+  # symlinks
+
+
+See  http://wiki.nosdigitais.teia.org.br/VXL  for detailed compile instructions, what
+CMake flags to use, etc.'
+
+echo '
+Please use Git 2 or later with VPE! Instructions on how to upgrade your git in
+Ubuntu Linux are available at scripts/utils/configure-ubuntu-for-programming.
 '
-fi
-
-echo Periodically, you may run scripts/update to fetch all remotes. It will not merge anything.
-
-echo You may also run scripts/test to test all packages (VXL, VXD, ETC).
-
-echo You should go through scripts/utils/configure-ubuntu-for-programming to configure your Linux programming environment
-
-echo script/utils/vxl also has other utilities you may want to use for VXL programming
-
-echo Remember to add script/utils/vxl to your PATH
-
-
-# Download utils-macambira
