@@ -26,6 +26,8 @@ git branch vxd-master origin/vxd-master
 # Setup separate hardlinked clones for each sub package, for history searching,
 # Or for those who prefer it
 
+git clone 
+
 
 echo "==> VPE is now ready to go!"
 
