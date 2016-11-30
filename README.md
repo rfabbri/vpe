@@ -275,7 +275,7 @@ This is an improvement to the alternative process proposed in a [stackoverflow a
 For the curious, the procedure we used to create the VPE monorepo initially is
 in the file [additional-maintenance](./additional-maintenance.md). 
 
-## Pulling in changes from VXL/VXD
+### Pulling in changes from VXL/VXD
 ```bash
 # do it in steps to make sure whats going on
 git fetch vxl
@@ -299,32 +299,38 @@ git push origin vxl-master
 # git merge -s recursive -Xsubtree=vxl vxl/master
 ```
 
-## Updating the remote
-### 1. Make edits
+### Pushing to VXL/VXD upstream from VPE
+#### 1. Make edits to VXL/VXD in an organized way
 ```bash
-# Edit vxl/ normally
+# Edit vxl/ normally (best to organize your commits in a separate branch)
+#
+# eg:  
+echo '// test' >> vxl/CMakeLists.txt   # an existing VXL file is edited
+#
+# if we want that change to be backported to VXL, we prepend TO VXL to the
+# commit and (preferably) keep it in a separate branch:
 
-# eg:  echo '// test' >> vxl/CMakeLists.txt   # an existing VXL file is edited
-# if we want that change to be backported to VXL, we prepend TO VXL:
 git ci -am "VPE->VXL: cmakelists"  # this message shows up on upstream
+
 # Or, if we forgot, we can tag the commit "TO-VXD"
 ```
-
-Keep doing other commits to anywhere in the tree.  When backporting, we have to
+Keep doing other commits anywhere in the tree.  When backporting, we have to
 cherry-pick when the original team has made free commits anywhere in the tree.
 If you yourself are working on the tree, and separate your commits to vxl/ and
 vxd/ folders in separate branches merged to your master, this becomes a rebase
-instead of cherrypicking (see similar approach 2 below).
+instead of cherrypicking.
 
 ### 2. Cherrypick/Rebase edits
 ```bash
 git fetch vxl
 git checkout -b vxl-integration vxl-master
 git checkout vxl-integration
-# merge changes from master using subtree
+# merge changes from master using subtree (_adapt_ to pick the commits you want)
+
 git cherry-pick -x --strategy=subtree -Xsubtree=vxl/ master
-# check if that generates a commit with the wrong prefix, if so,
-# undo the commit by resetting HEAD and give up, start again.
+
+# check from git log or gitk if that generates a commit with the wrong prefix,
+# if so, undo the commit by resetting HEAD and give up, start again.
 #
 # --strategy=subtree (-s means something else in cherry-pick) also helps to make sure
 # changes outside of the subtree (elsewhere in container code) will get quietly
@@ -337,7 +343,7 @@ git cherry-pick -x --strategy=subtree -Xsubtree=vxl/ master
 # Use the following to make sure files outside of the subtree (elsewhere in container code) 
 # will get quietly ignored. This may be useful when cherypicking a rename, since move is rm+add
 
-# Or, if you organized your VXL commits directly into eg vxl-integration, just rebase
+# Or, if you organized your VXL commits directly into eg vxl-integration, just rebase:
 
 git branch master-reb master # master or any other branch tip to rebase
 git rebase -s subtree -Xsubtree=vxl --onto vxl-integration feature-in-progress master-reb
@@ -345,7 +351,7 @@ git checkout vxl-integration
 git merge master-reb
 ```
 
-## 3. Push edits
+## 3. Push edits to VXL/VXD
 
 ```bash
 # double-check your future vxl-master commits will look good and linear
@@ -356,7 +362,7 @@ git push origin vxl-master # to push the vxl-master branch to toplevel VPE
 git push vxl HEAD:master
 git branch -D master-reb
 
-# tag master that you've done all integration up to here
+# you may want to tag master that you've done all integration up to here
 git co master
 git tag -d integrated-VXL 
 git push origin :refs/tags/integrated-VXL
