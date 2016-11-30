@@ -6,19 +6,17 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
-
 # Install dependencies,
 # Add user-independent branches, remotes etc
-devsetup/setup
+scripts/devsetup/setup
 
 # User-dependent settings: git email, etc
-devsetup/setup-user
+scripts/devsetup/setup-user
 
 sudo updatedb&
 
 # Last thing: tips and suggestions
-devsetup/tips | less
+scripts/devsetup/tips | less
 
 echo waiting for updatedb to finish up
 wait

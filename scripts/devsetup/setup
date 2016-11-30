@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# script/setup: Set up application for the first time after cloning
+# setup: Set up application for the first time after cloning
 
 set -e
 
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../.."
 
 # Setup sub remotes. All readonly for now (bulk of workflow).
 git remote add vxl	https://github.com/vxl/vxl.git
@@ -17,7 +17,7 @@ git fetch vxd &
 git fetch utils &
 
 # Basic deps
-script/bootstrap
+scripts/devsetup/bootstrap
 
 # Setup branches
 git branch utils-master origin/utils-master
