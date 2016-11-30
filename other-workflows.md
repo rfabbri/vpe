@@ -1,6 +1,5 @@
 # Further Ideas to make it easier to work on VXL + VXD + internal Project
 
-
 # Subtrees for VPE
 
 We're in VPE, and want to add VXD and VXL
