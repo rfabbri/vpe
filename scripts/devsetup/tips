@@ -62,4 +62,7 @@ echo You should go through scripts/utils/configure-ubuntu-for-programming to con
 
 echo script/utils/vxl also has other utilities you may want to use for VXL programming
 
+echo Remember to add script/utils/vxl to your PATH
+
+
 # Download utils-macambira
