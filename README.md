@@ -320,7 +320,7 @@ If you yourself are working on the tree, and separate your commits to vxl/ and
 vxd/ folders in separate branches merged to your master, this becomes a rebase
 instead of cherrypicking.
 
-### 2. Cherrypick/Rebase edits
+#### 2. Cherrypick/Rebase edits
 ```bash
 git fetch vxl
 git checkout -b vxl-integration vxl-master
@@ -351,7 +351,7 @@ git checkout vxl-integration
 git merge master-reb
 ```
 
-## 3. Push edits to VXL/VXD
+#### 3. Push edits to VXL/VXD
 
 ```bash
 # double-check your future vxl-master commits will look good and linear
@@ -437,8 +437,6 @@ git fetch vxd
 git branch --track vxl-master vxl/master
 git branch --track vxd-master vxd/master
 ```
-
-# check user's git is greater than 2.
 
 ### First-timer cloning and seting up LEMSVPE
 ```bash
