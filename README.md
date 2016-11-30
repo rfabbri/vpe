@@ -230,7 +230,9 @@ This is an improvement to link [5]'s alternative in the response therein.
     git checkout master
     # merges vxl/master into vxl-master
     git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
-    # check that vxl-master has the commits as you want them
+    # git merge -s recursive utils-master -Xsubtree=scripts/utils utils/master   # for utils
+
+    # Check that vxl-master has the commits as you want them
     git merge vxl-master  # optional branch
     git push origin vxl-master
 
