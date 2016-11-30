@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Sets up VPE for users who just want to compile and use something
+
+if test -e "vxl-bin"; then
+  echo 'Looks like this repository has already been setup for users.'
+  exit
+fi
+
+ln -s vxl-bin-dbg vxl-bin
+ln -s vxd-bin-dbg vxd-bin
+
+scripts/devsetup/usertips
+
+echo '==> VPE all set. '
+

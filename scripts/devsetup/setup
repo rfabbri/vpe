@@ -6,6 +6,8 @@ set -e
 
 cd "$(dirname "$0")/../.."
 
+./setup-for-use
+
 echo '==> Seting up sub remotes. All readonly for now (bulk of workflow).'
 git remote add vxl	https://github.com/vxl/vxl.git
 git remote add vxd	https://github.com/rfabbri/vxd.git
@@ -25,9 +27,6 @@ echo '==> Setting up branches and symlinks.'
 git branch utils-master origin/utils-master
 git branch vxl-master origin/vxl-master
 git branch vxd-master origin/vxd-master
-
-ln -s vxl-bin-dbg vxl-bin
-ln -s vxd-bin-dbg vxd-bin
 
 echo '==> Setting up hardlinked clones for each subpackage.'
 # Setup separate hardlinked clones for each sub package, for history searching,

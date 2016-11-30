@@ -7,7 +7,7 @@
 set -e
 
 if test "`git remote | grep vxl`" = 'vxl'; then
-  echo 'Looks like this repository has already been setup.'
+  echo 'Looks like this repository has already been setup for programming.'
   exit
 fi
 
