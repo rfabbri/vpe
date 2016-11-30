@@ -3,7 +3,7 @@
 VPE (Vision Programming Environment) is a monolithic superproject (a.k.a.
 monorepo) for tightly
 coupled projects based on [VXL](http://vxl.sourceforge.net) and
-[VXD](http://rfabbri/github/vxd).  It bundles VXL, VXD and related utilities
+[VXD](http://github.com/rfabbri/vxd).  It bundles VXL, VXD and related utilities
 into a unified programming environment, making the setup more homogeneous among
 developers of a team. It makes life easier:
 
