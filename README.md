@@ -228,7 +228,7 @@ Share pattern
 
 New collab working with the team needs to know
 
-  - most of the time: only the master branch, which already has proper VXD and VXL merged in
+  - Most of the time: nothing. The master branch already has proper VXD and VXL merged in.
   - If new collab wants to work on a feature, he needs to know the feature
     branch to work on VPE
 
@@ -241,139 +241,78 @@ New collab working with the team needs to know
 #### Very rare
   - Integrate to VXL upstream done by more experienced/more active peer
   
-### Internal/ LEMS
-
-#### Basic usage (99% of the time)
-  Edit pattern
-
-  - heavy edits to Internal
-  - moderate edits to VXD
-  - small edits or tweaks to VXL
-
-  Share pattern
-  
-  - Internal edits and pushes done in agreed upon feature branches (new-sfm-system),
-    merged often into master
-  - VXD edits and pushes done in agreed upon feature branches (edge-improvement)
-  - less often: VXL small edits shared on VXL feature branches on a peer remote
-    which is not the official one (github/rfabbri branch compile-fix)
-  - when some good feature is pushed, a pull request/email is sent
-    - this fails when: 
-
-    - Say vxl and vxd got an update of a few commits. You pulled in the updates,
-      but no other person in the team did. 
-    - At this point, everyone has an old vxl/ and vxd/ 
-    - You make an edit to Internal, commit, tested and push.
-        - case 1: you did send a pull request (rarely rappens in rapid Internal dev)
-        - case 2: you did not tell all your peers about this push. After all, it
-          was only a few commits.
-    - If someone else updates, they may get a compile or unforeseen errors,
-      because your Internal commits were tested against a slightly older vxl.
-    - They may see the compile error was due to VXL, and go in and update VXL.
-      But VXD is slightly off, too..
-    
-    Everyone run these risks in day to day programming.
-    - VXD will be moderately high developed. So it will be out of sync
-      constantly, because people mostly use git pull from Internal.
-
-  New collab working with the team needs to know
-
-  To bootstrap
-  - remote and feature branch to work in Internal
-  - remote and feature branch to work in VXD
-  - corresponding remote and patch branch to work in VXL
-  - extras (for new person):
-      - establishing src/bin layouts
-      - what other libs and system packages to install
-      - what project-specific setup and utilities to install (aliases, mymake, switchpath, etc)
-
-  To keep up (assuming he stopped for a while and didn't receive all pull requests)
-  - git fetch each Internal
-  - figure out from peers what are the branches they're working with
-  - git update the branch
-
-
-
-#### Fairly common
-  - Integrate to Internal master done quite often (people tend integrate and push to
-    master in my experience, when they take ownership of the repo)
-  - Integrate to VXD master done by more experienced/more active peer
-
-#### Very rare
-  - Integrate to VXL master done by more experienced/more active peer
-
-
 ## Subtree maintenance for VPE
 This is an improvement to link [5]'s alternative in the response therein.
 
 ### Adding vxl to vpe
-    > initial-dummy-file
-    git add .
-    git commit -m 'initial dummy commit'
+```bash
+> initial-dummy-file
+git add .
+git commit -m 'initial dummy commit'
 
-    git remote add vxl ../vxl
-    git fetch vxl
+git remote add vxl ../vxl
+git fetch vxl
 
-    # at this point, if you may have conflicting files,
-    # checkout a branch and do the move as a separate commit,
-    # prior to the merge.
-    #
-    # git checkout -b vxl-move-tmp vxl/master  # keeps vxl history across git clones
-    # mkdir vxl
-    # git mv `ls|grep -v vxl` vxl
-    # git commit -m 'moved vxl to vxl/ folder'
-    # git checkout master
-    # an _then_ merge. This would work for adding other subtrees later on
-    # lgit merge --allow-unrelated-histories vxl/master
-    git merge --allow-unrelated-histories vxl-move-tmp
+# at this point, if you may have conflicting files,
+# checkout a branch and do the move as a separate commit,
+# prior to the merge.
+#
+# git checkout -b vxl-move-tmp vxl/master  # keeps vxl history across git clones
+# mkdir vxl
+# git mv `ls|grep -v vxl` vxl
+# git commit -m 'moved vxl to vxl/ folder'
+# git checkout master
+# an _then_ merge. This would work for adding other subtrees later on
+# lgit merge --allow-unrelated-histories vxl/master
+git merge --allow-unrelated-histories vxl-move-tmp
 
-    # if you did move with a branch, now delete the branch
-    # git branch -D vxl-move-tmp
-    # --- SQUASHING HISTORY ------------------------------------------------
-    # if you are importing a secondary subpackage, you might not want full history.
-    # Then squash it, instead of the above merge:
-    # To squash all commits since you branched away from master, do
-    # git checkout vxl-move-tmp
-    # git rebase -i master
-    # Note that rebasing to the master does not work if you merged the master into your feature branch while you were working on the new feature. If you did this you will need to find the original branch point and call git rebase with a SHA1 revision.
-    # 
-    # Your editor will open with a file like
-    # 
-    # 
-    # pick fda59df commit 1
-    # pick x536897 commit 2
-    # pick c01a668 commit 3
-    # Each line represents a commit (in chronological order, the latest commit will be at the bottom).
-    # 
-    # To transform all these commits into a single one, change the file to this:
-    # 
-    # 
-    # pick fda59df commit 1
-    # squash x536897 commit 2
-    # squash c01a668 commit 3
-    # This means, you take the first commit, and squash the following onto it. If you remove a line, the corresponding commit is actually really lost. Don't bother changing the commit messages because they are ignored. After saving the squash settings, your editor will open once more to ask for a commit message for the squashed commit.
-    # 
-    # You can now merge your feature as a single commit into the master:
-    # 
-    # 
-    # git checkout master
-    # git merge squashed_feature
-    # ----------------------------------------------------------------------
+# if you did move with a branch, now delete the branch
+# git branch -D vxl-move-tmp
+# --- SQUASHING HISTORY ------------------------------------------------
+# if you are importing a secondary subpackage, you might not want full history.
+# Then squash it, instead of the above merge:
+# To squash all commits since you branched away from master, do
+# git checkout vxl-move-tmp
+# git rebase -i master
+# Note that rebasing to the master does not work if you merged the master into your feature branch while you were working on the new feature. If you did this you will need to find the original branch point and call git rebase with a SHA1 revision.
+# 
+# Your editor will open with a file like
+# 
+# 
+# pick fda59df commit 1
+# pick x536897 commit 2
+# pick c01a668 commit 3
+# Each line represents a commit (in chronological order, the latest commit will be at the bottom).
+# 
+# To transform all these commits into a single one, change the file to this:
+# 
+# 
+# pick fda59df commit 1
+# squash x536897 commit 2
+# squash c01a668 commit 3
+# This means, you take the first commit, and squash the following onto it. If you remove a line, the corresponding commit is actually really lost. Don't bother changing the commit messages because they are ignored. After saving the squash settings, your editor will open once more to ask for a commit message for the squashed commit.
+# 
+# You can now merge your feature as a single commit into the master:
+# 
+# 
+# git checkout master
+# git merge squashed_feature
+# ----------------------------------------------------------------------
 
-    git rm initial-dummy-file
-    git commit -m 'cleaning up initial file'
-    mkdir vxl
-    git mv `ls|grep -v vxl` vxl
-    git commit -m 'moved vxl to vxl/ folder'
+git rm initial-dummy-file
+git commit -m 'cleaning up initial file'
+mkdir vxl
+git mv `ls|grep -v vxl` vxl
+git commit -m 'moved vxl to vxl/ folder'
 
-    git checkout -b vxl-master vxl/master  # keeps vxl history across git clones
-    # don't do the above command if you don't want to track this package's
-    # history
+git checkout -b vxl-master vxl/master  # keeps vxl history across git clones
+# don't do the above command if you don't want to track this package's
+# history
 
-    git remote add origin git@github.com:rfabbri/vpe.git
-    git push -u origin master
-    git push origin vxl-master
-    git co master
+git remote add origin git@github.com:rfabbri/vpe.git
+git push -u origin master
+git push origin vxl-master
+git co master
 
 ## Adding vxd to vpe
 
@@ -427,15 +366,18 @@ This is an improvement to link [5]'s alternative in the response therein.
 
     # TO TEST: merge with squash (so we don't keep their history)
     git merge -s recursive --squash utils-rebase -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
+```
 
 ## Updating the remote
 ### 1. Make edits
-    # Edit vxl/ normally
+```bash
+# Edit vxl/ normally
 
-    # eg:  echo '// test' >> vxl/CMakeLists.txt   # an existing VXL file is edited
-    # if we want that change to be backported to VXL, we prepend TO VXL:
-    git ci -am "VPE->VXL: cmakelists"  # this message shows up on upstream
-    # Or, if we forgot, we can tag the commit "TO-VXD"
+# eg:  echo '// test' >> vxl/CMakeLists.txt   # an existing VXL file is edited
+# if we want that change to be backported to VXL, we prepend TO VXL:
+git ci -am "VPE->VXL: cmakelists"  # this message shows up on upstream
+# Or, if we forgot, we can tag the commit "TO-VXD"
+```
 
 Keep doing other commits to anywhere in the tree.  When backporting, we have to
 cherry-pick when the original team has made free commits anywhere in the tree.
@@ -444,137 +386,146 @@ vxd/ folders in separate branches merged to your master, this becomes a rebase
 instead of cherrypicking (see similar approach 2 below).
 
 ### 2. Cherrypick/Rebase edits
-    git fetch vxl
-    git checkout -b vxl-integration vxl-master
-    git checkout vxl-integration
-    # merge changes from master using subtree
-    git cherry-pick -x --strategy=subtree -Xsubtree=vxl/ master
-    # check if that generates a commit with the wrong prefix, if so,
-    # undo the commit by resetting HEAD and give up, start again.
-    #
-    # --strategy=subtree (-s means something else in cherry-pick) also helps to make sure
-    # changes outside of the subtree (elsewhere in container code) will get quietly
-    # ignored. 
+```bash
+git fetch vxl
+git checkout -b vxl-integration vxl-master
+git checkout vxl-integration
+# merge changes from master using subtree
+git cherry-pick -x --strategy=subtree -Xsubtree=vxl/ master
+# check if that generates a commit with the wrong prefix, if so,
+# undo the commit by resetting HEAD and give up, start again.
+#
+# --strategy=subtree (-s means something else in cherry-pick) also helps to make sure
+# changes outside of the subtree (elsewhere in container code) will get quietly
+# ignored. 
 
-    # use '-e' flag to cherry-pick to edit the commit message before passing upstream
-    # you may want to say something about it if it was a move from another package
-    #
-    # the -x in these commands annotate the commit message with the SHA1 of VPE
-    # Use the following to make sure files outside of the subtree (elsewhere in container code) 
-    # will get quietly ignored. This may be useful when cherypicking a rename, since move is rm+add
+# use '-e' flag to cherry-pick to edit the commit message before passing upstream
+# you may want to say something about it if it was a move from another package
+#
+# the -x in these commands annotate the commit message with the SHA1 of VPE
+# Use the following to make sure files outside of the subtree (elsewhere in container code) 
+# will get quietly ignored. This may be useful when cherypicking a rename, since move is rm+add
 
-    # Or, if you organized your VXL commits directly into eg vxl-integration, just rebase
+# Or, if you organized your VXL commits directly into eg vxl-integration, just rebase
 
-    git branch master-reb master # master or any other branch tip to rebase
-    git rebase -s subtree -Xsubtree=vxl --onto vxl-integration feature-in-progress master-reb
-    git checkout vxl-integration
-    git merge master-reb
+git branch master-reb master # master or any other branch tip to rebase
+git rebase -s subtree -Xsubtree=vxl --onto vxl-integration feature-in-progress master-reb
+git checkout vxl-integration
+git merge master-reb
+```
 
 ## 3. Push edits
 
-    # double-check your future vxl-master commits will look good and linear
+```bash
+# double-check your future vxl-master commits will look good and linear
 
-    git co vxl-master
-    git merge vxl-integration
-    git push origin vxl-master # to push the vxl-master branch to toplevel VPE
-    git push vxl HEAD:master
-    git branch -D master-reb
+git co vxl-master
+git merge vxl-integration
+git push origin vxl-master # to push the vxl-master branch to toplevel VPE
+git push vxl HEAD:master
+git branch -D master-reb
 
-    # tag master that you've done all integration up to here
-    git co master
-    git tag -d integrated-VXL 
-    git push origin :refs/tags/integrated-VXL
-    git tag -a integrated-VXL -m "Integrated all commits touching VXD up to this point."
+# tag master that you've done all integration up to here
+git co master
+git tag -d integrated-VXL 
+git push origin :refs/tags/integrated-VXL
+git tag -a integrated-VXL -m "Integrated all commits touching VXD up to this point."
 
-    Rebase is nice, since rebasing interactively means that you have a chance to
-    edit the commits which are rebased (inserting move-related info such as the
-    origin sha1 etc). You can reorder the commits, and you can
-    remove them (weeding out bad or otherwise unwanted patches).
+Rebase is nice, since rebasing interactively means that you have a chance to
+edit the commits which are rebased (inserting move-related info such as the
+origin sha1 etc). You can reorder the commits, and you can
+remove them (weeding out bad or otherwise unwanted patches).
+```
 
 ### Creating a new Internal project based on VPE 
 
-    # clone VPE from github
-    git clone vpe internalvpe
-    # do all your edits in InternalVPE
-    # change the name and the remote to your new internal repo URL
+```bash
+# clone VPE from github
+git clone vpe internalvpe
+# do all your edits in InternalVPE
+# change the name and the remote to your new internal repo URL
+```
 
 ### Migrating a new Internal project to a workflow based on VPE
-    # lets call this new project LEMSVXL
+```bash
+# lets call this new project LEMSVXL
 
-    # lemsvxl is a checked-out copy of Internal project
-    # we first create a VPE monorepo for that project
-    cp -R lemsvxl lemsvpe
-    cd lemsvpe
+# lemsvxl is a checked-out copy of Internal project
+# we first create a VPE monorepo for that project
+cp -R lemsvxl lemsvpe
+cd lemsvpe
 
-    # new-master is the branch we work on LEMSVXL stuff
-    # it is the modernized version
-    git checkout new-master
+# new-master is the branch we work on LEMSVXL stuff
+# it is the modernized version
+git checkout new-master
 
-    # move everything to lemsvxl subdir, if you want
-    mkdir lemsvxl
-    git mv `ls |grep -v '^lemsvxl$'` lemsvxl
+# move everything to lemsvxl subdir, if you want
+mkdir lemsvxl
+git mv `ls |grep -v '^lemsvxl$'` lemsvxl
 
-    # do a ls -a to check for any hidden files
+# do a ls -a to check for any hidden files
 
+# check that VPE itself doesn't have conflicting file names with the
+# existing project, as we merge it right in the root folder:
+# if it does have conflicting files, checkout a copy of VPE,
+# checkout a new branch, then remove the undesired files prior to merging
+# it to your repo.
 
-    # check that VPE itself doesn't have conflicting file names with the
-    # existing project, as we merge it right in the root folder:
-    # if it does have conflicting files, checkout a copy of VPE,
-    # checkout a new branch, then remove the undesired files prior to merging
-    # it to your repo.
+git remote add vpe ../vpe
+git fetch vpe
+# double-check no files match! Usually .gitignore is conflicted, or README
+git merge --allow-unrelated-histories vpe/master
 
-    git remote add vpe ../vpe
-    git fetch vpe
-    # double-check no files match! Usually .gitignore is conflicted, or README
-    git merge --allow-unrelated-histories vpe/master
+# Now replace the origin remote by a new one for LEMSVPE
+git remote add origin git@bitbucket.org:rfabbri2/lemsvpe.git
 
-    # Now replace the origin remote by a new one for LEMSVPE
-    git remote add origin git@bitbucket.org:rfabbri2/lemsvpe.git
+# massive push
+git push -u origin --all # pushes up the repo and its refs for the first time
+git push origin --tags # pushes up any tags
 
-    # massive push
-    git push -u origin --all # pushes up the repo and its refs for the first time
-    git push origin --tags # pushes up any tags
+# substitute remotes initially done locally to a proper remote
 
-    # substitute remotes initially done locally to a proper remote
+git remote remove vpe
 
-    git remote remove vpe
+# run all this in a bootstrap/setup script
+git remote add vpe http://github.com/rfabbri/vpe
+git fetch vpe
+git branch --track vpe-master vpe/master
 
-    # run all this in a bootstrap/setup script
-    git remote add vpe http://github.com/rfabbri/vpe
-    git fetch vpe
-    git branch --track vpe-master vpe/master
+# run VPE's bootstrap first
+git remote add vxl git@visionserver.lems.brown.edu:kimia_group/lemsvxl.git
+git remote add vxd git@github.com:rfabbri/vxd.git
+git fetch vxl
+git fetch vxd
+git branch --track vxl-master vxl/master
+git branch --track vxd-master vxd/master
+```
 
-    # run VPE's bootstrap first
-    git remote add vxl git@visionserver.lems.brown.edu:kimia_group/lemsvxl.git
-    git remote add vxd git@github.com:rfabbri/vxd.git
-    git fetch vxl
-    git fetch vxd
-    git branch --track vxl-master vxl/master
-    git branch --track vxd-master vxd/master
-
-    # check user's git is greater than 2.
+# check user's git is greater than 2.
 
 ### First-timer cloning and seting up LEMSVPE
-    git clone git@bitbucket.org:rfabbri2/lemsvpe.git lemsvpe
-    git checkout -b new-master origin/new-master
-    git remote add vpe http://github.com/rfabbri/vpe
-    git fetch vpe
-    git branch --track vpe-master vpe/master
-    vpe-bootstrap
-    # check user's git is greater than 2.
+```bash
+git clone git@bitbucket.org:rfabbri2/lemsvpe.git lemsvpe
+git checkout -b new-master origin/new-master
+git remote add vpe http://github.com/rfabbri/vpe
+git fetch vpe
+git branch --track vpe-master vpe/master
+vpe-bootstrap
+# check user's git is greater than 2.
+```
 
 ### Pulling in changes from VPE from within Internal project
-    # VPE was merged directly into the project root. That's where it lives.
-    # So we use regular merges. If there are conflicts (eg, for the README), we
-    # should always favour our version.
+```bash
+# VPE was merged directly into the project root. That's where it lives.
+# So we use regular merges. If there are conflicts (eg, for the README), we
+# should always favour our version.
 
-    git fetch vpe
-    git merge -s ours vpe/master  # this didn't work, one commit had conflict,
-                                  # the rest got ignored. I just carefully
-                                  # cherry-picked the VPE changes I needed
+git fetch vpe
+git merge -s ours vpe/master  # this didn't work, one commit had conflict,
+                              # the rest got ignored. I just carefully
+                              # cherry-picked the VPE changes I needed
+```
 
 # Links
 
 [1] http://stackoverflow.com/questions/10918244/git-subtree-without-squash-view-log/40349121#40349121
-
-
