@@ -7,8 +7,7 @@ coupled projects based on [VXL](http://vxl.sourceforge.net) and
 into a unified programming environment, making the setup more homogeneous among
 developers of a team. It makes life easier:
 
-- **No mess:** everyone in the team locked to the same VXL and VXD versions when
-  working on master.
+- **No dependency mess:** everyone in the team use the same VXL and VXD versions when working on master.
 - **Plain old Git:** most of the time, updating to/from VXL or VXD within VPE is tracked in VPE.
   Only the VPE team sees these changes, uniformly.
 - **Separate repositories for upstream sharing:** subrepos are simultaneously kept in their own upstream repositories.
@@ -18,7 +17,7 @@ developers of a team. It makes life easier:
   team through VPE, one has to be disciplined to share with upstream, which
   should only occur when needed, with proper branches and code quality.
 - **Promoting across VXL/VXD gets tracked:** If you promote code across the
-  different VXL-based projects (VPE/VXD/VXL), say from VXD/core to VXL/core,
+  different VXL-based projects (VPE/VXD/VXL),
   these operations will get documented and tracked as commits within VPE.
 
 - We call the superproject or monorepo .
