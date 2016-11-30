@@ -23,9 +23,9 @@ scripts/devsetup/setup
 scripts/devsetup/setup-user
 
 # Last thing: tips and suggestions
-scripts/devsetup/tips 
+scripts/devsetup/tips | less
 
-echo '==> Waiting for updatedb. Scroll up and read the above tips meanwhile.'
+echo '==> Waiting for unfinished jobs. Scroll up and read the above tips meanwhile.'
 wait
 
 echo "==>"
