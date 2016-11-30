@@ -12,6 +12,8 @@ if test "`git remote | grep vxl`" = 'vxl'; then
 fi
 
 # Install dependencies,
+# scripts/devsetup/bootstrap
+
 # Add user-independent branches, remotes etc
 scripts/devsetup/setup
 

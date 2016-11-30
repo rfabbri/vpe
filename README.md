@@ -1,6 +1,27 @@
-# Ideas to make it easier to work on VXL + VXD + internal Project
+# VPE: Vision Programming Environment
 
-We call the superproject or monorepo VPE: Vision Programming Environment.
+VPE (Vision Programming Environment) is a monolithic superproject (a.k.a.
+monorepo) for tightly
+coupled projects based on [VXL](http://vxl.sourceforge.net) and
+[VXD](http://rfabbri/github/vxd).  It bundles VXL, VXD and related utilities
+into a unified programming environment, making the setup more homogeneous among
+developers of a team. It makes life easier:
+
+- **No mess:** everyone in the team locked to the same VXL and VXD versions when
+  working on master.
+- **Plain old Git:** most of the time, updating to/from VXL or VXD within VPE is tracked in VPE.
+  Only the VPE team sees these changes, uniformly.
+- **Separate repositories for upstream sharing:** subrepos are simultaneously kept in their own upstream repositories.
+- **Harder to break things:** Propagating changes to/from upstream subrepos
+  requires a specific git procedure; this creates a buffer between VPE and
+  upstream VXL/VXD.  While it is seamless to share VXL or VXD changes with the
+  team through VPE, one has to be disciplined to share with upstream, which
+  should only occur when needed, with proper branches and code quality.
+- **Promoting across VXL/VXD gets tracked:** If you promote code across the
+  different VXL-based projects (VPE/VXD/VXL), say from VXD/core to VXL/core,
+  these operations will get documented and tracked as commits within VPE.
+
+- We call the superproject or monorepo .
 It would be a way of working in tandem, to try to make some things easier for
 people that use and modify all of VXL and VXD and internal project at the source level.
 
@@ -401,117 +422,13 @@ instead of cherrypicking (see similar approach 2 below).
 ### Conclusion
 - same as before
 
-- Caveat: git log --follow doesn't work for sub folders to trace down to the orig repo
+### Caveates
+- `git log --follow` doesn't work for sub folders to trace down to the orig repo
 
 - mere users only push to main repo, but will never ever push directly to the
   subrepos, unless they are advanced users. this may be a good thing, as
   day-to-day workflow gets centralized and synced a lot easier (one repo) than
   before.
-
-
-# Submodules for VPE
-- well supported
-- bad: all users need to learn a lot of submodule lingo
-- good: if the repo maintainer updates the sub-repos and pushes, users are
-  locked to that sub-repo version.
-  - If your peers do a mere git pull, it will pull-in the work VXL.
-  - If your peers update vxl, everyone gets vxl
-  - In that way, vxl is updated equally for everyone in the team,
-  instead of each pulling a different vxl master. You sync to the team repo,
-  rather than to the vxl team repo.
-  (? can we track multiple versions of vxl?)
-- in the simple use case of only editing and pushing to the container repo,
-  naive users may not be aware vxl/ folders are not separate git repos
-- basically the workflow has no base case for simple usage. It is always going
-  to be complex
-- advantage: much more well-defined and well-maintaned than subtrees if you
-  know the lingo
-- advantage: for advanced users it may provide a good way to share code in a
-  predictable way, locking the subprojects to the commits that people are
-  working at the moment.
-
-Submodules differ from subtrees:
-- submodules are separate git repositories inside a a bigger one, yet are not
-  managed as usual git repositories within the bigger one. 
-  - git log works nicely, with separate histories for each
-- subtrees look more like a subfolder uniformly managed by git, but with tiny annoying quirks
-
-- for submodules, collaborators won't automatically see updates to submodules—if
-  you update a submodule, you may need to remind your colleagues to run git
-  submodule update or they will likely see odd behavior.
-
-
-For VPE, submodules are not attractive since:
-- people's usual git workflow is broken
-- commits made to sub projects may be lost.
-
-
-##  Pulling in changes from VPE
-
-    git spull   # alias or script. reminds me of the scripted superrepo approach
-
-    git pull
-    git submodule update     # always.. massive danger if you don’t, as 
-                             # your next container commit will regress the submodule
-
-#### If the submodule url changed, everyone has to:
-    git pull
-    git submodule sync
-    git submodule update     # always.. massive danger if you don’t, as 
-                             # your next container commit will regress the submodule
-
-Spull alias cover all cases:
-
-    git config --global alias.spull '!git pull && git submodule sync --recursive && git submodule update --init --recursive'
-
-##  Pulling in changes from VXL/VXD
-
-    cd vxl
-    git fetch
-    git merge origin/master
-    cd .. 
-    git diff --submodule 
-    # you can see that the submodule was updated and get a list of commits that were added to it. 
-
-    git commit -am
-    git push
-   
-
-## Updating VXL/VXD within VPE
-
-    # first, make sure update submodule master to remote master,
-    # or, more generally, that you have a branch tracking the submodule
-
-    cd vxl
-
-    git status      # it will show detached state
-    git checkout vxl-master     # if it doesn't exist, create it
-    git merge origin/master
-
-    # if you don't want to use that branch, create any other, as long as you are
-    # inside the submodule, branches will be local.
-
-    # Now make your changes and commit normally, within vxl/
-    git push origin vxl-master
-
-    cd ..
-
-    # Part 2:  update VPE's repo to see if we have other branches or our own
-    # vxl-master updated in VPE's repo
-    git submodule update --remote --merge
-
-    # If you forget the --rebase or --merge, Git will just update the submodule
-    # to whatever is on the server and reset your project to a detached HEAD state.
-    # Then you have to checkout vxl-master again and redo the work
-
-    # on the toplevel, you won't use git push, but first
-    git push --recurse-submodules=check
-
-    
-# Android Repo tool
-
-- barely any reliable doc on the web for the VPE case
-
 
 
 # Links
