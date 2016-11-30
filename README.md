@@ -120,7 +120,7 @@ ln -s $PWD/* ~/bin
 
 For example, you are working in `vgl/algo` but would like to switch
 to a bin folder in order to debug an executable.
-```
+```bash
 pwd           # we are in vpe/vxl/core/vgl/algo
 sw            # switches path between vxl source and vxl-bin
 pwd           # we are in vpe/vxl-bin/core/vgl/algo
@@ -132,7 +132,7 @@ This requires a `.bash_profile` line described in `scripts/devsetup/tips`.
 
 ### Make anywhere with mymake
 
-```
+```bash
 pwd           # we are in vpe/vxl/core/vgl/algo
 mymake        # makes in vpe/vxl-bin
 sw            # switches path between vxl source and vxl-bin
@@ -143,7 +143,7 @@ mymake        # works the same if you are already in vxl-bin
 
 If you setup your CDPATH per `scripts/devsetup/tips`,
 you can get to any folder from anywhere, for instance:
-```
+```bash
 cd vgl/algo
 cd vpgl
 cd vxl
@@ -178,7 +178,7 @@ this convention.
 You will want relink by hand if you have different builds with different compile
 flags. The following command is equivalent to `switchbuild rel`
 
-```
+```bash
 rm vxl-bin vxd-bin
 ln -s vxl-bin-rel vxl-bin
 ln -s vxd-bin-rel vxd-bin
@@ -198,8 +198,9 @@ As long as you use the `vxl-bin/vxd-bin` symlinks, you are good to go with the
   the original repository. This means that, to see all commits from VXL that are
   outside of VPE, you will need to do something like this:
 
-```cd vxl-orig
-   gitk --all
+```bash
+cd vxl-orig
+gitk --all
 ```
 
 ### Code searching with tags
