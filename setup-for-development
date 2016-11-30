@@ -23,12 +23,11 @@ sudo updatedb&
 scripts/devsetup/setup-user
 
 # Last thing: tips and suggestions
-scripts/devsetup/tips | less
+scripts/devsetup/tips 
 
-echo '==> waiting for updatedb to finish up'
+echo '==> Waiting for updatedb. Scroll up and read the above tips meanwhile.'
 wait
 
 echo "==>"
 echo "==> VPE is now ready to go!"
 echo "==>"
-
