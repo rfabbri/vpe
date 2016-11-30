@@ -15,9 +15,9 @@ fi
 # Add user-independent branches, remotes etc
 scripts/devsetup/setup
 
-echo '==> enter password for updatedb (updating file search)'
-sudo -v   # prompts for password
-sudo updatedb&
+#echo '==> enter password for updatedb (updating file search)'
+#sudo -v   # prompts for password
+#sudo updatedb&
 
 # User-dependent settings: git email, etc
 scripts/devsetup/setup-user

@@ -96,9 +96,17 @@ programming.
   # set tags=./tags,tags,~/tags,~/src/vpe/tags
   # Adapt it to your case.
 
+* File searching: updatedb
+  Ubuntu: 
+    sudo updatedb
+  OSX:
+    sudo /usr/libexec/locate.updatedb &
+    sudo LC_ALL=C gupdatedb &
+  Example: Search files with 
+    locate 'vsol*cxx'       # or 'glocate -ri 'vsol.*cxx''
+    
 See  http://wiki.nosdigitais.teia.org.br/VXL  for detailed compile instructions, what
 CMake flags to use, etc.'
-
 
 echo '
 Please use Git 2 or later with VPE! Instructions on how to upgrade your git in
