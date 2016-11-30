@@ -6,7 +6,7 @@ set -e
 
 cd "$(dirname "$0")/../.."
 
-# Setup sub remotes. All readonly for now (bulk of workflow).
+echo '==> Seting up sub remotes. All readonly for now (bulk of workflow).'
 git remote add vxl	https://github.com/vxl/vxl.git
 git remote add vxd	https://github.com/rfabbri/vxd.git
 git remote add utils git://git.code.sf.net/p/labmacambira/utils
@@ -17,9 +17,11 @@ git fetch vxd &
 git fetch utils &
 
 # Basic deps
+echo '==> Installing dependencies.'
 scripts/devsetup/bootstrap
 
 # Setup branches
+echo '==> Setting up branches and symlinks.'
 git branch utils-master origin/utils-master
 git branch vxl-master origin/vxl-master
 git branch vxd-master origin/vxd-master
@@ -27,6 +29,7 @@ git branch vxd-master origin/vxd-master
 ln -s vxl-bin-dbg vxl-bin
 ln -s vxd-bin-dbg vxd-bin
 
+echo '==> Setting up hardlinked clones for each subpackage.'
 # Setup separate hardlinked clones for each sub package, for history searching,
 # Or for those who prefer it. This should not consume more space (hardlinks).
 git clone $PWD vxl-orig &
