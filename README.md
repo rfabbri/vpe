@@ -63,25 +63,53 @@ establish useful remotes and branches.
 ### A tour of VPE
 Once bootstrapped for development, you will get the following files
 
+```bash
+other-workflows.md          # Other possible workflows for VPE beyond subtrees
+
+scripts/devsetup/           # Scripts used by ./setup-for-development
+
+scripts/utils/              # Utilities for VXL development, templates, shell/editor config
+
+vxl/                        # VXL folder tracked within VPE
+vxl-bin -> vxl-bin-dbg      # Default VXL build folder pointing to possible debug version
+vxl-bin-dbg/                # VXL build folder with debug flags
+vxl-bin-rel/                # VXL build folder without debug flags.
+vxl-orig/                   # Original VXL as a separate repository (mostly for history)
+
+vxd/                        # VXD folder tracked within VPE
+vxd-bin -> vxd-bin-dbg      # Default VXL build folder pointing to possible debug version
+vxd-bin-dbg/                # VXD build folder with debug flags
+vxd-bin-rel/                # VXD build folder without debug flags.
+vxl-orig/                   # Original VXD as a separate repository (mostly for history)
 ```
-other-workflows.md             Other possible workflows for VPE beyond subtrees
 
-scripts/devsetup/              Scripts used by ./setup-for-development
+You will also have remotes and branches setup for you
 
-scripts/utils/                 Utilities for VXL development, templates, shell/editor config
-
-vxl/                           VXL folder tracked within VPE
-vxl-bin -> vxl-bin-dbg         Default VXL build folder pointing to possible debug version
-vxl-bin-dbg/                   VXL build folder with debug flags
-vxl-bin-rel/                   VXL build folder without debug flags.
-vxl-orig/                      Original VXL as a separate repository (mostly for history)
-
-vxd/                           VXD folder tracked within VPE
-vxd-bin -> vxd-bin-dbg         Default VXL build folder pointing to possible debug version
-vxd-bin-dbg/                   VXD build folder with debug flags
-vxd-bin-rel/                   VXD build folder without debug flags.
-vxl-orig/                      Original VXD as a separate repository (mostly for history)
+```bash
+git remote
 ```
+
+```
+    origin	https://github.com/rfabbri/vpe.git
+    vxl	https://github.com/vxl/vxl.git
+    vxd	https://github.com/rfabbri/vxd.git
+    utils	git://git.code.sf.net/p/labmacambira/utils
+```
+
+```bash
+git branch
+```
+
+```
+  * master
+    utils-master
+    vxd-master
+    vxl-master
+```
+
+Each of these branches point to the last commit from the remote that VPE merged
+into master. For instance, to see what vxl master actually has, `git fetch` and
+then inspect the `vxl/master` branch instead of `vxl-master`.
 
 ## Building VPE
 
@@ -242,130 +270,33 @@ New collab working with the team needs to know
   - Integrate to VXL upstream done by more experienced/more active peer
   
 ## Subtree maintenance for VPE
-This is an improvement to link [5]'s alternative in the response therein.
+This is an improvement to the alternative process proposed in a [stackoverflow answer](http://stackoverflow.com/questions/10918244/git-subtree-without-squash-view-log/40349121#40349121).
 
-### Adding vxl to vpe
-```bash
-> initial-dummy-file
-git add .
-git commit -m 'initial dummy commit'
-
-git remote add vxl ../vxl
-git fetch vxl
-
-# at this point, if you may have conflicting files,
-# checkout a branch and do the move as a separate commit,
-# prior to the merge.
-#
-# git checkout -b vxl-move-tmp vxl/master  # keeps vxl history across git clones
-# mkdir vxl
-# git mv `ls|grep -v vxl` vxl
-# git commit -m 'moved vxl to vxl/ folder'
-# git checkout master
-# an _then_ merge. This would work for adding other subtrees later on
-# lgit merge --allow-unrelated-histories vxl/master
-git merge --allow-unrelated-histories vxl-move-tmp
-
-# if you did move with a branch, now delete the branch
-# git branch -D vxl-move-tmp
-# --- SQUASHING HISTORY ------------------------------------------------
-# if you are importing a secondary subpackage, you might not want full history.
-# Then squash it, instead of the above merge:
-# To squash all commits since you branched away from master, do
-# git checkout vxl-move-tmp
-# git rebase -i master
-# Note that rebasing to the master does not work if you merged the master into your feature branch while you were working on the new feature. If you did this you will need to find the original branch point and call git rebase with a SHA1 revision.
-# 
-# Your editor will open with a file like
-# 
-# 
-# pick fda59df commit 1
-# pick x536897 commit 2
-# pick c01a668 commit 3
-# Each line represents a commit (in chronological order, the latest commit will be at the bottom).
-# 
-# To transform all these commits into a single one, change the file to this:
-# 
-# 
-# pick fda59df commit 1
-# squash x536897 commit 2
-# squash c01a668 commit 3
-# This means, you take the first commit, and squash the following onto it. If you remove a line, the corresponding commit is actually really lost. Don't bother changing the commit messages because they are ignored. After saving the squash settings, your editor will open once more to ask for a commit message for the squashed commit.
-# 
-# You can now merge your feature as a single commit into the master:
-# 
-# 
-# git checkout master
-# git merge squashed_feature
-# ----------------------------------------------------------------------
-
-git rm initial-dummy-file
-git commit -m 'cleaning up initial file'
-mkdir vxl
-git mv `ls|grep -v vxl` vxl
-git commit -m 'moved vxl to vxl/ folder'
-
-git checkout -b vxl-master vxl/master  # keeps vxl history across git clones
-# don't do the above command if you don't want to track this package's
-# history
-
-git remote add origin git@github.com:rfabbri/vpe.git
-git push -u origin master
-git push origin vxl-master
-git co master
-
-## Adding vxd to vpe
-
-    git remote add vxd ../vxd
-    git fetch vxd
-    git merge --allow-unrelated-histories vxd/master
-    mkdir vxd
-    git mv `ls|grep -v '^vxd$' | grep -v '^vxl$'` vxd
-    git commit -m 'moved vxd to vxd/ folder'
-
-    git checkout -b vxd-master vxd/master  # keeps vxl history across git clones
-    git push origin master
-    git push origin vxd-master
-    git co master
-
-    # check histories look perfect
-
-## Finalizing
-    - .gitignore
+For the curious, the procedure we used to create the VPE monorepo initially is
+in the file [additional-maintenance](./additional-maintenance.md). 
 
 ## Pulling in changes from VXL/VXD
+```bash
+# do it in steps to make sure whats going on
+git fetch vxl
+# git branch vxl-master vxl/master # create optional branch if you're fetching 
+                                   # non-master branch, else use vxl-master normally
 
-    # do it in steps to make sure whats going on
-    git fetch vxl
-    # git branch vxl-master vxl/master # create optional branch if you're fetching 
-                                       # non-master branch, else use vxl-master normally
+git checkout master
+# merges vxl/master into vxl-master
+git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
+# git merge -s recursive utils-master -Xsubtree=scripts/utils utils/master   # for utils
 
-    git checkout master
-    # merges vxl/master into vxl-master
-    git merge -s recursive vxl-master -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
-    # git merge -s recursive utils-master -Xsubtree=scripts/utils utils/master   # for utils
+# Check that vxl-master has the commits as you want them
+# If necessary, checkout vxl-master and see if the files are in the right subfolder
+git merge vxl-master  # optional branch
+# Update VPE upstream
+git push origin master
+git push origin vxl-master
 
-    # Check that vxl-master has the commits as you want them
-    # If necessary, checkout vxl-master and see if the files are in the right subfolder
-    git merge vxl-master  # optional branch
-    git push origin master
-    git push origin vxl-master
-
-    # you could also just merge directly! (be careful)
-    # git fetch vxl
-    # git merge -s recursive -Xsubtree=vxl vxl/master
-
-## Pulling in changes from secondary packages (if any)
-
-    # for now all our packages are like VXL/VXD, with full history merged
-    # in. These instructions are here if you want to include some other package
-    # without history merging (ie, you have squashed its commits and rebased)
-    git fetch utils
-
-    git checkout -b utils-rebase utils/master
-
-    # TO TEST: merge with squash (so we don't keep their history)
-    git merge -s recursive --squash utils-rebase -Xsubtree=vxl vxl/master    # optional branch vxl/anybranch
+# you could also just merge directly! (be careful)
+# git fetch vxl
+# git merge -s recursive -Xsubtree=vxl vxl/master
 ```
 
 ## Updating the remote
@@ -430,12 +361,12 @@ git co master
 git tag -d integrated-VXL 
 git push origin :refs/tags/integrated-VXL
 git tag -a integrated-VXL -m "Integrated all commits touching VXD up to this point."
+```
 
 Rebase is nice, since rebasing interactively means that you have a chance to
 edit the commits which are rebased (inserting move-related info such as the
 origin sha1 etc). You can reorder the commits, and you can
 remove them (weeding out bad or otherwise unwanted patches).
-```
 
 ### Creating a new Internal project based on VPE 
 
@@ -526,6 +457,3 @@ git merge -s ours vpe/master  # this didn't work, one commit had conflict,
                               # cherry-picked the VPE changes I needed
 ```
 
-# Links
-
-[1] http://stackoverflow.com/questions/10918244/git-subtree-without-squash-view-log/40349121#40349121
