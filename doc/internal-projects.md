@@ -109,8 +109,6 @@ vpe/setup-for-development
 # should always favour our version.
 
 git fetch vpe
-git merge -s ours vpe/master  # this didn't work, one commit had conflict,
-                              # the rest got ignored. I just carefully
-                              # cherry-picked the VPE changes I needed
+git merge -s recursive -Xours vpe/master  
 ```
 
