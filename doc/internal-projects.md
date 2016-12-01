@@ -103,12 +103,24 @@ vpe/setup-for-development
 ```
 
 ### Pulling in changes from VPE from within Internal project
-```bash
-# VPE was merged directly into the project root. That's where it lives.
-# So we use regular merges. If there are conflicts (eg, for the README), we
-# should always favour our version.
 
+This operation is very rarely done. The only thing in VPE that we might want to
+update is the scripts or generic documentation.
+
+VPE was merged directly into the project root. That's where it lives.
+So we use regular merges. If there are conflicts (eg, for the README), we
+should always favour our version.
+```bash
 git fetch vpe
 git merge -s recursive -Xours vpe/master  
 ```
+Unless you know for sure there are changes you want to incorporate, in which
+case you just do a simple git merge vpe/master and resolve conflicts manually.
+Another option is to cherry-pick the changes you want from VPE.
 
+Again, bringing updates form VPE is rarely done; unless there is a fundamental
+change in how the programming environment works.
+
+### Updating the other subrepos
+For updating to/from VXL, VXD, utils, and your internal project,
+proceed regularly as in [VPE Instructions](../README.md).
