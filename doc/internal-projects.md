@@ -30,10 +30,13 @@ internal project will be a subfolder. The working file structure will look like:
 ```
 The idea is that your internal project also works like VXL, with CMake,
 and VPE organizes it into source and bin folders. Evetything is in one huge Git
-history.
+history.  The scripts are also updated, so that when you setup VPE, it also sets
+up appropriate remotes and branches for the team.
 
-The scripts are also updated
-as needed, so that when you setup VPE, it also pu
+When you move code from your internal project to VXD or VXL to the public, this
+gets tracked as internal LEMSVPE commits. What the world sees is VXD or VXL, or
+the original VPE repository. They will not see your internal code unless you
+explicitly publish into the adequate public subrepos.
 
 
 ```bash
@@ -53,34 +56,34 @@ git mv `ls |grep -v '^lemsvxl$'` lemsvxl
 
 # do a ls -a to check for any hidden files
 
-# check that VPE itself doesn't have conflicting file names with the
+# Check that VPE itself doesn't have conflicting file names with the
 # existing project, as we will merge it right in the root folder:
-# if it does have conflicting files, checkout a copy of VPE,
-# checkout a new branch, then remove the undesired files prior to merging
-# it to your repo
+# if it does have conflicting files, and the below operation does not work,
+# start over by checking out a copy of VPE, checkout a new branch, then remove
+# the undesired files prior to merging it to your repo.
+# Usually .gitignore is conflicted, or README
 
-git remote add vpe ../vpe
+git remote add vpe ../vpe        # adding a remote locally in our disk
 git fetch vpe
-# double-check no files match! Usually .gitignore is conflicted, or README
 git merge --allow-unrelated-histories vpe/master
 
-# Now replace the origin remote by a new one for LEMSVPE
+# Now replace the origin remote by a new one for LEMSVPE. In this example,
+# LEMSVPE is in a free private repository on Bitbucket.
 git remote add origin git@bitbucket.org:rfabbri2/lemsvpe.git
 
 # massive push
 git push -u origin --all # pushes up the repo and its refs for the first time
-git push origin --tags # pushes up any tags
+git push origin --tags   # pushes up any tags
 
-# substitute remotes initially done locally to a proper remote
-
+# substitute remotes initially done locally to a public remote
 git remote remove vpe
 
-# run all this in a bootstrap/setup script
+# all this is run in a bootstrap/setup script for other team members
 git remote add vpe http://github.com/rfabbri/vpe
 git fetch vpe
 git branch --track vpe-master vpe/master
 
-# run VPE's bootstrap first
+# This is run by executing VPE's bootstrap first
 git remote add vxl git@visionserver.lems.brown.edu:kimia_group/lemsvxl.git
 git remote add vxd git@github.com:rfabbri/vxd.git
 git fetch vxl
@@ -96,8 +99,7 @@ git checkout -b new-master origin/new-master
 git remote add vpe http://github.com/rfabbri/vpe
 git fetch vpe
 git branch --track vpe-master vpe/master
-vpe-bootstrap
-# check user's git is greater than 2.
+vpe/setup-for-development
 ```
 
 ### Pulling in changes from VPE from within Internal project
