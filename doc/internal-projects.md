@@ -9,16 +9,42 @@ git clone vpe internalvpe
 ```
 
 ### Migrating a new Internal project to a workflow based on VPE
-```bash
-# lets call this new project LEMSVXL
+Lets call this new project LEMSVXL: it is actually a private codebase by the
+LEMS team at Brown university that is very heavily based on VXL. The situation
+for your internal project would be similar: your team (here called LEMS) has an
+internal VXL codebase (LEMSVXL). You want to use VPE so that the entire team
+(LEMS) shares the same state of VXL and VXD when working at the master branch.
 
+The solution here will look just like VPE, but with your subproject folder (here
+`lemsvxl/`) in parallel to other folders. VPE will be at the root, and your
+internal project will be a subfolder. The working file structure will look like:
+```
+    vpe/
+      vxl
+      vxd
+      lemsvxl                   #  your internal project as a subfolder
+      scripts
+      vxl-bin
+      vxd-bin
+      lemsvxl-bin
+```
+The idea is that your internal project also works like VXL, with CMake,
+and VPE organizes it into source and bin folders. Evetything is in one huge Git
+history.
+
+The scripts are also updated
+as needed, so that when you setup VPE, it also pu
+
+
+```bash
 # lemsvxl is a checked-out copy of Internal project
 # we first create a VPE monorepo for that project
 cp -R lemsvxl lemsvpe
 cd lemsvpe
 
-# new-master is the branch we work on LEMSVXL stuff
-# it is the modernized version
+# new-master is the branch the team works on LEMSVXL stuff
+# It is the modernized version of master. 
+# For most internal projects, this is just master.
 git checkout new-master
 
 # move everything to lemsvxl subdir, if you want
@@ -28,10 +54,10 @@ git mv `ls |grep -v '^lemsvxl$'` lemsvxl
 # do a ls -a to check for any hidden files
 
 # check that VPE itself doesn't have conflicting file names with the
-# existing project, as we merge it right in the root folder:
+# existing project, as we will merge it right in the root folder:
 # if it does have conflicting files, checkout a copy of VPE,
 # checkout a new branch, then remove the undesired files prior to merging
-# it to your repo.
+# it to your repo
 
 git remote add vpe ../vpe
 git fetch vpe
