@@ -70,10 +70,17 @@ git merge --allow-unrelated-histories vpe/master
 # Now replace the origin remote by a new one for LEMSVPE. In this example,
 # LEMSVPE is in a free private repository on Bitbucket.
 git remote add origin git@bitbucket.org:rfabbri2/lemsvpe.git
+git fetch origin
 
 # massive push
 git push -u origin --all # pushes up the repo and its refs for the first time
 git push origin --tags   # pushes up any tags
+
+# Remove all refs you don't need. Any feature branches from LEMSVXL.
+git branch -D featurebranch
+git push origin :featurebranch  # delete from server
+
+# rename new-master to master
 
 # substitute remotes initially done locally to a public remote
 git remote remove vpe
