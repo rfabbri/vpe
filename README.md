@@ -379,4 +379,5 @@ remove them (weeding out bad or otherwise unwanted patches).
 For creating a new internal project based on VPE (possibly private),
 or for migrating an existing VXL/VXD internal project to a workflow based on
 VPE, see [Internal Projects and VPE](./doc/internal-projects.md).
-
+You may want to do this in case your internal project is tightly coupled with
+VXL/VXD, and will be constantly moving code to/from these packages.
