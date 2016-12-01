@@ -113,7 +113,7 @@ then inspect the `vxl/master` branch instead of `vxl-master`.
 
 ## Building VPE
 
-### Compile VXL
+### 1. Compile VXL
 ```
 
   cd ./vxl-bin
@@ -121,11 +121,11 @@ then inspect the `vxl/master` branch instead of `vxl-master`.
   make   # use mymake from scripts/utils/vxl to run it from from both vxl-bin and vxl
 ```
 
-### Compile VXD
+### 2. Compile VXD
 ```
   cd ../vxd-bin
   ccmake ../vxd
-  make'
+  make
 ```
 For further information on building each of these libraries and the best CMake flags to
 use, see http://wiki.nosdigitais.teia.org.br/VXL.
@@ -235,7 +235,7 @@ gitk --all
 
 See `scripts/devsetup/tips`.
 
-# Use a recent Git
+## Use a recent Git
 Always use Git version >= 2 when working with monorepos.
 
 
@@ -251,8 +251,8 @@ Edit pattern
 Share pattern
   
   - VXD edits and pushes done in agreed upon feature branches (eg, `curve-cues`),
-    merged often into `master`
-  - VXL small edits shared on VXL branches inside VPE 
+    merged often into `master` 
+  - VXL small edits shared on VXL branches inside VPE (prefix the branches with vxl-)
 
 New collab working with the team needs to know
 
