@@ -80,7 +80,7 @@ vxd/                        # VXD folder tracked within VPE
 vxd-bin -> vxd-bin-dbg      # Default VXL build folder pointing to possible debug version
 vxd-bin-dbg/                # VXD build folder with debug flags
 vxd-bin-rel/                # VXD build folder without debug flags.
-vxl-orig/                   # Original VXD as a separate repository (mostly for history)
+vxd-orig/                   # Original VXD as a separate repository (mostly for history)
 ```
 
 You will also have remotes and branches setup for you
