@@ -90,6 +90,9 @@ git remote add vpe http://github.com/rfabbri/vpe
 git fetch vpe
 git branch --track vpe-master vpe/master
 
+# Update .gitignore to ignore lemsvxl-bin and other similar folders
+# Update ./setup-for*
+
 # This is run by executing VPE's bootstrap first
 git remote add vxl git@visionserver.lems.brown.edu:kimia_group/lemsvxl.git
 git remote add vxd git@github.com:rfabbri/vxd.git

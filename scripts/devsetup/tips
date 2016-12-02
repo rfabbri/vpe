@@ -103,6 +103,13 @@ programming.
   # set tags=./tags,tags,~/tags,~/src/vpe/tags
   # Adapt it to your case.
 
+* Vim users: I put this in my ~/.vim/ftplugins/c_rfabbri.vim
+
+  set path +=~/cprg/vxlprg/lemsvpe/**
+
+  That way when typing 'gf' on top of a file name inside vim, it will take you
+  to the file.
+
 * File searching: updatedb
   Ubuntu: 
     sudo updatedb

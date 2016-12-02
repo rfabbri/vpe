@@ -24,9 +24,9 @@ scripts/devsetup/bootstrap
 
 # Setup branches
 echo '==> Setting up branches and symlinks.'
-git branch utils-master origin/utils-master
-git branch vxl-master origin/vxl-master
-git branch vxd-master origin/vxd-master
+git branch --track utils-master origin/utils-master
+git branch --track vxl-master origin/vxl-master
+git branch --track vxd-master origin/vxd-master
 
 echo '==> Setting up hardlinked clones for each subpackage.'
 # Setup separate hardlinked clones for each sub package, for history searching,
